@@ -6,8 +6,9 @@
 #import "TTXBaseViewController.h"
 #import "TTXProgressHUD.h"
 #import "TTXMessageHUD.h"
+#import "MBOperationView.h"
 
-@interface TTXBaseViewController ()
+@interface TTXBaseViewController ()<MBOperationViewDelegate>
 @end
 
 @implementation TTXBaseViewController
@@ -25,6 +26,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    MBOperationView *operationView = [[MBOperationView alloc] initWithFrame:self.view.bounds];
+    operationView.delegate = self;
+    self.view = operationView;
     [self configBackButton];
 }
 
@@ -75,6 +79,11 @@
                                           cancelButtonTitle:cancelTitle
                                           otherButtonTitles:otherTitle, nil];
     [alert show];
+}
+
+- (UIView *)operationView:(MBOperationView *)operationView hitTest:(CGPoint)point withEvent:(UIEvent *)event
+{
+    return nil;
 }
 
 - (void)dealloc

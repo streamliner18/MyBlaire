@@ -9,75 +9,21 @@
 #import "MBLoginViewController.h"
 
 @interface MBLoginViewController ()
-@property (nonatomic, strong) UIView *userNameBackView;
-@property (nonatomic, strong) UIView *passwordBackView;
+
 @end
 
 @implementation MBLoginViewController
 
-- (UIView *)userNameBackView
-{
-    if (!_userNameBackView) {
-        _userNameBackView = ({
-            UIView *view = [[UIView alloc] initWithFrame:CGRectZero];
-            view.backgroundColor = [UIColor whiteColor];
-            view;
-        });
-    }
-    return _userNameBackView;
-}
-
-- (UIView *)passwordBackView
-{
-    if (!_passwordBackView) {
-        _passwordBackView = ({
-            UIView *view = [[UIView alloc] initWithFrame:CGRectZero];
-            view.backgroundColor = [UIColor whiteColor];
-            view;
-        });
-    }
-    return _passwordBackView;
-}
-
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [[self navigationController] setNavigationBarHidden:[self.navigationController.viewControllers indexOfObject:self]%2==0 animated:animated];
+    [self setTextFieldBecomeResponder];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"登录";
-    self.view.backgroundColor = [UIColor lightGrayColor];
-    self.userNameBackView.frame = CGRectMake(0, 64, self.view.width, 44);
-    self.passwordBackView.frame = CGRectMake(0, 64+1+44, self.view.width, 44);
-    [self.view addSubview:self.userNameBackView];
-    [self.view addSubview:self.passwordBackView];
-    [self buildUserNameView];
-    [self buildPasswordView];
     [self buildLoginButton];
-}
-
-- (void)buildUserNameView
-{
-    UILabel *label = [UILabel userNameLabel];
-    label.frame = CGRectMake(20, 11, 52, 22);
-    [self.userNameBackView addSubview:label];
-    
-    UITextField *textField = [UITextField userNameTextField];
-    textField.frame = CGRectMake(label.right + 10, label.top, self.view.width - label.right - 10 - 20, label.height);
-    [self.userNameBackView addSubview:textField];
-}
-
-- (void)buildPasswordView
-{
-    UILabel *label = [UILabel passwordLabel];
-    label.frame = CGRectMake(20, 11, 52, 22);
-    [self.passwordBackView addSubview:label];
-    
-    UITextField *textField = [UITextField passwordTextField];
-    textField.frame = CGRectMake(label.right + 10, label.top, self.view.width - label.right - 10 - 20, label.height);
-    [self.passwordBackView addSubview:textField];
 }
 
 - (void)buildLoginButton
@@ -94,15 +40,47 @@
 
 - (void)doSinaLoginAction:(UIButton *)sender
 {
-    if (_sinaLoginActionBlock) {
-        _sinaLoginActionBlock();
+    if (self.sinaLoginActionBlock) {
+        self.sinaLoginActionBlock();
     }
 }
 
 - (void)doQQLoginAction:(UIButton *)sender
 {
-    if (_qqLoginActionBlock) {
-        _qqLoginActionBlock();
+    if (self.qqLoginActionBlock) {
+        self.qqLoginActionBlock();
+    }
+}
+
+#pragma mark - textfielddelegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if (textField == self.userNameTextField) {
+        [self.passwordTextField becomeFirstResponder];
+    }else if (textField == self.passwordTextField) {
+        //login
+        if (self.loginActionBlock) {
+            self.loginActionBlock();
+        }
+    }
+    return YES;
+}
+
+- (UIView *)operationView:(MBOperationView *)operationView hitTest:(CGPoint)point withEvent:(UIEvent *)event
+{
+    if ([self.userNameTextField isFirstResponder] || [self.passwordTextField isFirstResponder]) {
+        [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+    }
+    return [super operationView:operationView hitTest:point withEvent:event];
+}
+
+- (void)setTextFieldBecomeResponder
+{
+    if (self.userNameTextField.text.length == 0) {
+        [self.userNameTextField becomeFirstResponder];
+    }else{
+        [self.passwordTextField becomeFirstResponder];
     }
 }
 

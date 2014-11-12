@@ -29,4 +29,11 @@
     label.text = @"密码";
     return label;
 }
+
++ (instancetype)mailLabel
+{
+    UILabel *label = [self normalLabel];
+    label.text = @"邮箱";
+    return label;
+}
 @end

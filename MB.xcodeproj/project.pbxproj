@@ -23,6 +23,11 @@
 		758284A51A1257A900FD13E9 /* MBLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 758284A31A1257A900FD13E9 /* MBLoginViewController.m */; };
 		758284AC1A12630700FD13E9 /* UILabel+Factory.m in Sources */ = {isa = PBXBuildFile; fileRef = 758284AB1A12630700FD13E9 /* UILabel+Factory.m */; };
 		758284AF1A1264D000FD13E9 /* UITextField+Factory.m in Sources */ = {isa = PBXBuildFile; fileRef = 758284AE1A1264D000FD13E9 /* UITextField+Factory.m */; };
+		75942FEF1A1308030013AFEA /* TTXLoginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 75942FEE1A1308030013AFEA /* TTXLoginManager.m */; };
+		75942FF31A1325D70013AFEA /* MBRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75942FF21A1325D70013AFEA /* MBRegisterViewController.m */; };
+		75942FF61A1327B70013AFEA /* NSString+Extent.m in Sources */ = {isa = PBXBuildFile; fileRef = 75942FF51A1327B70013AFEA /* NSString+Extent.m */; };
+		75942FF91A13289E0013AFEA /* MBLRBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75942FF81A13289E0013AFEA /* MBLRBaseViewController.m */; };
+		75942FFC1A132D2E0013AFEA /* MBOperationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 75942FFB1A132D2E0013AFEA /* MBOperationView.m */; };
 		C4310DE9523E470F833AEFE9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E39AD4A044145C6ABB96EA3 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -63,6 +68,16 @@
 		758284AB1A12630700FD13E9 /* UILabel+Factory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+Factory.m"; sourceTree = "<group>"; };
 		758284AD1A1264D000FD13E9 /* UITextField+Factory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+Factory.h"; sourceTree = "<group>"; };
 		758284AE1A1264D000FD13E9 /* UITextField+Factory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+Factory.m"; sourceTree = "<group>"; };
+		75942FED1A1308030013AFEA /* TTXLoginManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTXLoginManager.h; sourceTree = "<group>"; };
+		75942FEE1A1308030013AFEA /* TTXLoginManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTXLoginManager.m; sourceTree = "<group>"; };
+		75942FF11A1325D70013AFEA /* MBRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBRegisterViewController.h; sourceTree = "<group>"; };
+		75942FF21A1325D70013AFEA /* MBRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBRegisterViewController.m; sourceTree = "<group>"; };
+		75942FF41A1327B70013AFEA /* NSString+Extent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Extent.h"; sourceTree = "<group>"; };
+		75942FF51A1327B70013AFEA /* NSString+Extent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Extent.m"; sourceTree = "<group>"; };
+		75942FF71A13289E0013AFEA /* MBLRBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBLRBaseViewController.h; sourceTree = "<group>"; };
+		75942FF81A13289E0013AFEA /* MBLRBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBLRBaseViewController.m; sourceTree = "<group>"; };
+		75942FFA1A132D2E0013AFEA /* MBOperationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBOperationView.h; sourceTree = "<group>"; };
+		75942FFB1A132D2E0013AFEA /* MBOperationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBOperationView.m; sourceTree = "<group>"; };
 		79644A57B5CDA7336727AAE4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -180,6 +195,8 @@
 		758284811A12488E00FD13E9 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				75942FFA1A132D2E0013AFEA /* MBOperationView.h */,
+				75942FFB1A132D2E0013AFEA /* MBOperationView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -190,8 +207,12 @@
 				7582849E1A12554000FD13E9 /* BaseViewController */,
 				758284861A124A1200FD13E9 /* MBGuideViewController.h */,
 				758284871A124A1200FD13E9 /* MBGuideViewController.m */,
+				75942FF71A13289E0013AFEA /* MBLRBaseViewController.h */,
+				75942FF81A13289E0013AFEA /* MBLRBaseViewController.m */,
 				758284A21A1257A900FD13E9 /* MBLoginViewController.h */,
 				758284A31A1257A900FD13E9 /* MBLoginViewController.m */,
+				75942FF11A1325D70013AFEA /* MBRegisterViewController.h */,
+				75942FF21A1325D70013AFEA /* MBRegisterViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -218,6 +239,8 @@
 			children = (
 				758284901A124D4B00FD13E9 /* GuideViewManager.h */,
 				758284911A124D4B00FD13E9 /* GuideViewManager.m */,
+				75942FED1A1308030013AFEA /* TTXLoginManager.h */,
+				75942FEE1A1308030013AFEA /* TTXLoginManager.m */,
 				7582849F1A12559C00FD13E9 /* TTXTransitionManager.h */,
 				758284A01A12559C00FD13E9 /* TTXTransitionManager.m */,
 			);
@@ -242,6 +265,8 @@
 			children = (
 				758284981A1251E400FD13E9 /* UIView+Frame.h */,
 				758284991A1251E400FD13E9 /* UIView+Frame.m */,
+				75942FF41A1327B70013AFEA /* NSString+Extent.h */,
+				75942FF51A1327B70013AFEA /* NSString+Extent.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -368,7 +393,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75942FEF1A1308030013AFEA /* TTXLoginManager.m in Sources */,
 				7582848E1A124BFF00FD13E9 /* MBConfig.m in Sources */,
+				75942FF31A1325D70013AFEA /* MBRegisterViewController.m in Sources */,
 				758284921A124D4B00FD13E9 /* GuideViewManager.m in Sources */,
 				7522E5FF1A10AE9D007024E6 /* AppDelegate.m in Sources */,
 				758284A11A12559C00FD13E9 /* TTXTransitionManager.m in Sources */,
@@ -377,12 +404,15 @@
 				758284AC1A12630700FD13E9 /* UILabel+Factory.m in Sources */,
 				750C31951A110672009B8242 /* TTXProgressHUD.m in Sources */,
 				758284851A12488E00FD13E9 /* TTXBaseViewController.m in Sources */,
+				75942FF91A13289E0013AFEA /* MBLRBaseViewController.m in Sources */,
 				758284881A124A1200FD13E9 /* MBGuideViewController.m in Sources */,
 				758284AF1A1264D000FD13E9 /* UITextField+Factory.m in Sources */,
 				7582849A1A1251E400FD13E9 /* UIView+Frame.m in Sources */,
 				758284961A124F7E00FD13E9 /* UIButton+Factory.m in Sources */,
 				758284A51A1257A900FD13E9 /* MBLoginViewController.m in Sources */,
 				7582849D1A12553300FD13E9 /* TTXBaseNavigationController.m in Sources */,
+				75942FF61A1327B70013AFEA /* NSString+Extent.m in Sources */,
+				75942FFC1A132D2E0013AFEA /* MBOperationView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

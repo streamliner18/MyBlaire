@@ -11,4 +11,6 @@
 @interface UILabel (Factory)
 + (instancetype)userNameLabel;
 + (instancetype)passwordLabel;
++ (instancetype)mailLabel;
+
 @end

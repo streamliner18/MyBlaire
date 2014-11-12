@@ -17,17 +17,28 @@
     return textField;
 }
 
-+ (instancetype)userNameTextField
++ (instancetype)userNameTextFieldWithDelegate:(id<UITextFieldDelegate>)object
 {
     UITextField *textField = [self normalTextField];
     textField.returnKeyType = UIReturnKeyNext;
+    textField.delegate = object;
     return textField;
 }
 
-+ (instancetype)passwordTextField
++ (instancetype)passwordTextFieldWithDelegate:(id<UITextFieldDelegate>)object
 {
     UITextField *textField = [self normalTextField];
+    textField.secureTextEntry = YES;
+    textField.delegate = object;
     textField.returnKeyType = UIReturnKeyGo;
+    return textField;
+}
+
++ (instancetype)mailTextFieldWithDelegate:(id<UITextFieldDelegate>)object
+{
+    UITextField *textField = [self normalTextField];
+    textField.returnKeyType = UIReturnKeyDone;
+    textField.delegate = object;
     return textField;
 }
 

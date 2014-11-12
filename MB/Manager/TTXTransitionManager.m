@@ -248,6 +248,12 @@ NSString * const k__Transition_GestureRecognizer = @"__Transition_GestureRecogni
     
     return YES;
 }
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
+    return ![self.transitionCoordinator isAnimated];
+}
+
 @end
 
 @implementation UINavigationController(DisableTTXTransitionManager)

@@ -10,6 +10,8 @@
 #import "MBGuideViewController.h"
 #import "TTXBaseNavigationController.h"
 #import "MBLoginViewController.h"
+#import "MBRegisterViewController.h"
+#import "TTXLoginManager.h"
 
 @implementation GuideViewManager
 + (void)showGuildWithAppVersion:(NSString *)version
@@ -32,7 +34,10 @@
         [GuideViewManager configLoginViewAction:loginViewController];
     };
     guideView.registActionBlock = ^(){
-
+        @strongify(guideView);
+        MBRegisterViewController *registerViewController = [[MBRegisterViewController alloc] init];
+        [guideView.navigationController pushViewController:registerViewController animated:YES];
+        [GuideViewManager configRegisterViewAction:registerViewController];;
     };
 }
 
@@ -40,12 +45,26 @@
 {
     @weakify(loginView);
     loginView.sinaLoginActionBlock = ^(){
-        NSLog(@"1");
+        @strongify(loginView);
+        [[TTXLoginManager shared] sinaLoginWithViewController:loginView];
     };
     loginView.qqLoginActionBlock = ^(){
-        NSLog(@"0");
-
+        @strongify(loginView);
+        [[TTXLoginManager shared] qqLoginWithViewController:loginView];
     };
+}
+
++ (void)configRegisterViewAction:(MBRegisterViewController *)registerView
+{
+//    @weakify(loginView);
+//    loginView.sinaLoginActionBlock = ^(){
+//        @strongify(loginView);
+//        [[TTXLoginManager shared] sinaLoginWithViewController:loginView];
+//    };
+//    loginView.qqLoginActionBlock = ^(){
+//        @strongify(loginView);
+//        [[TTXLoginManager shared] qqLoginWithViewController:loginView];
+//    };
 }
 
 @end

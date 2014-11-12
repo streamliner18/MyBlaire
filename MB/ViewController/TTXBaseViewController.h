@@ -5,6 +5,8 @@
 
 #import <UIKit/UIKit.h>
 
+@class MBOperationView;
+
 @interface TTXBaseViewController : UIViewController
 
 + (instancetype)loadFromXib;
@@ -17,5 +19,7 @@
 - (void)showAlertTitle:(NSString *)title message:(NSString *)message;
 - (void)showError:(NSError *)error message:(NSString *)message;
 - (void)showMessageHUDWithMessage:(NSString *)message;
+
+- (UIView *)operationView:(MBOperationView *)operationView hitTest:(CGPoint)point withEvent:(UIEvent *)event;
 
 @end

@@ -78,13 +78,14 @@
     [[self navigationController] setNavigationBarHidden:YES animated:animated];
 }
 
-- (void)viewDidLoad {
-    
+- (void)viewDidLoad
+{    
     [super viewDidLoad];
     
-    self.scrollView.frame = self.view.bounds;
+    self.view.backgroundColor = [UIColor lightGrayColor];
+    
+    self.scrollView.frame = CGRectMake(0, 0, 320, 400);
     self.scrollView.contentSize = CGSizeMake(self.view.width * 4, self.view.height);
-    self.scrollView.backgroundColor = [UIColor lightGrayColor];
     
     self.pageControl.frame = CGRectMake(0, 0, self.view.width, 30);
     self.pageControl.center = CGPointMake(self.view.width * 0.5, self.view.height - 150);
