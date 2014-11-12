@@ -13,6 +13,16 @@
 		7522E5FF1A10AE9D007024E6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7522E5FE1A10AE9D007024E6 /* AppDelegate.m */; };
 		7522E6071A10AE9D007024E6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7522E6061A10AE9D007024E6 /* Images.xcassets */; };
 		758284851A12488E00FD13E9 /* TTXBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 758284841A12488E00FD13E9 /* TTXBaseViewController.m */; };
+		758284881A124A1200FD13E9 /* MBGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 758284871A124A1200FD13E9 /* MBGuideViewController.m */; };
+		7582848E1A124BFF00FD13E9 /* MBConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 7582848D1A124BFF00FD13E9 /* MBConfig.m */; };
+		758284921A124D4B00FD13E9 /* GuideViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 758284911A124D4B00FD13E9 /* GuideViewManager.m */; };
+		758284961A124F7E00FD13E9 /* UIButton+Factory.m in Sources */ = {isa = PBXBuildFile; fileRef = 758284951A124F7E00FD13E9 /* UIButton+Factory.m */; };
+		7582849A1A1251E400FD13E9 /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 758284991A1251E400FD13E9 /* UIView+Frame.m */; };
+		7582849D1A12553300FD13E9 /* TTXBaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7582849C1A12553300FD13E9 /* TTXBaseNavigationController.m */; };
+		758284A11A12559C00FD13E9 /* TTXTransitionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 758284A01A12559C00FD13E9 /* TTXTransitionManager.m */; };
+		758284A51A1257A900FD13E9 /* MBLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 758284A31A1257A900FD13E9 /* MBLoginViewController.m */; };
+		758284AC1A12630700FD13E9 /* UILabel+Factory.m in Sources */ = {isa = PBXBuildFile; fileRef = 758284AB1A12630700FD13E9 /* UILabel+Factory.m */; };
+		758284AF1A1264D000FD13E9 /* UITextField+Factory.m in Sources */ = {isa = PBXBuildFile; fileRef = 758284AE1A1264D000FD13E9 /* UITextField+Factory.m */; };
 		C4310DE9523E470F833AEFE9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E39AD4A044145C6ABB96EA3 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -29,10 +39,30 @@
 		7522E5FD1A10AE9D007024E6 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7522E5FE1A10AE9D007024E6 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		7522E6061A10AE9D007024E6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		752A80EE1A10D4C9003A5DEB /* TTXGlobalMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTXGlobalMacro.h; sourceTree = "<group>"; };
 		75352C341A10D00300110F2D /* MBPrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBPrefixHeader.pch; sourceTree = "<group>"; };
 		758284831A12488E00FD13E9 /* TTXBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTXBaseViewController.h; sourceTree = "<group>"; };
 		758284841A12488E00FD13E9 /* TTXBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTXBaseViewController.m; sourceTree = "<group>"; };
+		758284861A124A1200FD13E9 /* MBGuideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBGuideViewController.h; sourceTree = "<group>"; };
+		758284871A124A1200FD13E9 /* MBGuideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBGuideViewController.m; sourceTree = "<group>"; };
+		7582848B1A124BC200FD13E9 /* TTXGlobalMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTXGlobalMacro.h; sourceTree = "<group>"; };
+		7582848C1A124BFF00FD13E9 /* MBConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBConfig.h; sourceTree = "<group>"; };
+		7582848D1A124BFF00FD13E9 /* MBConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBConfig.m; sourceTree = "<group>"; };
+		758284901A124D4B00FD13E9 /* GuideViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuideViewManager.h; sourceTree = "<group>"; };
+		758284911A124D4B00FD13E9 /* GuideViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuideViewManager.m; sourceTree = "<group>"; };
+		758284941A124F7E00FD13E9 /* UIButton+Factory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+Factory.h"; sourceTree = "<group>"; };
+		758284951A124F7E00FD13E9 /* UIButton+Factory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Factory.m"; sourceTree = "<group>"; };
+		758284981A1251E400FD13E9 /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
+		758284991A1251E400FD13E9 /* UIView+Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Frame.m"; sourceTree = "<group>"; };
+		7582849B1A12553300FD13E9 /* TTXBaseNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTXBaseNavigationController.h; sourceTree = "<group>"; };
+		7582849C1A12553300FD13E9 /* TTXBaseNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTXBaseNavigationController.m; sourceTree = "<group>"; };
+		7582849F1A12559C00FD13E9 /* TTXTransitionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTXTransitionManager.h; sourceTree = "<group>"; };
+		758284A01A12559C00FD13E9 /* TTXTransitionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTXTransitionManager.m; sourceTree = "<group>"; };
+		758284A21A1257A900FD13E9 /* MBLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBLoginViewController.h; sourceTree = "<group>"; };
+		758284A31A1257A900FD13E9 /* MBLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBLoginViewController.m; sourceTree = "<group>"; };
+		758284AA1A12630700FD13E9 /* UILabel+Factory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+Factory.h"; sourceTree = "<group>"; };
+		758284AB1A12630700FD13E9 /* UILabel+Factory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+Factory.m"; sourceTree = "<group>"; };
+		758284AD1A1264D000FD13E9 /* UITextField+Factory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+Factory.h"; sourceTree = "<group>"; };
+		758284AE1A1264D000FD13E9 /* UITextField+Factory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+Factory.m"; sourceTree = "<group>"; };
 		79644A57B5CDA7336727AAE4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -115,10 +145,14 @@
 			children = (
 				7522E5FD1A10AE9D007024E6 /* AppDelegate.h */,
 				7522E5FE1A10AE9D007024E6 /* AppDelegate.m */,
+				758284971A1251CF00FD13E9 /* Category */,
+				758284931A124F3500FD13E9 /* Factory */,
+				7582848F1A124D2900FD13E9 /* Manager */,
+				7582848A1A124BC200FD13E9 /* MBConfig */,
+				758284891A124A6A00FD13E9 /* Test */,
 				758284811A12488E00FD13E9 /* View */,
 				758284821A12488E00FD13E9 /* ViewController */,
 				758284801A12487E00FD13E9 /* Model */,
-				752A80ED1A10D4C9003A5DEB /* Macro */,
 				750C31881A1104C2009B8242 /* Tools */,
 				7522E6061A10AE9D007024E6 /* Images.xcassets */,
 				7522E5F91A10AE9D007024E6 /* Supporting Files */,
@@ -134,14 +168,6 @@
 				7522E5FB1A10AE9D007024E6 /* main.m */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		752A80ED1A10D4C9003A5DEB /* Macro */ = {
-			isa = PBXGroup;
-			children = (
-				752A80EE1A10D4C9003A5DEB /* TTXGlobalMacro.h */,
-			);
-			path = Macro;
 			sourceTree = "<group>";
 		};
 		758284801A12487E00FD13E9 /* Model */ = {
@@ -161,10 +187,74 @@
 		758284821A12488E00FD13E9 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				758284831A12488E00FD13E9 /* TTXBaseViewController.h */,
-				758284841A12488E00FD13E9 /* TTXBaseViewController.m */,
+				7582849E1A12554000FD13E9 /* BaseViewController */,
+				758284861A124A1200FD13E9 /* MBGuideViewController.h */,
+				758284871A124A1200FD13E9 /* MBGuideViewController.m */,
+				758284A21A1257A900FD13E9 /* MBLoginViewController.h */,
+				758284A31A1257A900FD13E9 /* MBLoginViewController.m */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		758284891A124A6A00FD13E9 /* Test */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Test;
+			sourceTree = "<group>";
+		};
+		7582848A1A124BC200FD13E9 /* MBConfig */ = {
+			isa = PBXGroup;
+			children = (
+				7582848B1A124BC200FD13E9 /* TTXGlobalMacro.h */,
+				7582848C1A124BFF00FD13E9 /* MBConfig.h */,
+				7582848D1A124BFF00FD13E9 /* MBConfig.m */,
+			);
+			path = MBConfig;
+			sourceTree = "<group>";
+		};
+		7582848F1A124D2900FD13E9 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				758284901A124D4B00FD13E9 /* GuideViewManager.h */,
+				758284911A124D4B00FD13E9 /* GuideViewManager.m */,
+				7582849F1A12559C00FD13E9 /* TTXTransitionManager.h */,
+				758284A01A12559C00FD13E9 /* TTXTransitionManager.m */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		758284931A124F3500FD13E9 /* Factory */ = {
+			isa = PBXGroup;
+			children = (
+				758284941A124F7E00FD13E9 /* UIButton+Factory.h */,
+				758284951A124F7E00FD13E9 /* UIButton+Factory.m */,
+				758284AA1A12630700FD13E9 /* UILabel+Factory.h */,
+				758284AB1A12630700FD13E9 /* UILabel+Factory.m */,
+				758284AD1A1264D000FD13E9 /* UITextField+Factory.h */,
+				758284AE1A1264D000FD13E9 /* UITextField+Factory.m */,
+			);
+			path = Factory;
+			sourceTree = "<group>";
+		};
+		758284971A1251CF00FD13E9 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				758284981A1251E400FD13E9 /* UIView+Frame.h */,
+				758284991A1251E400FD13E9 /* UIView+Frame.m */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		7582849E1A12554000FD13E9 /* BaseViewController */ = {
+			isa = PBXGroup;
+			children = (
+				758284831A12488E00FD13E9 /* TTXBaseViewController.h */,
+				758284841A12488E00FD13E9 /* TTXBaseViewController.m */,
+				7582849B1A12553300FD13E9 /* TTXBaseNavigationController.h */,
+				7582849C1A12553300FD13E9 /* TTXBaseNavigationController.m */,
+			);
+			name = BaseViewController;
 			sourceTree = "<group>";
 		};
 		FF404DD00E204CB5A8CBF243 /* Frameworks */ = {
@@ -278,11 +368,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7582848E1A124BFF00FD13E9 /* MBConfig.m in Sources */,
+				758284921A124D4B00FD13E9 /* GuideViewManager.m in Sources */,
 				7522E5FF1A10AE9D007024E6 /* AppDelegate.m in Sources */,
+				758284A11A12559C00FD13E9 /* TTXTransitionManager.m in Sources */,
 				750C31941A110672009B8242 /* TTXMessageHUD.m in Sources */,
 				7522E5FC1A10AE9D007024E6 /* main.m in Sources */,
+				758284AC1A12630700FD13E9 /* UILabel+Factory.m in Sources */,
 				750C31951A110672009B8242 /* TTXProgressHUD.m in Sources */,
 				758284851A12488E00FD13E9 /* TTXBaseViewController.m in Sources */,
+				758284881A124A1200FD13E9 /* MBGuideViewController.m in Sources */,
+				758284AF1A1264D000FD13E9 /* UITextField+Factory.m in Sources */,
+				7582849A1A1251E400FD13E9 /* UIView+Frame.m in Sources */,
+				758284961A124F7E00FD13E9 /* UIButton+Factory.m in Sources */,
+				758284A51A1257A900FD13E9 /* MBLoginViewController.m in Sources */,
+				7582849D1A12553300FD13E9 /* TTXBaseNavigationController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

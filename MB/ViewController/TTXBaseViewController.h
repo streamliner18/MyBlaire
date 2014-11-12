@@ -7,6 +7,8 @@
 
 @interface TTXBaseViewController : UIViewController
 
++ (instancetype)loadFromXib;
+
 #pragma mark - UI Util Elements
 
 - (void)showProgressHUD;

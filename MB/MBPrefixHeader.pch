@@ -13,5 +13,13 @@
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
 
 #import <AFNetworking.h>
-
+#import "GuideViewManager.h"
+#import "MBConfig.h"
+#import "TTXGlobalMacro.h"
+#import "UIView+Frame.h"
+#import <RACEXTScope.h>
+#import "UIButton+Factory.h"
+#import "UILabel+Factory.h"
+#import "UITextField+Factory.h"
+#import <ShareSDK.h>
 #endif

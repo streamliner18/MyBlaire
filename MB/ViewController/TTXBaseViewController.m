@@ -12,6 +12,11 @@
 
 @implementation TTXBaseViewController
 
++ (instancetype)loadFromXib
+{
+    return [[self alloc] initWithNibName:NSStringFromClass([self class]) bundle:nil];
+}
+
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
     return UIStatusBarStyleLightContent;
