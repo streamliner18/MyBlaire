@@ -10,20 +10,38 @@
 #import "MBApiWebManager.h"
 
 @implementation MBApi
-+ (void)registerNewUserWithUserName:(NSString *)userName password:(NSString *)password email:(NSString *)mail handle:(MBApiRegisterBlock)block
+
++ (void)postWithTokenURL:(NSString *)url parameters:(NSDictionary *)dic handleErrorBlock:(MBApiErrorBlock)block
+{
+    [[MBApiWebManager shareWithoutToken] POST:url parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        block([MBApiError shareWithCode:[(NSDictionary *)responseObject integerForKey:@"code"] message:[(NSDictionary *)responseObject stringForKey:@"message"]]);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        block([MBApiError shareNetworkError]);
+    }];
+}
+
++ (void)postWithTokenURL:(NSString *)url parameters:(NSDictionary *)dic handleArrayBlock:(MBApiArrayBlock)block
+{
+    [[MBApiWebManager shareWithoutToken] POST:url parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        block([MBApiError shareWithCode:[(NSDictionary *)responseObject integerForKey:@"code"] message:[(NSDictionary *)responseObject stringForKey:@"message"]], [(NSDictionary *)responseObject arrayForKey:@"result"]);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        block([MBApiError shareNetworkError],nil);
+    }];
+}
+
+
++ (void)registerNewUserWithUserName:(NSString *)userName password:(NSString *)password email:(NSString *)mail handle:(MBApiErrorBlock)block
 {
     if ([self checkEmail:mail]) {
-        [[MBApiWebManager shareWithoutToken] POST:@"MyBlaire/app/register" parameters:@{@"userName":userName,@"password":password,@"email":mail} success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            block([MBApiError shareWithCode:[(NSDictionary *)responseObject integerForKey:@"code"] message:[(NSDictionary *)responseObject stringForKey:@"message"]]);
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            block([MBApiError shareNetworkError]);
+        [self postWithTokenURL:@"MyBlaire/app/register" parameters:@{@"userName":userName,@"password":password,@"email":mail} handleErrorBlock:^(MBApiError *error) {
+            block(error);
         }];
     }else{
         block([MBApiError shareWithCode:MBApiCodeRegisterFaildWithEmailError message:@"邮箱填写错误"]);
     }
 }
 
-+ (void)loginWithType:(MBLoginType)type userName:(NSString *)userName password:(NSString *)password token:(NSString *)token handle:(MBApiLoginBlock)block
++ (void)loginWithType:(MBLoginType)type userName:(NSString *)userName password:(NSString *)password token:(NSString *)token handle:(MBApiErrorBlock)block
 {
     if (type == MBLoginTypeNormal) {
         [[MBApiWebManager shareWithoutToken] POST:@"MyBlaire/app/normalLogin" parameters:@{@"userName":userName,@"password":password} success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -46,12 +64,75 @@
     }
 }
 
-+ (void)getKeyWord
++ (void)getKeyWordWithCompletionHandle:(MBApiArrayBlock)block
 {
-    [[MBApiWebManager shareWithToken] POST:@"MyBlaire/app/getKeyWord" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
+    NSString *url = @"MyBlaire/app/getKeyWord";
+    NSDictionary *param = nil;
+    [self postWithTokenURL:url parameters:param handleArrayBlock:^(MBApiError *error, NSArray *array) {
+        block(error,array);
+    }];
+}
+
++ (void)getHotGoodsWithCompletionHandle:(MBApiArrayBlock)block
+{
+    NSString *url = @"MyBlaire/app/getHotGoods";
+    NSDictionary *param = nil;
+    [self postWithTokenURL:url parameters:param handleArrayBlock:^(MBApiError *error, NSArray *array) {
+        block(error,array);
+    }];
+}
+
++ (void)getStreetShootingGoodsWithCompletionHandle:(MBApiArrayBlock)block
+{
+    NSString *url = @"MyBlaire/app/getStreetShootingGoods";
+    NSDictionary *param = nil;
+    [self postWithTokenURL:url parameters:param handleArrayBlock:^(MBApiError *error, NSArray *array) {
+        block(error,array);
+    }];
+}
+
++ (void)getGoodsWithPriceRange:(MBGoodsPriceRange)range discount:(MBGoodsDiscount)discount color:(NSString *)color searchContent:(NSString *)content completionHandle:(MBApiArrayBlock)block
+{
+    NSString *url = @"MyBlaire/app/getGoods";
+    NSDictionary *param = @{@"priceRange":[NSString stringWithFormat:@"%ld",(long)range],@"discount":@(discount),@"color":color,@"searchContent":content};
+    [self postWithTokenURL:url parameters:param handleArrayBlock:^(MBApiError *error, NSArray *array) {
+        block(error,array);
+    }];
+}
+
++ (void)getGoodsInfo:(NSInteger)goodsID completionHandle:(MBApiArrayBlock)block
+{
+    NSString *url = @"MyBlaire/app/getGoodDetailed";
+    NSDictionary *param = @{@"goodId":[NSString stringWithFormat:@"%ld",(long)goodsID]};
+    [self postWithTokenURL:url parameters:param handleArrayBlock:^(MBApiError *error, NSArray *array) {
+        block(error,array);
+    }];
+}
+
++ (void)collecteGoods:(NSInteger)goodsID completionHandle:(MBApiErrorBlock)block
+{
+    NSString *url = @"MyBlaire/app/collectGood";
+    NSDictionary *parems = @{@"goodId":[NSString stringWithFormat:@"%ld",(long)goodsID]};
+    [self postWithTokenURL:url parameters:parems handleErrorBlock:^(MBApiError *error) {
+        block(error);
+    }];
+}
+
++ (void)collectOrderGoodCompletionHandle:(MBApiArrayBlock)block
+{
+    NSString *url = @"MyBlaire/app/collectOrder";
+    NSDictionary *parems = nil;
+    [self postWithTokenURL:url parameters:parems handleArrayBlock:^(MBApiError *error, NSArray *array) {
+        block(error,array);
+    }];
+}
+
++ (void)feedbackWithMesage:(NSString *)message completionHandle:(MBApiErrorBlock)block
+{
+    NSString *url = @"MyBlaire/app/saveFeedback";
+    NSDictionary *parems = @{@"content":message};
+    [self postWithTokenURL:url parameters:parems handleErrorBlock:^(MBApiError *error) {
+        block(error);
     }];
 }
 

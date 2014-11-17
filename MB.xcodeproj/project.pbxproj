@@ -36,6 +36,9 @@
 		756EEC281A1A03940007D495 /* MBApiWebManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 756EEC271A1A03940007D495 /* MBApiWebManager.m */; };
 		756EEC2B1A1A07290007D495 /* NSDictionary+SafeAccessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 756EEC2A1A1A07290007D495 /* NSDictionary+SafeAccessor.m */; };
 		756EEC2E1A1A0C000007D495 /* MBApiError.m in Sources */ = {isa = PBXBuildFile; fileRef = 756EEC2D1A1A0C000007D495 /* MBApiError.m */; };
+		756EEC311A1A49D80007D495 /* MBKeyWord.m in Sources */ = {isa = PBXBuildFile; fileRef = 756EEC301A1A49D80007D495 /* MBKeyWord.m */; };
+		756EEC341A1A4A1E0007D495 /* MBStreetShootingPrroduct.m in Sources */ = {isa = PBXBuildFile; fileRef = 756EEC331A1A4A1E0007D495 /* MBStreetShootingPrroduct.m */; };
+		756EEC371A1A4AA90007D495 /* MBProductModel+Detail.m in Sources */ = {isa = PBXBuildFile; fileRef = 756EEC361A1A4AA90007D495 /* MBProductModel+Detail.m */; };
 		758284851A12488E00FD13E9 /* TTXBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 758284841A12488E00FD13E9 /* TTXBaseViewController.m */; };
 		758284881A124A1200FD13E9 /* MBGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 758284871A124A1200FD13E9 /* MBGuideViewController.m */; };
 		7582848E1A124BFF00FD13E9 /* MBConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 7582848D1A124BFF00FD13E9 /* MBConfig.m */; };
@@ -117,6 +120,12 @@
 		756EEC2A1A1A07290007D495 /* NSDictionary+SafeAccessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+SafeAccessor.m"; sourceTree = "<group>"; };
 		756EEC2C1A1A0C000007D495 /* MBApiError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBApiError.h; sourceTree = "<group>"; };
 		756EEC2D1A1A0C000007D495 /* MBApiError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBApiError.m; sourceTree = "<group>"; };
+		756EEC2F1A1A49D80007D495 /* MBKeyWord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBKeyWord.h; sourceTree = "<group>"; };
+		756EEC301A1A49D80007D495 /* MBKeyWord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBKeyWord.m; sourceTree = "<group>"; };
+		756EEC321A1A4A1E0007D495 /* MBStreetShootingPrroduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBStreetShootingPrroduct.h; sourceTree = "<group>"; };
+		756EEC331A1A4A1E0007D495 /* MBStreetShootingPrroduct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBStreetShootingPrroduct.m; sourceTree = "<group>"; };
+		756EEC351A1A4AA90007D495 /* MBProductModel+Detail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProductModel+Detail.h"; sourceTree = "<group>"; };
+		756EEC361A1A4AA90007D495 /* MBProductModel+Detail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProductModel+Detail.m"; sourceTree = "<group>"; };
 		758284831A12488E00FD13E9 /* TTXBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTXBaseViewController.h; sourceTree = "<group>"; };
 		758284841A12488E00FD13E9 /* TTXBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTXBaseViewController.m; sourceTree = "<group>"; };
 		758284861A124A1200FD13E9 /* MBGuideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBGuideViewController.h; sourceTree = "<group>"; };
@@ -336,6 +345,12 @@
 				756D71151A13BEB50023F8F8 /* MBHomePageCellModel.m */,
 				75194D3F1A15FA20002C7038 /* MBProductModel.h */,
 				75194D401A15FA20002C7038 /* MBProductModel.m */,
+				756EEC2F1A1A49D80007D495 /* MBKeyWord.h */,
+				756EEC301A1A49D80007D495 /* MBKeyWord.m */,
+				756EEC321A1A4A1E0007D495 /* MBStreetShootingPrroduct.h */,
+				756EEC331A1A4A1E0007D495 /* MBStreetShootingPrroduct.m */,
+				756EEC351A1A4AA90007D495 /* MBProductModel+Detail.h */,
+				756EEC361A1A4AA90007D495 /* MBProductModel+Detail.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -553,6 +568,7 @@
 			files = (
 				756D71161A13BEB50023F8F8 /* MBHomePageCellModel.m in Sources */,
 				756D70FE1A13ACE10023F8F8 /* TTXBaseTableViewController.m in Sources */,
+				756EEC371A1A4AA90007D495 /* MBProductModel+Detail.m in Sources */,
 				756D71121A13BE6E0023F8F8 /* MBHomePageViewCell.m in Sources */,
 				75942FEF1A1308030013AFEA /* TTXLoginManager.m in Sources */,
 				7582848E1A124BFF00FD13E9 /* MBConfig.m in Sources */,
@@ -564,6 +580,7 @@
 				756EEC251A1A02AA0007D495 /* MBApi.m in Sources */,
 				75194D3E1A15D489002C7038 /* MBSearchView.m in Sources */,
 				758284921A124D4B00FD13E9 /* GuideViewManager.m in Sources */,
+				756EEC341A1A4A1E0007D495 /* MBStreetShootingPrroduct.m in Sources */,
 				7522E5FF1A10AE9D007024E6 /* AppDelegate.m in Sources */,
 				758284A11A12559C00FD13E9 /* TTXTransitionManager.m in Sources */,
 				756EEC281A1A03940007D495 /* MBApiWebManager.m in Sources */,
@@ -583,6 +600,7 @@
 				7582849A1A1251E400FD13E9 /* UIView+Frame.m in Sources */,
 				756EEC211A19FE560007D495 /* MBModel.m in Sources */,
 				75194D441A16083A002C7038 /* MBProductListView.m in Sources */,
+				756EEC311A1A49D80007D495 /* MBKeyWord.m in Sources */,
 				756D70F41A13A7130023F8F8 /* MBUserManager.m in Sources */,
 				756D71091A13B8D60023F8F8 /* UIImage+ImageWithoutCache.m in Sources */,
 				756D711F1A13BFAE0023F8F8 /* MBAboutViewController.m in Sources */,

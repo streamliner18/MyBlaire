@@ -9,11 +9,12 @@
 #import <Foundation/Foundation.h>
 
 @interface MBProductModel : NSObject
-@property (nonatomic) NSString *imageURL;
+@property (nonatomic) NSString *goodId;
+@property (nonatomic) NSString *goodName;
+@property (nonatomic) CGFloat currentPrice;
+@property (nonatomic) NSString *smallPicture;
+@property (nonatomic) NSString *collectCount;
+@property (nonatomic) NSString *isCollect;
 @property (nonatomic) CGFloat imageWidth;
 @property (nonatomic) CGFloat imageHeight;
-@property (nonatomic) NSString *name;
-@property (nonatomic) CGFloat price;
-@property (nonatomic) NSInteger loveCount;
-@property (nonatomic) BOOL isLoved;
 @end
