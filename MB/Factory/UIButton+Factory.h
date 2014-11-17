@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface UIButton (Factory)
++ (instancetype)normalButton;
 + (instancetype)registButton;
 + (instancetype)loginButton;
 + (instancetype)sinaLoginButton;

@@ -20,6 +20,15 @@
     [self setTextFieldBecomeResponder];
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    if (!iOS8) {
+        [self.userNameTextField resignFirstResponder];
+        [self.passwordTextField resignFirstResponder];
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"登录";
@@ -67,12 +76,11 @@
     return YES;
 }
 
-- (UIView *)operationView:(MBOperationView *)operationView hitTest:(CGPoint)point withEvent:(UIEvent *)event
+- (void)hideKeyBoard:(UITapGestureRecognizer *)sender
 {
     if ([self.userNameTextField isFirstResponder] || [self.passwordTextField isFirstResponder]) {
         [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
     }
-    return [super operationView:operationView hitTest:point withEvent:event];
 }
 
 - (void)setTextFieldBecomeResponder

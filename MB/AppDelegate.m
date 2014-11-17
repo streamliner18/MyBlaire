@@ -7,12 +7,15 @@
 //
 
 #import "AppDelegate.h"
-#import "GuideViewManager.h"
 #import "TTXTransitionManager.h"
-#import <UMSocial.h>
-#import <UMSocialQQHandler.h>
-#import <UMSocialSinaHandler.h>
-#import <UMSocialWechatHandler.h>
+#import "MBSocialManager.h"
+#import "TTXBaseNavigationController.h"
+#import "MBHomePageViewController.h"
+#import "MBSearchViewController.h"
+#import "MBLoveViewController.h"
+#import "MBAboutViewController.h"
+
+#import "MBModel.h"
 
 @interface AppDelegate ()
 
@@ -20,35 +23,31 @@
 
 @implementation AppDelegate
 
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [MBModel regist];
+    //设定Tabbar的颜色
+    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor lightGrayColor], UITextAttributeTextColor, nil] forState:UIControlStateNormal];
+    [[UITabBarItem appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],UITextAttributeTextColor, nil]forState:UIControlStateSelected];
+    [[UITabBar appearance] setBarTintColor:[UIColor blackColor]];
+    /////
+    [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    
     [TTXTransitionManager validatePanPackWithTransitionGestureRecognizerType:TransitionGestureRecognizerTypePan];
-    [self registSocialShare];
+    [MBSocialManager registSocialShare];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
-    self.window.rootViewController = [[UIViewController alloc] init];
+    UITabBarController *tab = [[UITabBarController alloc] init];
+    tab.viewControllers = @[
+                            [[TTXBaseNavigationController alloc] initWithRootViewController:[[MBHomePageViewController alloc] init]],
+                            [[TTXBaseNavigationController alloc] initWithRootViewController:[[MBSearchViewController alloc] init]],
+                            [[TTXBaseNavigationController alloc] initWithRootViewController:[[MBLoveViewController alloc] init]],
+                            [[TTXBaseNavigationController alloc] initWithRootViewController:[[MBAboutViewController alloc] init]]
+                            ];
+    self.window.rootViewController = tab;
     [self.window makeKeyWindow];
-    [self.window makeKeyAndVisible];
-    [GuideViewManager showGuildWithAppVersion:TTX_ShowGuide_AppVersion()];
+    [self.window makeKeyAndVisible];    
     return YES;
-}
-
-- (void)registSocialShare
-{
-    //设置友盟社会化组件appkey
-    [UMSocialData setAppKey:kUmengAppkey];
-    
-    //打开调试log的开关
-    [UMSocialData openLog:NO];
-    
-    [UMSocialWechatHandler setWXAppId:kIMWechatAppKey appSecret:kIMWechatAppSecret url:kIMWechatAppRedirectUrl];
-    
-    [UMSocialQQHandler setQQWithAppId:@"100424468" appKey:@"c7394704798a158208a74ab60104f0ba" url:@"http://www.umeng.com/social"];
-
-    //打开新浪微博的SSO开关
-    [UMSocialSinaHandler openSSOWithRedirectURL:kSnsSinaWeiboRedirectUrl];
-    //设置支持没有客户端情况下使用SSO授权
-    [UMSocialQQHandler setSupportWebView:YES];
 }
 
 /**
@@ -56,7 +55,7 @@
  */
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
-    return  [UMSocialSnsService handleOpenURL:url wxApiDelegate:nil];
+    return  [MBSocialManager application:application openURL:url sourceApplication:sourceApplication annotation:annotation];;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

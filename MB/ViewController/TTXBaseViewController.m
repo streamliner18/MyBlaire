@@ -6,9 +6,8 @@
 #import "TTXBaseViewController.h"
 #import "TTXProgressHUD.h"
 #import "TTXMessageHUD.h"
-#import "MBOperationView.h"
 
-@interface TTXBaseViewController ()<MBOperationViewDelegate>
+@interface TTXBaseViewController ()
 @end
 
 @implementation TTXBaseViewController
@@ -23,12 +22,20 @@
     return UIStatusBarStyleLightContent;
 }
 
+- (instancetype)init
+{
+    if (self = [super init]) {
+        self.navigationItem.title = [[self class] navigationItemTitle];
+    }
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    MBOperationView *operationView = [[MBOperationView alloc] initWithFrame:self.view.bounds];
-    operationView.delegate = self;
-    self.view = operationView;
+    if (iOS7) {
+        self.automaticallyAdjustsScrollViewInsets = [[self class] automaticallyAdjustsScrollViewInsets];
+    }
     [self configBackButton];
 }
 
@@ -81,9 +88,33 @@
     [alert show];
 }
 
-- (UIView *)operationView:(MBOperationView *)operationView hitTest:(CGPoint)point withEvent:(UIEvent *)event
+- (void)viewWillAppear:(BOOL)animated
 {
-    return nil;
+    [super viewWillAppear:animated];
+    self.navigationItem.title = [[self class] navigationItemTitle];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    self.navigationItem.title = [[self class] navigationItemDisappearTitle];
+}
+
+#pragma mark - UINavigationProtocol
+
++ (NSString *)navigationItemTitle
+{
+    return @"";
+}
+
++ (NSString *)navigationItemDisappearTitle
+{
+    return [self navigationItemTitle];
+}
+
++ (BOOL)automaticallyAdjustsScrollViewInsets
+{
+    return NO;
 }
 
 - (void)dealloc

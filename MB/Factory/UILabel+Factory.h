@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface UILabel (Factory)
++ (instancetype)normalLabel;
 + (instancetype)userNameLabel;
 + (instancetype)passwordLabel;
 + (instancetype)mailLabel;

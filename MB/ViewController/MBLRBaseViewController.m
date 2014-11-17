@@ -52,6 +52,8 @@
     [self.view addSubview:self.passwordBackView];
     [self buildUserNameView];
     [self buildPasswordView];
+    UITapGestureRecognizer *tapGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyBoard:)];
+    [self.view addGestureRecognizer:tapGes];
 }
 
 - (void)buildUserNameView
@@ -87,6 +89,13 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     return YES;
+}
+
+#pragma mark - tapGestureAction
+
+- (void)hideKeyBoard:(UITapGestureRecognizer *)sender
+{
+    
 }
 
 - (void)didReceiveMemoryWarning {

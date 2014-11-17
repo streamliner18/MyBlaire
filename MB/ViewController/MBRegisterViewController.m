@@ -11,6 +11,7 @@
 @interface MBRegisterViewController ()
 @property (nonatomic, strong) UIView *mailBackView;
 @property (nonatomic, strong) UITextField *mailTextField;
+@property (nonatomic, strong) UIButton *registButton;
 @end
 
 @implementation MBRegisterViewController
@@ -32,13 +33,24 @@
     [self setTextFieldBecomeResponder];
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    if (!iOS8) {
+        [self.userNameTextField resignFirstResponder];
+        [self.passwordTextField resignFirstResponder];
+        [self.mailTextField resignFirstResponder];
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"注册";
     self.mailBackView.frame = CGRectMake(0, self.passwordBackView.bottom + 1, self.view.width, 44);
     [self.view addSubview:self.mailBackView];
     [self buildMailView];
-
+    [self buildRegisterButton];
+    [self buildLoginButton];
     self.passwordTextField.returnKeyType = UIReturnKeyNext;
 }
 
@@ -56,6 +68,53 @@
     [self.mailBackView addSubview:self.mailTextField];
 }
 
+- (void)buildRegisterButton
+{
+    self.registButton = [UIButton registButton];
+    self.registButton.center = CGPointMake(self.view.width * 0.5, self.mailBackView.bottom + 40);
+    [self.registButton addTarget:self action:@selector(doRegistUser:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.registButton];
+    
+    UIImageView *imageview = [[UIImageView alloc] initWithFrame:CGRectMake(0, self.registButton.bottom + 20, self.view.width, 10)];
+    imageview.backgroundColor = [UIColor darkGrayColor];
+    [self.view addSubview:imageview];
+}
+
+- (void)buildLoginButton
+{
+    UIButton *sina = [UIButton sinaLoginButton];
+    [sina addTarget:self action:@selector(doSinaLoginAction:) forControlEvents:UIControlEventTouchUpInside];
+    UIButton *qq = [UIButton qqLoginButton];
+    [qq addTarget:self action:@selector(doQQLoginAction:) forControlEvents:UIControlEventTouchUpInside];
+    sina.center = CGPointMake(100, self.registButton.bottom + 50 + 10);
+    qq.center = CGPointMake(100 + 100, self.registButton.bottom + 50 + 10);
+    [self.view addSubview:sina];
+    [self.view addSubview:qq];
+}
+
+#pragma mark - actions
+
+- (void)doRegistUser:(UIButton *)sender
+{
+    if (self.registerActionBlock) {
+        self.registerActionBlock();
+    }
+}
+
+- (void)doSinaLoginAction:(UIButton *)sender
+{
+    if (self.sinaLoginActionBlock) {
+        self.sinaLoginActionBlock();
+    }
+}
+
+- (void)doQQLoginAction:(UIButton *)sender
+{
+    if (self.qqLoginActionBlock) {
+        self.qqLoginActionBlock();
+    }
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     if (textField == self.userNameTextField) {
@@ -71,12 +130,13 @@
     return YES;
 }
 
-- (UIView *)operationView:(MBOperationView *)operationView hitTest:(CGPoint)point withEvent:(UIEvent *)event
+//Rewrite
+
+- (void)hideKeyBoard:(UITapGestureRecognizer *)sender
 {
     if ([self.userNameTextField isFirstResponder] || [self.passwordTextField isFirstResponder] || [self.mailTextField isFirstResponder]) {
         [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
     }
-    return [super operationView:operationView hitTest:point withEvent:event];
 }
 
 - (void)setTextFieldBecomeResponder

@@ -20,6 +20,9 @@
 #define kSnsSinaWeiboAppSecret          @"83e8511087b9476d63d4e1c542dcb847"
 #define kSnsSinaWeiboRedirectUrl        @"http://www.meituliaoliao.com"
 
+#define MBURLBASE                       @"http://182.92.243.125:8080"
+
+
 //需要展示引导页的版本
 extern NSString* TTX_ShowGuide_AppVersion(void);
 //是否第一次运行当前版本

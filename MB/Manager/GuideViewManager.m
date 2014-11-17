@@ -14,6 +14,7 @@
 #import "TTXLoginManager.h"
 
 @implementation GuideViewManager
+
 + (void)showGuildWithAppVersion:(NSString *)version
 {
     if (TTX_AppVersion_Is_FirstLoad(version)) {
@@ -56,15 +57,16 @@
 
 + (void)configRegisterViewAction:(MBRegisterViewController *)registerView
 {
-//    @weakify(loginView);
-//    loginView.sinaLoginActionBlock = ^(){
-//        @strongify(loginView);
-//        [[TTXLoginManager shared] sinaLoginWithViewController:loginView];
-//    };
-//    loginView.qqLoginActionBlock = ^(){
-//        @strongify(loginView);
-//        [[TTXLoginManager shared] qqLoginWithViewController:loginView];
-//    };
+    @weakify(registerView);
+    registerView.sinaLoginActionBlock = ^(){
+        @strongify(registerView);
+        [[TTXLoginManager shared] sinaLoginWithViewController:registerView];
+    };
+    registerView.qqLoginActionBlock = ^(){
+        @strongify(registerView);
+        [[TTXLoginManager shared] qqLoginWithViewController:registerView];
+    };
 }
+
 
 @end

@@ -20,5 +20,6 @@ NSString *TTX_AppVersion(NSString *version)
 
 BOOL TTX_AppVersion_Is_FirstLoad(NSString *version)
 {
-    return ![[NSUserDefaults standardUserDefaults] boolForKey:TTX_AppVersion(version)];
+    return NO;
+//    return ![[NSUserDefaults standardUserDefaults] boolForKey:TTX_AppVersion(version)];
 }
