@@ -30,8 +30,8 @@
 
 + (instancetype)shareWithoutToken
 {
-    MBApiWebManager *manager = [self shared];
-    [manager.requestSerializer setValue:nil forHTTPHeaderField:@"token"];
+    NSURL *baseURL = [NSURL URLWithString:MBURLBASE];
+    MBApiWebManager *manager = [[self alloc] initWithBaseURL:baseURL];
     return manager;
 }
 

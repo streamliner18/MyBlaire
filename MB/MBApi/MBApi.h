@@ -33,8 +33,26 @@ typedef void(^MBApiArrayBlock)(MBApiError *error, NSArray *array);
 
 @interface MBApi : NSObject
 
+/**
+ *  注册
+ *
+ *  @param userName 用户名
+ *  @param password 密码
+ *  @param mail     邮箱
+ *  @param block    注册回调方法
+ */
+
 + (void)registerNewUserWithUserName:(NSString *)userName password:(NSString *)password email:(NSString *)mail handle:(MBApiErrorBlock)block;
 
+/**
+ *  登陆
+ *
+ *  @param type     登录类型
+ *  @param userName 用户名,正常登录需要
+ *  @param password 密码,正常登录需要
+ *  @param token    token,第三方登录需要
+ *  @param block    登录回调方法
+ */
 + (void)loginWithType:(MBLoginType)type userName:(NSString *)userName password:(NSString *)password token:(NSString *)token handle:(MBApiErrorBlock)block;
 
 /**

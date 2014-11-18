@@ -17,6 +17,11 @@
 
 #import "MBModel.h"
 
+#import "MBApi.h"
+
+#import <AFNetworkActivityLogger.h>
+#import <AFNetworkActivityIndicatorManager.h>
+
 @interface AppDelegate ()
 
 @end
@@ -24,7 +29,16 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [MBModel regist];
+    
+    if (DEBUG) [[AFNetworkActivityLogger sharedLogger] startLogging];
+    [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
+    
+    [MBApi registerNewUserWithUserName:@"xushao1990" password:@"xu123456" email:@"1124672787@qq.com" handle:^(MBApiError *error) {
+        DLog(@"%@",error);
+    }];
+    
+    
+    
     //设定Tabbar的颜色
     [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor lightGrayColor], UITextAttributeTextColor, nil] forState:UIControlStateNormal];
     [[UITabBarItem appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],UITextAttributeTextColor, nil]forState:UIControlStateSelected];

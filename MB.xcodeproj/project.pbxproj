@@ -38,7 +38,6 @@
 		756EEC2E1A1A0C000007D495 /* MBApiError.m in Sources */ = {isa = PBXBuildFile; fileRef = 756EEC2D1A1A0C000007D495 /* MBApiError.m */; };
 		756EEC311A1A49D80007D495 /* MBKeyWord.m in Sources */ = {isa = PBXBuildFile; fileRef = 756EEC301A1A49D80007D495 /* MBKeyWord.m */; };
 		756EEC341A1A4A1E0007D495 /* MBStreetShootingPrroduct.m in Sources */ = {isa = PBXBuildFile; fileRef = 756EEC331A1A4A1E0007D495 /* MBStreetShootingPrroduct.m */; };
-		756EEC371A1A4AA90007D495 /* MBProductModel+Detail.m in Sources */ = {isa = PBXBuildFile; fileRef = 756EEC361A1A4AA90007D495 /* MBProductModel+Detail.m */; };
 		758284851A12488E00FD13E9 /* TTXBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 758284841A12488E00FD13E9 /* TTXBaseViewController.m */; };
 		758284881A124A1200FD13E9 /* MBGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 758284871A124A1200FD13E9 /* MBGuideViewController.m */; };
 		7582848E1A124BFF00FD13E9 /* MBConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 7582848D1A124BFF00FD13E9 /* MBConfig.m */; };
@@ -54,6 +53,7 @@
 		75942FF31A1325D70013AFEA /* MBRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75942FF21A1325D70013AFEA /* MBRegisterViewController.m */; };
 		75942FF61A1327B70013AFEA /* NSString+Extent.m in Sources */ = {isa = PBXBuildFile; fileRef = 75942FF51A1327B70013AFEA /* NSString+Extent.m */; };
 		75942FF91A13289E0013AFEA /* MBLRBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75942FF81A13289E0013AFEA /* MBLRBaseViewController.m */; };
+		75CF8A5B1A1B2B380051C241 /* UIFont+Replacement.m in Sources */ = {isa = PBXBuildFile; fileRef = 75CF8A5A1A1B2B380051C241 /* UIFont+Replacement.m */; };
 		C4310DE9523E470F833AEFE9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E39AD4A044145C6ABB96EA3 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -124,8 +124,6 @@
 		756EEC301A1A49D80007D495 /* MBKeyWord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBKeyWord.m; sourceTree = "<group>"; };
 		756EEC321A1A4A1E0007D495 /* MBStreetShootingPrroduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBStreetShootingPrroduct.h; sourceTree = "<group>"; };
 		756EEC331A1A4A1E0007D495 /* MBStreetShootingPrroduct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBStreetShootingPrroduct.m; sourceTree = "<group>"; };
-		756EEC351A1A4AA90007D495 /* MBProductModel+Detail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProductModel+Detail.h"; sourceTree = "<group>"; };
-		756EEC361A1A4AA90007D495 /* MBProductModel+Detail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProductModel+Detail.m"; sourceTree = "<group>"; };
 		758284831A12488E00FD13E9 /* TTXBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTXBaseViewController.h; sourceTree = "<group>"; };
 		758284841A12488E00FD13E9 /* TTXBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTXBaseViewController.m; sourceTree = "<group>"; };
 		758284861A124A1200FD13E9 /* MBGuideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBGuideViewController.h; sourceTree = "<group>"; };
@@ -157,6 +155,8 @@
 		75942FF51A1327B70013AFEA /* NSString+Extent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Extent.m"; sourceTree = "<group>"; };
 		75942FF71A13289E0013AFEA /* MBLRBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBLRBaseViewController.h; sourceTree = "<group>"; };
 		75942FF81A13289E0013AFEA /* MBLRBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBLRBaseViewController.m; sourceTree = "<group>"; };
+		75CF8A591A1B2B380051C241 /* UIFont+Replacement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+Replacement.h"; sourceTree = "<group>"; };
+		75CF8A5A1A1B2B380051C241 /* UIFont+Replacement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+Replacement.m"; sourceTree = "<group>"; };
 		79644A57B5CDA7336727AAE4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -349,8 +349,6 @@
 				756EEC301A1A49D80007D495 /* MBKeyWord.m */,
 				756EEC321A1A4A1E0007D495 /* MBStreetShootingPrroduct.h */,
 				756EEC331A1A4A1E0007D495 /* MBStreetShootingPrroduct.m */,
-				756EEC351A1A4AA90007D495 /* MBProductModel+Detail.h */,
-				756EEC361A1A4AA90007D495 /* MBProductModel+Detail.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -429,6 +427,8 @@
 			children = (
 				756EEC291A1A07290007D495 /* NSDictionary+SafeAccessor.h */,
 				756EEC2A1A1A07290007D495 /* NSDictionary+SafeAccessor.m */,
+				75CF8A591A1B2B380051C241 /* UIFont+Replacement.h */,
+				75CF8A5A1A1B2B380051C241 /* UIFont+Replacement.m */,
 				758284981A1251E400FD13E9 /* UIView+Frame.h */,
 				758284991A1251E400FD13E9 /* UIView+Frame.m */,
 				75942FF41A1327B70013AFEA /* NSString+Extent.h */,
@@ -568,7 +568,6 @@
 			files = (
 				756D71161A13BEB50023F8F8 /* MBHomePageCellModel.m in Sources */,
 				756D70FE1A13ACE10023F8F8 /* TTXBaseTableViewController.m in Sources */,
-				756EEC371A1A4AA90007D495 /* MBProductModel+Detail.m in Sources */,
 				756D71121A13BE6E0023F8F8 /* MBHomePageViewCell.m in Sources */,
 				75942FEF1A1308030013AFEA /* TTXLoginManager.m in Sources */,
 				7582848E1A124BFF00FD13E9 /* MBConfig.m in Sources */,
@@ -592,6 +591,7 @@
 				750C31951A110672009B8242 /* TTXProgressHUD.m in Sources */,
 				758284851A12488E00FD13E9 /* TTXBaseViewController.m in Sources */,
 				756D70FB1A13A8300023F8F8 /* MBSocialManager.m in Sources */,
+				75CF8A5B1A1B2B380051C241 /* UIFont+Replacement.m in Sources */,
 				75942FF91A13289E0013AFEA /* MBLRBaseViewController.m in Sources */,
 				75194D4A1A16175F002C7038 /* Test_Products.m in Sources */,
 				758284881A124A1200FD13E9 /* MBGuideViewController.m in Sources */,

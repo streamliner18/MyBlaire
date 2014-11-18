@@ -130,11 +130,11 @@
         MBProductModel *model = self.object;
         CGFloat imageWidth = self.width - kImageLeftMargin - kImageRightMargin;
         self.showImageView.frame = CGRectMake(kImageLeftMargin, kImageTopMargin, imageWidth, model.imageHeight / model.imageWidth * imageWidth);
-        [self.showImageView setImageWithURL:[NSURL URLWithString:model.imageURL] placeholderImage:nil usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        [self.showImageView setImageWithURL:[NSURL URLWithString:model.smallPicture] placeholderImage:nil usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         self.name.frame = CGRectMake(self.showImageView.left, self.showImageView.bottom + kImageBottomMargin, self.showImageView.width - 50, kNameHeight);
-        self.name.text = model.name;
+        self.name.text = model.goodName;
         self.price.frame = CGRectMake(self.showImageView.left, self.name.bottom + kNameBottomMargin, self.name.width, kPriceHeight);
-        self.price.text = [@"$" stringByAppendingFormat:@"%0.f",model.price];
+        self.price.text = [@"$" stringByAppendingFormat:@"%0.f",model.currentPrice];
     }
 }
 

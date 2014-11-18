@@ -17,4 +17,19 @@
 @property (nonatomic) NSString *isCollect;
 @property (nonatomic) CGFloat imageWidth;
 @property (nonatomic) CGFloat imageHeight;
+
+
+
+
+
+
+@property (nonatomic) NSString *detailed;
+@property (nonatomic) NSString *materialQuality;
+@property (nonatomic) NSString *color;
+@property (nonatomic) NSString *goodDesc;
+@property (nonatomic) NSString *production;
+@property (nonatomic) NSString *bigPctureUrl;
+@property (nonatomic) NSString *bigPctureUrl2;
+@property (nonatomic) NSString *bigPctureUrl3;
+
 @end
