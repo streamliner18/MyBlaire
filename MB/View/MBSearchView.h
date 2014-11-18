@@ -19,4 +19,6 @@ typedef void(^MBSearchViewTagSearchBlock)(NSString *tag,NSInteger index);
 
 - (instancetype)initWithFrame:(CGRect)frame tags:(NSArray *)array;
 
+- (void)resetTags:(NSArray *)array;
+
 @end

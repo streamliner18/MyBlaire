@@ -19,7 +19,10 @@ typedef NS_ENUM(NSUInteger, MBApiCode) {
 @interface MBApiError : NSObject
 @property (nonatomic) MBApiCode code;
 @property (nonatomic) NSString *message;
+
 + (instancetype)shareWithCode:(MBApiCode)code message:(NSString *)message;
 
 + (instancetype)shareNetworkError;
+
++ (instancetype)shareWithDictionary:(NSDictionary *)dic;
 @end

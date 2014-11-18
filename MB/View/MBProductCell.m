@@ -38,6 +38,9 @@
 #define kPriceHeight (13)
 #define kLoveCountHeight (12)
 
+#define kLoveButtonWidth (20)
+#define kLoveButtonHeight (20)
+
 #define kNameBottomMargin (5)
 #define kPriceBottomMargin (5)
 
@@ -81,6 +84,8 @@
     if (!_loveCount) {
         _loveCount = ({
             UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
+            label.font = [UIFont systemFontOfSize:11];
+            label.textAlignment = NSTextAlignmentRight;
             label;
         });
     }
@@ -135,6 +140,13 @@
         self.name.text = model.goodName;
         self.price.frame = CGRectMake(self.showImageView.left, self.name.bottom + kNameBottomMargin, self.name.width, kPriceHeight);
         self.price.text = [@"$" stringByAppendingFormat:@"%0.f",model.currentPrice];
+        
+        self.loveButton.frame = CGRectMake(CGRectGetMaxX(self.showImageView.frame) - kLoveButtonWidth, CGRectGetMinY(self.name.frame), kLoveButtonWidth, kLoveButtonHeight);
+        self.loveButton.backgroundColor = [UIColor lightGrayColor];
+        
+        self.loveCount.frame = CGRectMake(CGRectGetMinX(self.loveButton.frame) - 25, CGRectGetMinY(self.name.frame), 25, kLoveCountHeight);
+        self.loveCount.text = model.collectCount;
+        
     }
 }
 

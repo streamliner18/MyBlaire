@@ -9,8 +9,12 @@
 #import "MBHomePageViewController.h"
 #import "MBGuideViewController.h"
 #import "MBSearchView.h"
+#import "MBHomePageCellModel.h"
+
+typedef void(^MBKeywordsBlock)(NSArray *keys);
 
 @interface MBHomePageViewController ()<UISearchBarDelegate>
+@property (nonatomic, strong) NSArray *dataSource;
 @property (nonatomic, strong) UISearchBar *searchBar;
 @property (nonatomic, strong) MBSearchView *searchView;
 @end
@@ -39,6 +43,8 @@
     self.tableView.tableHeaderView = self.searchBar;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundColor = [UIColor colorWithRed:245/255.0 green:243/255.0 blue:243/255.0 alpha:1.0];
+    self.dataSource = [MBHomePageCellModel shareModels];
+    [self.tableView reloadData];
 }
 
 - (NSString *)cellIdentifyAtIndexPath:(NSIndexPath *)indexPath
@@ -46,23 +52,25 @@
     return @"MBHomePageViewCell";
 }
 
+- (id)cellModelAtIndexPath:(NSIndexPath *)indexPath
+{
+    return self.dataSource[indexPath.row];
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 10;
+    return self.dataSource.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 80;
+    return 160;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self.searchBar resignFirstResponder];
-    UIViewController *c = [[UIViewController alloc] init];
-    c.view.backgroundColor = [UIColor whiteColor];
-    [self.navigationController pushViewController:c animated:YES];
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    MBHomePageCellModel *model = self.dataSource[indexPath.row];
+    DLog(@"%d",model.type);
 }
 
 #pragma mark - searchBar delegate
@@ -83,7 +91,7 @@
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
-    
+    [self searchWithKey:searchBar.text];
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
@@ -94,11 +102,22 @@
 - (void)showSearchView
 {
     self.tableView.scrollEnabled = NO;
-    self.searchView = [[MBSearchView alloc] initWithFrame:CGRectMake(0, self.searchBar.height, self.tableView.width, self.tableView.height - self.searchBar.height)tags:@[@"关键词1",@"关键词2",@"关键词3"]];
+    self.searchView = [[MBSearchView alloc] initWithFrame:CGRectMake(0, self.searchBar.height, self.tableView.width, self.tableView.height - self.searchBar.height)tags:nil];
+    @weakify(self);
+    [self refreshKeywords:^(NSArray *keys) {
+        @strongify(self);
+        [self.searchView resetTags:keys];
+    }];
     self.searchView.tagTapAction = ^(NSString *tag,NSInteger index){
-        DLog(@"%@",tag);
+        @strongify(self);
+        [self searchWithKey:tag];
     };
     [self.tableView addSubview:self.searchView];
+}
+
+- (void)refreshKeywords:(MBKeywordsBlock)block
+{
+    block(@[@"关键词1",@"关键词2",@"关键词3"]);
 }
 
 - (void)hideSearchView
@@ -110,6 +129,16 @@
         [self.searchView removeFromSuperview];
         self.searchView = nil;
     }];
+}
+
+#pragma mark - Search Action
+
+- (void)searchWithKey:(NSString *)key
+{
+    [self.searchBar resignFirstResponder];
+    UIViewController *view =[[UIViewController alloc] init];
+    view.view.backgroundColor = [UIColor whiteColor];
+    [self.navigationController pushViewController:view animated:YES];
 }
 
 #pragma mark - UINavigationProtocol

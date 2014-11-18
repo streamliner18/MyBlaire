@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		42C993DB1A1B9C2A009E930F /* 111.png in Resources */ = {isa = PBXBuildFile; fileRef = 42C993DA1A1B9C2A009E930F /* 111.png */; };
 		750C31941A110672009B8242 /* TTXMessageHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 750C31901A110672009B8242 /* TTXMessageHUD.m */; };
 		750C31951A110672009B8242 /* TTXProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 750C31931A110672009B8242 /* TTXProgressHUD.m */; };
 		75194BA31A1489F0002C7038 /* TTXSearchBarTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75194BA21A1489F0002C7038 /* TTXSearchBarTableViewController.m */; };
@@ -59,6 +60,7 @@
 
 /* Begin PBXFileReference section */
 		12CF74056A394297B13E98AA /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		42C993DA1A1B9C2A009E930F /* 111.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 111.png; sourceTree = "<group>"; };
 		6E39AD4A044145C6ABB96EA3 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		750C318F1A110672009B8242 /* TTXMessageHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTXMessageHUD.h; sourceTree = "<group>"; };
 		750C31901A110672009B8242 /* TTXMessageHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTXMessageHUD.m; sourceTree = "<group>"; };
@@ -260,6 +262,7 @@
 			children = (
 				7522E5FD1A10AE9D007024E6 /* AppDelegate.h */,
 				7522E5FE1A10AE9D007024E6 /* AppDelegate.m */,
+				42C993DA1A1B9C2A009E930F /* 111.png */,
 				756EEC221A1A029C0007D495 /* MBApi */,
 				756EEC1E1A19FE420007D495 /* User */,
 				75194CFF1A15B7DC002C7038 /* Protocol */,
@@ -521,6 +524,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42C993DB1A1B9C2A009E930F /* 111.png in Resources */,
 				756D71061A13B8A20023F8F8 /* Source.bundle in Resources */,
 				7522E6071A10AE9D007024E6 /* Images.xcassets in Resources */,
 			);
@@ -697,6 +701,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 12CF74056A394297B13E98AA /* Pods.debug.xcconfig */;
 			buildSettings = {
+				ARCHS = armv7;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
@@ -715,6 +720,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 79644A57B5CDA7336727AAE4 /* Pods.release.xcconfig */;
 			buildSettings = {
+				ARCHS = armv7;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;

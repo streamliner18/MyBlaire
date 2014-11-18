@@ -8,6 +8,10 @@
 
 #import "MBSearchView.h"
 
+@interface MBSearchView ()
+@property (nonatomic, strong) DWTagList *tagList;
+@end
+
 @implementation MBSearchView
 
 - (instancetype)initWithFrame:(CGRect)frame tags:(NSArray *)array
@@ -21,23 +25,28 @@
             self.toolBar.backgroundColor = [UIColor whiteColor];
         }
         [self addSubview:self.toolBar];
-        DWTagList *tagList = [[DWTagList alloc] initWithFrame:CGRectMake(10, 20, self.width-20,self.height - 20)];
-        tagList.font = [UIFont systemFontOfSize:15];
-        tagList.backgroundColor = [UIColor clearColor];
-        tagList.bottomMargin = 10.0;
-        [tagList setTags:array];
-        tagList.minimumWidth = (tagList.width - 54) / 3.0;
-        tagList.verticalPadding = 3;
-        [tagList setTagDelegate:self];
-        [tagList setTagBackgroundColor:[UIColor clearColor]];
-        [tagList setTagHighlightColor:[[UIColor darkGrayColor] colorWithAlphaComponent:0.3]];
-        [tagList setTextShadowOffset:CGSizeMake(0, 0)];
-        [tagList setCornerRadius:2.0f];
-        [tagList setBorderWidth:0.f];
-        [tagList setTextColor:[UIColor blackColor]];
-        [self addSubview:tagList];
+        _tagList = [[DWTagList alloc] initWithFrame:CGRectMake(10, 20, self.width-20,self.height - 20)];
+        _tagList.font = [UIFont systemFontOfSize:15];
+        _tagList.backgroundColor = [UIColor clearColor];
+        _tagList.bottomMargin = 10.0;
+        [_tagList setTags:array];
+        _tagList.minimumWidth = (_tagList.width - 54) / 3.0;
+        _tagList.verticalPadding = 3;
+        [_tagList setTagDelegate:self];
+        [_tagList setTagBackgroundColor:[UIColor clearColor]];
+        [_tagList setTagHighlightColor:[[UIColor darkGrayColor] colorWithAlphaComponent:0.3]];
+        [_tagList setTextShadowOffset:CGSizeMake(0, 0)];
+        [_tagList setCornerRadius:2.0f];
+        [_tagList setBorderWidth:0.f];
+        [_tagList setTextColor:[UIColor blackColor]];
+        [self addSubview:_tagList];
     }
     return self;
+}
+
+- (void)resetTags:(NSArray *)array
+{
+    [_tagList setTags:array];
 }
 
 - (void)selectedTag:(NSString *)tagName tagIndex:(NSInteger)tagIndex

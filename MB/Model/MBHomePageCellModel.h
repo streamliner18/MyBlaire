@@ -8,6 +8,21 @@
 
 #import <Foundation/Foundation.h>
 
+typedef NS_ENUM(NSUInteger, MBHomePageCellModelType) {
+    MBHomePageCellModelTypeDiscount,
+    MBHomePageCellModelTypePopular,
+    MBHomePageCellModelTypeStarSame,
+};
+
 @interface MBHomePageCellModel : NSObject
-@property (nonatomic) NSString *imageURL;
+
+@property (nonatomic) NSString *imageName;
+@property (nonatomic) MBHomePageCellModelType type;
+
++ (NSArray *)shareModels;
+
++ (instancetype)shareDisCountModel;
++ (instancetype)sharePopularModel;
++ (instancetype)shareStarSameModel;
+
 @end

@@ -34,7 +34,7 @@
     [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
     
     [MBApi registerNewUserWithUserName:@"xushao1990" password:@"xu123456" email:@"1124672787@qq.com" handle:^(MBApiError *error) {
-        DLog(@"%@",error);
+        DLog(@"%@",error.message);
     }];
     
     

@@ -102,7 +102,14 @@ typedef void(^MBApiPostBlock)(MBApiError *error,NSArray *array,id responseObject
         [[MBApiWebManager shareWithoutToken] POST:[self urlWithPostType:MBApiPostTypeRegister] parameters:@{@"userName":userName,@"password":password,@"email":mail} success:^(AFHTTPRequestOperation *operation, id responseObject) {
             block([MBApiError shareWithCode:[(NSDictionary *)responseObject integerForKey:@"code"] message:[(NSDictionary *)responseObject stringForKey:@"message"]]);
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            block([MBApiError shareNetworkError]);
+            if (operation.responseData) {
+                NSDictionary *dic;
+                if ((dic = [NSJSONSerialization JSONObjectWithData:operation.responseData options:0 error:nil])) {
+                    block([MBApiError shareWithDictionary:dic]);
+                }
+            }else{
+                block([MBApiError shareNetworkError]);
+            }
         }];
     }else{
         block([MBApiError shareWithCode:MBApiCodeRegisterFaildWithEmailError message:@"邮箱填写错误"]);

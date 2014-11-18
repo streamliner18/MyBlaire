@@ -20,4 +20,12 @@
 {
     return [MBApiError shareWithCode:MBApiCodeNetworkError message:@"网络连接错误"];
 }
+
++ (instancetype)shareWithDictionary:(NSDictionary *)dic
+{
+    MBApiError *error = [[MBApiError alloc] init];
+    error.code = [dic integerForKey:@"code"];
+    error.message = [dic stringForKey:@"message"];
+    return error;
+}
 @end
