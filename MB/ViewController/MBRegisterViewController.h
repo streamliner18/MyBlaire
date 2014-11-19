@@ -9,5 +9,5 @@
 #import "MBLRBaseViewController.h"
 
 @interface MBRegisterViewController : MBLRBaseViewController
-
+@property (nonatomic, copy) TTXActionBlock loginAfterRegisterBlock;
 @end

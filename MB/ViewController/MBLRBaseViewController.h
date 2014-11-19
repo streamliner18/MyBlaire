@@ -19,6 +19,7 @@
 @property (nonatomic,copy) TTXActionBlock loginActionBlock;
 @property (nonatomic,copy) TTXActionBlock sinaLoginActionBlock;
 @property (nonatomic,copy) TTXActionBlock qqLoginActionBlock;
+@property (nonatomic, copy) TTXActionBlock loginWithTokenBlock;
 
 - (void)hideKeyBoard:(UITapGestureRecognizer *)sender;
 

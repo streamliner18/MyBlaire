@@ -13,7 +13,7 @@
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
 
 #import <AFNetworking.h>
-#import "GuideViewManager.h"
+#import "LoginManager.h"
 #import "MBConfig.h"
 #import "TTXGlobalMacro.h"
 #import "UIView+Frame.h"
@@ -23,6 +23,8 @@
 #import <UIImageView+UIActivityIndicatorForSDWebImage.h>
 #import "NSDictionary+SafeAccessor.h"
 #import "MBApiError.h"
+#import "MBModel.h"
+#import "MBApi.h"
 //-Test-//
 
 #import "Test_Products.h"

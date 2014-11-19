@@ -17,7 +17,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self setTextFieldBecomeResponder];
+//    [self setTextFieldBecomeResponder];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -33,6 +33,15 @@
     [super viewDidLoad];
     self.navigationItem.title = @"登录";
     [self buildLoginButton];
+    
+    @weakify (self);
+    self.loginWithTokenBlock = ^(MBLoginType type, NSString *token){
+        @strongify (self);
+        [self showProgressHUD];
+        [MBApi loginWithType:type userName:nil password:nil token:token handle:^(MBApiError *error) {
+            [self dealWithLoginResult:error];
+        }];
+    };
 }
 
 - (void)buildLoginButton
@@ -68,12 +77,43 @@
     if (textField == self.userNameTextField) {
         [self.passwordTextField becomeFirstResponder];
     }else if (textField == self.passwordTextField) {
-        //login
-        if (self.loginActionBlock) {
-            self.loginActionBlock();
-        }
+        [self doLoginAction];
     }
     return YES;
+}
+
+- (void)doLoginAction
+{
+    NSString *userName = [self.userNameTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    NSString *password = [self.passwordTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    if (userName.length == 0) {
+        [self showAlertTitle:@"提示" message:@"请检查用户名"];
+        return;
+    }
+    if (password.length == 0) {
+        [self showAlertTitle:@"提示" message:@"请检查密码"];
+        return;
+    }
+    [self showProgressHUD];
+    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+    [MBApi loginWithType:MBLoginTypeNormal userName:userName password:password token:nil handle:^(MBApiError *error) {
+        [self dealWithLoginResult:error];
+    }];
+}
+
+- (void)dealWithLoginResult:(MBApiError *)error
+{
+    DLog(@"%@",error.message);
+    if (error.code == MBApiCodeLoginSuccess) {
+        [self postUserLoginNotification];
+        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    }
+    [self hideProgressHUD];
+}
+
+- (void)postUserLoginNotification
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:kMBMODELUSERDIDLOGIN object:nil];
 }
 
 - (void)hideKeyBoard:(UITapGestureRecognizer *)sender
@@ -90,6 +130,11 @@
     }else{
         [self.passwordTextField becomeFirstResponder];
     }
+}
+
++ (NSString *)navigationItemTitle
+{
+    return @"登录";
 }
 
 - (void)didReceiveMemoryWarning {

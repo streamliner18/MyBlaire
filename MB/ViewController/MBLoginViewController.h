@@ -9,5 +9,4 @@
 #import "MBLRBaseViewController.h"
 
 @interface MBLoginViewController : MBLRBaseViewController
-
 @end

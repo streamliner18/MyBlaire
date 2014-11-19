@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-
+@class MBLRBaseViewController;
 @interface TTXLoginManager : NSObject
 SINGLETON_INTERFACE(TTXLoginManager)
-- (void)sinaLoginWithViewController:(UIViewController *)viewController;
-- (void)qqLoginWithViewController:(UIViewController *)viewController;
+- (void)sinaLoginWithViewController:(MBLRBaseViewController *)viewController;
+- (void)qqLoginWithViewController:(MBLRBaseViewController *)viewController;
 @end

@@ -33,7 +33,7 @@ typedef void(^MBKeywordsBlock)(NSArray *keys);
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [GuideViewManager showGuildWithAppVersion:TTX_ShowGuide_AppVersion()];
+    [LoginManager showLoginView];
 }
 
 - (void)viewDidLoad {
@@ -117,7 +117,12 @@ typedef void(^MBKeywordsBlock)(NSArray *keys);
 
 - (void)refreshKeywords:(MBKeywordsBlock)block
 {
-    block(@[@"关键词1",@"关键词2",@"关键词3"]);
+    [MBApi getKeyWordWithCompletionHandle:^(MBApiError *error, NSArray *array) {
+        DLog(@"%@",error.message);
+        if (array) {
+            block(array);
+        }
+    }];
 }
 
 - (void)hideSearchView

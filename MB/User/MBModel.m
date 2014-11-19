@@ -9,20 +9,54 @@
 #import "MBModel.h"
 
 @implementation MBModel
-SINGLETON_IMPLEMENTATION(MBModel)
 
-+ (void)regist
+#define kMBMODELTOKENKEY @"MBTOKEN"
+
++ (instancetype)shared
 {
-    NSURL *baseURL = [NSURL URLWithString:MBURLBASE];
-    AFHTTPRequestOperationManager *s_sharedWebAPIManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:baseURL];
-    NSDictionary *param = @{@"userName":@"xushao1990",@"password":@"xu123456789",@"email":@"1124672787@qq.com"};    
-//    [s_sharedWebAPIManager.requestSerializer setValue:uuidString forHTTPHeaderField:@"Vacation-device-id"];
-    [s_sharedWebAPIManager POST:@"MyBlaire/app/register" parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"%@",responseObject);
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"%@",error);
-    }];
+    static MBModel *userModel = nil;
+    static dispatch_once_t predicate;
+    dispatch_once(&predicate, ^{
+        userModel = [[self alloc] init];
+        [userModel configSelf];
+        [userModel registNotification];
+    });
+    return userModel;
+}
 
+- (void)configSelf
+{
+    self.token = [[NSUserDefaults standardUserDefaults] stringForKey:kMBMODELTOKENKEY];
+    if (self.token) {
+        DLog(@"%@",self.token);
+    }
+}
+
+- (void)registNotification
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidLogin:) name:kMBMODELUSERDIDLOGIN object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidLoginOut:) name:KMBMODELUSERDIDLOGINOUT object:nil];
+}
+
+- (void)userDidLogin:(NSNotification *)sender
+{
+    [self configSelf];
+}
+
+- (void)userDidLoginOut:(NSNotification *)sender
+{
+    [self configSelf];
+}
+
+- (void)save
+{
+    [[NSUserDefaults standardUserDefaults] setObject:self.token forKey:kMBMODELTOKENKEY];
+}
+
+- (void)clear
+{
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:kMBMODELTOKENKEY];
+    [self configSelf];
 }
 
 @end

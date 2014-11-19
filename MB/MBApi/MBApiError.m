@@ -16,6 +16,7 @@
     error.message = message;
     return error;
 }
+
 + (instancetype)shareNetworkError
 {
     return [MBApiError shareWithCode:MBApiCodeNetworkError message:@"网络连接错误"];

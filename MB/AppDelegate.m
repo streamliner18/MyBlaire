@@ -33,14 +33,14 @@
     if (DEBUG) [[AFNetworkActivityLogger sharedLogger] startLogging];
     [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
     
-//    [MBApi registerNewUserWithUserName:@"xushao1990" password:@"xu123456" email:@"1124672787@qq.com" handle:^(MBApiError *error) {
-//        DLog(@"%@",error.message);
+//    [MBApi loginWithType:MBLoginTypeNormal userName:@"xushao1990" password:@"xu123456" token:nil handle:^(MBApiError *error) {
+//        DLog(@"%@,%@",error.message,[[NSUserDefaults standardUserDefaults] objectForKey:@"MBTOKEN"]);
+//    }];
+//    [MBApi getKeyWordWithCompletionHandle:^(MBApiError *error, NSArray *array) {
+//        DLog(@"%@%@",error.message,array);
 //    }];
     
-    [MBApi loginWithType:MBLoginTypeNormal userName:@"xushao1990" password:@"xu123456" token:nil handle:^(MBApiError *error) {
-        DLog(@"%@,%@",error.message,[[NSUserDefaults standardUserDefaults] objectForKey:@"MBTOKEN"]);
-    }];
-    
+    MB_Model;
     
     //设定Tabbar的颜色
     [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor lightGrayColor], UITextAttributeTextColor, nil] forState:UIControlStateNormal];
@@ -83,6 +83,7 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    [MB_Model clear];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {

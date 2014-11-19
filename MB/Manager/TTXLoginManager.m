@@ -10,6 +10,7 @@
 #import <UMengSocial/UMSocialControllerService.h>
 #import <UMengSocial/UMSocialSnsPlatformManager.h>
 #import <UMengSocial/UMSocialAccountManager.h>
+#import "MBLRBaseViewController.h"
 
 @interface TTXLoginManager ()<UMSocialUIDelegate>
 
@@ -19,17 +20,17 @@
 
 SINGLETON_IMPLEMENTATION(TTXLoginManager)
 
-- (void)sinaLoginWithViewController:(UIViewController *)viewController
+- (void)sinaLoginWithViewController:(MBLRBaseViewController *)viewController
 {
     [self loginWithType:UMSocialSnsTypeSina viewController:viewController];
 }
 
-- (void)qqLoginWithViewController:(UIViewController *)viewController
+- (void)qqLoginWithViewController:(MBLRBaseViewController *)viewController
 {
     [self loginWithType:UMSocialSnsTypeMobileQQ viewController:viewController];
 }
 
-- (void)loginWithType:(UMSocialSnsType)type viewController:(UIViewController *)viewController
+- (void)loginWithType:(UMSocialSnsType)type viewController:(MBLRBaseViewController *)viewController
 {
     //此处调用授权的方法,你可以把下面的platformName 替换成 UMShareToSina,UMShareToTencent等
     NSString *platformName = [UMSocialSnsPlatformManager getSnsPlatformString:type];
@@ -41,6 +42,9 @@ SINGLETON_IMPLEMENTATION(TTXLoginManager)
         //          获取微博用户名、uid、token等
         if (response.responseCode == UMSResponseCodeSuccess) {
             UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary] valueForKey:platformName];
+            if (viewController.loginWithTokenBlock) {
+                viewController.loginWithTokenBlock ((type == UMSocialSnsTypeMobileQQ ? MBLoginTypeQQ : MBLoginTypeSina),snsAccount.accessToken);
+            }
             NSLog(@"username is %@, uid is %@, token is %@",snsAccount.userName,snsAccount.usid,snsAccount.accessToken);
         }
         //这里可以获取到腾讯微博openid,Qzone的token等

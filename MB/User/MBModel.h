@@ -9,8 +9,12 @@
 #import <Foundation/Foundation.h>
 
 @interface MBModel : NSObject
-SINGLETON_INTERFACE(MBModel)
+@property (nonatomic) NSString *token;
 
-+ (void)regist;
++ (instancetype)shared;
+
+- (void)save;
+
+- (void)clear;
 
 @end

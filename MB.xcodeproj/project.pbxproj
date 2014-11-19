@@ -20,7 +20,6 @@
 		7522E5FC1A10AE9D007024E6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7522E5FB1A10AE9D007024E6 /* main.m */; };
 		7522E5FF1A10AE9D007024E6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7522E5FE1A10AE9D007024E6 /* AppDelegate.m */; };
 		7522E6071A10AE9D007024E6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7522E6061A10AE9D007024E6 /* Images.xcassets */; };
-		756D70F41A13A7130023F8F8 /* MBUserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 756D70F31A13A7130023F8F8 /* MBUserManager.m */; };
 		756D70F81A13A7F80023F8F8 /* MBHomePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 756D70F71A13A7F80023F8F8 /* MBHomePageViewController.m */; };
 		756D70FB1A13A8300023F8F8 /* MBSocialManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 756D70FA1A13A8300023F8F8 /* MBSocialManager.m */; };
 		756D70FE1A13ACE10023F8F8 /* TTXBaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 756D70FD1A13ACE10023F8F8 /* TTXBaseTableViewController.m */; };
@@ -42,7 +41,7 @@
 		758284851A12488E00FD13E9 /* TTXBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 758284841A12488E00FD13E9 /* TTXBaseViewController.m */; };
 		758284881A124A1200FD13E9 /* MBGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 758284871A124A1200FD13E9 /* MBGuideViewController.m */; };
 		7582848E1A124BFF00FD13E9 /* MBConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 7582848D1A124BFF00FD13E9 /* MBConfig.m */; };
-		758284921A124D4B00FD13E9 /* GuideViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 758284911A124D4B00FD13E9 /* GuideViewManager.m */; };
+		758284921A124D4B00FD13E9 /* LoginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 758284911A124D4B00FD13E9 /* LoginManager.m */; };
 		758284961A124F7E00FD13E9 /* UIButton+Factory.m in Sources */ = {isa = PBXBuildFile; fileRef = 758284951A124F7E00FD13E9 /* UIButton+Factory.m */; };
 		7582849A1A1251E400FD13E9 /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 758284991A1251E400FD13E9 /* UIView+Frame.m */; };
 		7582849D1A12553300FD13E9 /* TTXBaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7582849C1A12553300FD13E9 /* TTXBaseNavigationController.m */; };
@@ -89,8 +88,6 @@
 		7522E5FE1A10AE9D007024E6 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		7522E6061A10AE9D007024E6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		75352C341A10D00300110F2D /* MBPrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBPrefixHeader.pch; sourceTree = "<group>"; };
-		756D70F21A13A7130023F8F8 /* MBUserManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBUserManager.h; sourceTree = "<group>"; };
-		756D70F31A13A7130023F8F8 /* MBUserManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBUserManager.m; sourceTree = "<group>"; };
 		756D70F61A13A7F80023F8F8 /* MBHomePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBHomePageViewController.h; sourceTree = "<group>"; };
 		756D70F71A13A7F80023F8F8 /* MBHomePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBHomePageViewController.m; sourceTree = "<group>"; };
 		756D70F91A13A8300023F8F8 /* MBSocialManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBSocialManager.h; sourceTree = "<group>"; };
@@ -133,8 +130,8 @@
 		7582848B1A124BC200FD13E9 /* TTXGlobalMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTXGlobalMacro.h; sourceTree = "<group>"; };
 		7582848C1A124BFF00FD13E9 /* MBConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBConfig.h; sourceTree = "<group>"; };
 		7582848D1A124BFF00FD13E9 /* MBConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBConfig.m; sourceTree = "<group>"; };
-		758284901A124D4B00FD13E9 /* GuideViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuideViewManager.h; sourceTree = "<group>"; };
-		758284911A124D4B00FD13E9 /* GuideViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuideViewManager.m; sourceTree = "<group>"; };
+		758284901A124D4B00FD13E9 /* LoginManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginManager.h; sourceTree = "<group>"; };
+		758284911A124D4B00FD13E9 /* LoginManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginManager.m; sourceTree = "<group>"; };
 		758284941A124F7E00FD13E9 /* UIButton+Factory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+Factory.h"; sourceTree = "<group>"; };
 		758284951A124F7E00FD13E9 /* UIButton+Factory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Factory.m"; sourceTree = "<group>"; };
 		758284981A1251E400FD13E9 /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
@@ -397,10 +394,8 @@
 			children = (
 				756D70F91A13A8300023F8F8 /* MBSocialManager.h */,
 				756D70FA1A13A8300023F8F8 /* MBSocialManager.m */,
-				756D70F21A13A7130023F8F8 /* MBUserManager.h */,
-				756D70F31A13A7130023F8F8 /* MBUserManager.m */,
-				758284901A124D4B00FD13E9 /* GuideViewManager.h */,
-				758284911A124D4B00FD13E9 /* GuideViewManager.m */,
+				758284901A124D4B00FD13E9 /* LoginManager.h */,
+				758284911A124D4B00FD13E9 /* LoginManager.m */,
 				75942FED1A1308030013AFEA /* TTXLoginManager.h */,
 				75942FEE1A1308030013AFEA /* TTXLoginManager.m */,
 				7582849F1A12559C00FD13E9 /* TTXTransitionManager.h */,
@@ -498,6 +493,7 @@
 				TargetAttributes = {
 					7522E5F51A10AE9D007024E6 = {
 						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = 2E728EA35C;
 					};
 				};
 			};
@@ -582,7 +578,7 @@
 				756D711C1A13BF920023F8F8 /* MBLoveViewController.m in Sources */,
 				756EEC251A1A02AA0007D495 /* MBApi.m in Sources */,
 				75194D3E1A15D489002C7038 /* MBSearchView.m in Sources */,
-				758284921A124D4B00FD13E9 /* GuideViewManager.m in Sources */,
+				758284921A124D4B00FD13E9 /* LoginManager.m in Sources */,
 				756EEC341A1A4A1E0007D495 /* MBStreetShootingPrroduct.m in Sources */,
 				7522E5FF1A10AE9D007024E6 /* AppDelegate.m in Sources */,
 				758284A11A12559C00FD13E9 /* TTXTransitionManager.m in Sources */,
@@ -605,7 +601,6 @@
 				756EEC211A19FE560007D495 /* MBModel.m in Sources */,
 				75194D441A16083A002C7038 /* MBProductListView.m in Sources */,
 				756EEC311A1A49D80007D495 /* MBKeyWord.m in Sources */,
-				756D70F41A13A7130023F8F8 /* MBUserManager.m in Sources */,
 				756D71091A13B8D60023F8F8 /* UIImage+ImageWithoutCache.m in Sources */,
 				756D711F1A13BFAE0023F8F8 /* MBAboutViewController.m in Sources */,
 				758284961A124F7E00FD13E9 /* UIButton+Factory.m in Sources */,

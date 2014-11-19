@@ -15,6 +15,7 @@
 @end
 
 @implementation MBRegisterViewController
+
 - (UIView *)mailBackView
 {
     if (!_mailBackView) {
@@ -45,13 +46,21 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.title = @"注册";
     self.mailBackView.frame = CGRectMake(0, self.passwordBackView.bottom + 1, self.view.width, 44);
     [self.view addSubview:self.mailBackView];
     [self buildMailView];
     [self buildRegisterButton];
     [self buildLoginButton];
     self.passwordTextField.returnKeyType = UIReturnKeyNext;
+    
+    @weakify (self);
+    self.loginAfterRegisterBlock = ^(NSString *userName,NSString *password){
+        @strongify (self);
+        [self showProgressHUD];
+        [MBApi loginWithType:MBLoginTypeNormal userName:userName password:password token:nil handle:^(MBApiError *error) {
+            [self hideProgressHUD];
+        }];
+    };
 }
 
 - (void)buildMailView
@@ -96,8 +105,24 @@
 
 - (void)doRegistUser:(UIButton *)sender
 {
+    NSString *userName = [self.userNameTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    NSString *password = [self.passwordTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    NSString *email = [self.mailTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    if (userName.length == 0) {
+        [self showAlertTitle:@"提示" message:@"请检查用户名"];
+        return;
+    }
+    if (password.length == 0) {
+        [self showAlertTitle:@"提示" message:@"请检查密码"];
+        return;
+    }
+    if (email.length == 0) {
+        [self showAlertTitle:@"提示" message:@"请检查邮箱"];
+        return;
+    }
+    
     if (self.registerActionBlock) {
-        self.registerActionBlock();
+        self.registerActionBlock(userName,password,email);
     }
 }
 
@@ -123,9 +148,7 @@
         [self.mailTextField becomeFirstResponder];
     }else if (textField == self.mailTextField) {
         [textField resignFirstResponder];
-        if (self.registerActionBlock) {
-            self.registerActionBlock();
-        }
+        [self doRegistUser:nil];
     }
     return YES;
 }
@@ -148,6 +171,11 @@
     }else{
         [self.mailTextField becomeFirstResponder];
     }
+}
+
++ (NSString *)navigationItemTitle
+{
+    return @"注册";
 }
 
 - (void)didReceiveMemoryWarning {

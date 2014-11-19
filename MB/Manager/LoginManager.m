@@ -6,20 +6,20 @@
 //  Copyright (c) 2014年 xxx Innovation Co. Ltd. All rights reserved.
 //
 
-#import "GuideViewManager.h"
+#import "LoginManager.h"
 #import "MBGuideViewController.h"
 #import "TTXBaseNavigationController.h"
 #import "MBLoginViewController.h"
 #import "MBRegisterViewController.h"
 #import "TTXLoginManager.h"
 
-@implementation GuideViewManager
+@implementation LoginManager
 
-+ (void)showGuildWithAppVersion:(NSString *)version
++ (void)showLoginView
 {
-    if (TTX_AppVersion_Is_FirstLoad(version)) {
+    if (!MB_Model.token) {
         MBGuideViewController *guideView = [[MBGuideViewController alloc] init];
-        [GuideViewManager configGuideViewAction:guideView];
+        [LoginManager configGuideViewAction:guideView];
         UIViewController *controller = [[[UIApplication sharedApplication] keyWindow] rootViewController];
         [controller presentViewController:[[TTXBaseNavigationController alloc] initWithRootViewController:guideView] animated:YES completion:nil];
     }
@@ -32,13 +32,13 @@
         @strongify(guideView);
         MBLoginViewController *loginViewController = [[MBLoginViewController alloc] init];
         [guideView.navigationController pushViewController:loginViewController animated:YES];
-        [GuideViewManager configLoginViewAction:loginViewController];
+        [LoginManager configLoginViewAction:loginViewController];
     };
     guideView.registActionBlock = ^(){
         @strongify(guideView);
         MBRegisterViewController *registerViewController = [[MBRegisterViewController alloc] init];
         [guideView.navigationController pushViewController:registerViewController animated:YES];
-        [GuideViewManager configRegisterViewAction:registerViewController];;
+        [LoginManager configRegisterViewAction:registerViewController];;
     };
 }
 
@@ -66,7 +66,12 @@
         @strongify(registerView);
         [[TTXLoginManager shared] qqLoginWithViewController:registerView];
     };
+    registerView.registerActionBlock = ^(NSString *userName,NSString *password,NSString *mail){
+      [MBApi registerNewUserWithUserName:userName password:password email:mail handle:^(MBApiError *error) {
+          @strongify (registerView);
+          registerView.loginAfterRegisterBlock (userName,password);
+      }];
+    };
 }
-
 
 @end
