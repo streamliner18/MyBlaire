@@ -120,12 +120,26 @@ typedef void(^MBApiPostBlock)(MBApiError *error,NSArray *array,id responseObject
 {
     if (type == MBLoginTypeNormal) {
         [[MBApiWebManager shareWithoutToken] POST:[self urlWithPostType:MBApiPostTypeLoginNormal] parameters:@{@"userName":userName,@"password":password} success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            block([MBApiError shareWithCode:[(NSDictionary *)responseObject integerForKey:@"code"] message:[(NSDictionary *)responseObject stringForKey:@"message"]]);
-            if ([(NSDictionary *)responseObject integerForKey:@"code"] == 0) {
-                [[NSUserDefaults standardUserDefaults] setObject:[[(NSDictionary *)responseObject dictionaryForKey:@"result"] stringForKey:@"token"] forKey:@"MBTOKEN"];
+            if ([responseObject isKindOfClass:[NSDictionary class]]) {
+                MBApiError *error = [MBApiError shareWithDictionary:responseObject];
+                if (error.code == MBApiCodeLoginSuccess) {
+                    [[NSUserDefaults standardUserDefaults] setObject:[[(NSDictionary *)responseObject dictionaryForKey:@"result"] stringForKey:@"token"] forKey:@"MBTOKEN"];
+                }
+                block(error);
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            block([MBApiError shareNetworkError]);
+            if (operation.responseData) {
+                NSDictionary *dic;
+                if ((dic = [NSJSONSerialization JSONObjectWithData:operation.responseData options:0 error:nil])) {
+                    MBApiError *error = [MBApiError shareWithDictionary:dic];
+                    if (error.code == MBApiCodeLoginSuccess) {
+                        [[NSUserDefaults standardUserDefaults] setObject:[[dic dictionaryForKey:@"result"] stringForKey:@"token"] forKey:@"MBTOKEN"];
+                    }
+                    block(error);
+                }
+            }else{
+                block([MBApiError shareNetworkError]);
+            }
         }];
     }else{
         [[MBApiWebManager shareWithoutToken] POST:[self urlWithPostType:MBApiPostTypeLoginThirdParty] parameters:@{@"thirdPartyType":(type == MBLoginTypeQQ ? @"QQ":@"MICROBLOG"),@"thirdPartyToken":token} success:^(AFHTTPRequestOperation *operation, id responseObject) {
