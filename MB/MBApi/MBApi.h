@@ -42,7 +42,7 @@ typedef void(^MBApiArrayBlock)(MBApiError *error, NSArray *array);
  *  @param block    注册回调方法
  */
 
-+ (void)registerNewUserWithUserName:(NSString *)userName password:(NSString *)password handle:(MBApiErrorBlock)block;
++ (void)registerNewUserWithUserName:(NSString *)userName password:(NSString *)password email:(NSString *)mail handle:(MBApiErrorBlock)block;
 
 /**
  *  登陆
