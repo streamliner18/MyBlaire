@@ -33,9 +33,13 @@
     if (DEBUG) [[AFNetworkActivityLogger sharedLogger] startLogging];
     [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
     
-    [MBApi registerNewUserWithUserName:@"xushao1990" password:@"xu123456" email:@"1124672787@qq.com" handle:^(MBApiError *error) {
+    [MBApi registerNewUserWithUserName:@"xushao1990" password:@"xu123456" handle:^(MBApiError *error) {
         DLog(@"%@",error.message);
     }];
+    
+//    [MBApi loginWithType:MBLoginTypeNormal userName:@"xushao1990" password:@"xu123456" token:nil handle:^(MBApiError *error) {
+//        id object = [[NSUserDefaults standardUserDefaults] objectForKey:@"MBTOKEN"];
+//    }];
     
     
     

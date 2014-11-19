@@ -96,35 +96,35 @@ typedef void(^MBApiPostBlock)(MBApiError *error,NSArray *array,id responseObject
 
 #pragma mark - function
 
-+ (void)registerNewUserWithUserName:(NSString *)userName password:(NSString *)password email:(NSString *)mail handle:(MBApiErrorBlock)block
++ (void)registerNewUserWithUserName:(NSString *)userName password:(NSString *)password handle:(MBApiErrorBlock)block
 {
-    if ([self checkEmail:mail]) {
-        [[MBApiWebManager shareWithoutToken] POST:[self urlWithPostType:MBApiPostTypeRegister] parameters:@{@"userName":userName,@"password":password,@"email":mail} success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            block([MBApiError shareWithCode:[(NSDictionary *)responseObject integerForKey:@"code"] message:[(NSDictionary *)responseObject stringForKey:@"message"]]);
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            if (operation.responseData) {
-                NSDictionary *dic;
-                if ((dic = [NSJSONSerialization JSONObjectWithData:operation.responseData options:0 error:nil])) {
-                    block([MBApiError shareWithDictionary:dic]);
-                }
-            }else{
-                block([MBApiError shareNetworkError]);
+    [[MBApiWebManager shareWithoutToken] POST:[self urlWithPostType:MBApiPostTypeRegister] parameters:@{@"userName":userName,@"password":password} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        block([MBApiError shareWithCode:[(NSDictionary *)responseObject integerForKey:@"code"] message:[(NSDictionary *)responseObject stringForKey:@"message"]]);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (operation.responseData) {
+            NSDictionary *dic;
+            if ((dic = [NSJSONSerialization JSONObjectWithData:operation.responseData options:0 error:nil])) {
+                block([MBApiError shareWithDictionary:dic]);
             }
-        }];
-    }else{
-        block([MBApiError shareWithCode:MBApiCodeRegisterFaildWithEmailError message:@"邮箱填写错误"]);
-    }
+        }else{
+            block([MBApiError shareNetworkError]);
+        }
+    }];
 }
 
 + (void)loginWithType:(MBLoginType)type userName:(NSString *)userName password:(NSString *)password token:(NSString *)token handle:(MBApiErrorBlock)block
 {
     if (type == MBLoginTypeNormal) {
         [[MBApiWebManager shareWithoutToken] POST:[self urlWithPostType:MBApiPostTypeLoginNormal] parameters:@{@"userName":userName,@"password":password} success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            block([MBApiError shareWithCode:[(NSDictionary *)responseObject integerForKey:@"code"] message:[(NSDictionary *)responseObject stringForKey:@"message"]]);
             if ([(NSDictionary *)responseObject integerForKey:@"code"] == 0) {
                 [[NSUserDefaults standardUserDefaults] setObject:[[(NSDictionary *)responseObject dictionaryForKey:@"result"] stringForKey:@"token"] forKey:@"MBTOKEN"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
             }
+            block([MBApiError shareWithCode:[(NSDictionary *)responseObject integerForKey:@"code"] message:[(NSDictionary *)responseObject stringForKey:@"message"]]);
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            
+            NSDictionary *d = [NSJSONSerialization JSONObjectWithData:operation.responseData options:0 error:nil];
+            
             block([MBApiError shareNetworkError]);
         }];
     }else{
