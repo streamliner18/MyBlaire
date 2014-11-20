@@ -68,6 +68,6 @@ return self;                                        \
 #define iOS7Only (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0") && SYSTEM_VERSION_LESS_THAN(@"8.0"))
 #define iOS8Only (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0") && SYSTEM_VERSION_LESS_THAN(@"9.0"))
 
-#define MB_Model [MBModel shared]
+#define MB_Model [MBModel shareModel]
 #define kMBMODELUSERDIDLOGIN @"MBMODELUSERDIDLOGIN"
 #define KMBMODELUSERDIDLOGINOUT @"MBMODELUSERDIDLOGINOUT"

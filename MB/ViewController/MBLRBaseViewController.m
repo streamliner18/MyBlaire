@@ -98,6 +98,22 @@
     
 }
 
+- (void)dealWithLoginResult:(MBApiError *)error
+{
+    if (error.code == MBApiCodeLoginSuccess) {
+        [self postUserLoginNotification];
+        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    }else{
+        [self showAlertTitle:@"" message:error.message];
+    }
+    [self hideProgressHUD];
+}
+
+- (void)postUserLoginNotification
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:kMBMODELUSERDIDLOGIN object:nil];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

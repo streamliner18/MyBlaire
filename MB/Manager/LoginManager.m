@@ -69,7 +69,7 @@
     registerView.registerActionBlock = ^(NSString *userName,NSString *password,NSString *mail){
       [MBApi registerNewUserWithUserName:userName password:password email:mail handle:^(MBApiError *error) {
           @strongify (registerView);
-          registerView.loginAfterRegisterBlock (userName,password);
+          registerView.loginAfterRegisterBlock (userName,password,error);
       }];
     };
 }

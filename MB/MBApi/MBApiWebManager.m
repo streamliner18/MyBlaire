@@ -17,6 +17,7 @@
     dispatch_once(&onceToken, ^{
         NSURL *baseURL = [NSURL URLWithString:MBURLBASE];
         s_sharedWebManager = [[self alloc] initWithBaseURL:baseURL];
+        s_sharedWebManager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", @"text/html", nil];
     });
     return s_sharedWebManager;
 }
@@ -30,8 +31,8 @@
 
 + (instancetype)shareWithoutToken
 {
-    NSURL *baseURL = [NSURL URLWithString:MBURLBASE];
-    MBApiWebManager *manager = [[self alloc] initWithBaseURL:baseURL];
+    MBApiWebManager *manager = [self shared];
+    [manager.requestSerializer setValue:nil forHTTPHeaderField:@"token"];
     return manager;
 }
 

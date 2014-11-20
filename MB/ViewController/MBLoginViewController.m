@@ -31,7 +31,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.title = @"登录";
     [self buildLoginButton];
     
     @weakify (self);
@@ -99,21 +98,6 @@
     [MBApi loginWithType:MBLoginTypeNormal userName:userName password:password token:nil handle:^(MBApiError *error) {
         [self dealWithLoginResult:error];
     }];
-}
-
-- (void)dealWithLoginResult:(MBApiError *)error
-{
-    DLog(@"%@",error.message);
-    if (error.code == MBApiCodeLoginSuccess) {
-        [self postUserLoginNotification];
-        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-    }
-    [self hideProgressHUD];
-}
-
-- (void)postUserLoginNotification
-{
-    [[NSNotificationCenter defaultCenter] postNotificationName:kMBMODELUSERDIDLOGIN object:nil];
 }
 
 - (void)hideKeyBoard:(UITapGestureRecognizer *)sender

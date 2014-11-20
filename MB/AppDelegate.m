@@ -30,22 +30,17 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    if (DEBUG) [[AFNetworkActivityLogger sharedLogger] startLogging];
+//    if (DEBUG) [[AFNetworkActivityLogger sharedLogger] startLogging];
     [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
-    
-//    [MBApi loginWithType:MBLoginTypeNormal userName:@"xushao1990" password:@"xu123456" token:nil handle:^(MBApiError *error) {
-//        DLog(@"%@,%@",error.message,[[NSUserDefaults standardUserDefaults] objectForKey:@"MBTOKEN"]);
-//    }];
-//    [MBApi getKeyWordWithCompletionHandle:^(MBApiError *error, NSArray *array) {
-//        DLog(@"%@%@",error.message,array);
-//    }];
     
     MB_Model;
     
     //设定Tabbar的颜色
     [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor lightGrayColor], UITextAttributeTextColor, nil] forState:UIControlStateNormal];
     [[UITabBarItem appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],UITextAttributeTextColor, nil]forState:UIControlStateSelected];
-    [[UITabBar appearance] setBarTintColor:[UIColor blackColor]];
+    if (iOS7) {
+        [[UITabBar appearance] setBarTintColor:[UIColor blackColor]];
+    }
     /////
     [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];

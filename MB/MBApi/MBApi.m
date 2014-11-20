@@ -10,20 +10,20 @@
 #import "MBApiWebManager.h"
 
 typedef NS_ENUM(NSUInteger, MBApiPostType) {
-    MBApiPostTypeRegister,
-    MBApiPostTypeLoginNormal,
-    MBApiPostTypeLoginThirdParty,
-    MBApiPostTypeGetKeyWord,
-    MBApiPostTypeGetHotGoods,
-    MBApiPostTypeGetStreetShootingGoods,
-    MBApiPostTypeGetGoodsWithCondition,
-    MBApiPostTypeGetGoodsInfo,
-    MBApiPostTypeCollecteGoods,
-    MBApiPostTypeGetCollecteOrderGoods,
-    MBApiPostTypeFeedback,
+    MBApiPostTypeRegister,//注册
+    MBApiPostTypeLoginNormal,//正常登录
+    MBApiPostTypeLoginThirdParty,//第三方登录
+    MBApiPostTypeGetKeyWord,//关键词
+    MBApiPostTypeGetHotGoods,//热销产品
+    MBApiPostTypeGetStreetShootingGoods,//明星同款
+    MBApiPostTypeGetGoodsWithCondition,//条件搜索
+    MBApiPostTypeGetGoodsInfo,//查看商品信息
+    MBApiPostTypeCollecteGoods,//收藏商品
+    MBApiPostTypeGetCollecteOrderGoods,//获取收藏的商品
+    MBApiPostTypeFeedback,//反馈
 };
 
-typedef void(^MBApiPostBlock)(MBApiError *error,NSArray *array,id responseObject);
+typedef void(^MBApiPostBlock)(MBApiError *error,NSArray *array);
 
 @implementation MBApi
 
@@ -33,9 +33,9 @@ typedef void(^MBApiPostBlock)(MBApiError *error,NSArray *array,id responseObject
 {
     if (url && url.length > 0) {
         [[MBApiWebManager shareWithoutToken] POST:url parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            block([MBApiError shareWithCode:[(NSDictionary *)responseObject integerForKey:@"code"] message:[(NSDictionary *)responseObject stringForKey:@"message"]],nil,responseObject);
+            block([MBApiError shareWithCode:[(NSDictionary *)responseObject integerForKey:@"code"] message:[(NSDictionary *)responseObject stringForKey:@"message"]],nil);
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            block([MBApiError shareNetworkError],nil,nil);
+            block([MBApiError shareNetworkError],nil);
         }];
     }
 }
@@ -44,9 +44,9 @@ typedef void(^MBApiPostBlock)(MBApiError *error,NSArray *array,id responseObject
 {
     if (url && url.length > 0) {
         [[MBApiWebManager shareWithToken] POST:url parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            block([MBApiError shareWithCode:[(NSDictionary *)responseObject integerForKey:@"code"] message:[(NSDictionary *)responseObject stringForKey:@"message"]], [(NSDictionary *)responseObject arrayForKey:@"result"],responseObject);
+            block([MBApiError shareWithCode:[(NSDictionary *)responseObject integerForKey:@"code"] message:[(NSDictionary *)responseObject stringForKey:@"message"]], [(NSDictionary *)responseObject arrayForKey:@"result"]);
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            block([MBApiError shareNetworkError],nil,nil);
+            block([MBApiError shareNetworkError],nil);
         }];
     }
 }
@@ -59,7 +59,7 @@ typedef void(^MBApiPostBlock)(MBApiError *error,NSArray *array,id responseObject
         [[MBApiWebManager shareWithoutToken] POST:[self urlWithPostType:MBApiPostTypeRegister] parameters:@{@"userName":userName,@"password":password,@"email":mail} success:^(AFHTTPRequestOperation *operation, id responseObject) {
             block ([self dealWithRegisterSuccessResult:responseObject]);
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            block ([self dealWithRegisterFailureResult:operation.responseData]);
+            block ([MBApiError shareNetworkError]);
         }];
     }else{
         block([MBApiError shareWithCode:MBApiCodeRegisterFaildWithEmailError message:@"邮箱填写错误"]);
@@ -72,13 +72,13 @@ typedef void(^MBApiPostBlock)(MBApiError *error,NSArray *array,id responseObject
         [[MBApiWebManager shareWithoutToken] POST:[self urlWithPostType:MBApiPostTypeLoginNormal] parameters:@{@"userName":userName,@"password":password} success:^(AFHTTPRequestOperation *operation, id responseObject) {
             block ([self dealWithLoginSuccessResult:responseObject]);
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            block ([self dealWithLoginFailureResult:operation.responseData]);
+            block ([MBApiError shareNetworkError]);
         }];
     }else{
         [[MBApiWebManager shareWithoutToken] POST:[self urlWithPostType:MBApiPostTypeLoginThirdParty] parameters:@{@"thirdPartyType":(type == MBLoginTypeQQ ? @"QQ":@"MICROBLOG"),@"thirdPartyToken":token} success:^(AFHTTPRequestOperation *operation, id responseObject) {
             block ([self dealWithLoginSuccessResult:responseObject]);
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            block ([self dealWithLoginFailureResult:operation.responseData]);
+            block ([MBApiError shareNetworkError]);
         }];
     }
 }
@@ -86,7 +86,7 @@ typedef void(^MBApiPostBlock)(MBApiError *error,NSArray *array,id responseObject
 + (void)getKeyWordWithCompletionHandle:(MBApiArrayBlock)block
 {
     NSDictionary *param = nil;
-    [self postWithTokenURL:[self urlWithPostType:MBApiPostTypeGetKeyWord] parameters:param handleArrayBlock:^(MBApiError *error, NSArray *array, id responseObject) {
+    [self postWithTokenURL:[self urlWithPostType:MBApiPostTypeGetKeyWord] parameters:param handleArrayBlock:^(MBApiError *error, NSArray *array) {
         block(error,array);
     }];
 }
@@ -94,7 +94,7 @@ typedef void(^MBApiPostBlock)(MBApiError *error,NSArray *array,id responseObject
 + (void)getHotGoodsWithCompletionHandle:(MBApiArrayBlock)block
 {
     NSDictionary *param = nil;
-    [self postWithTokenURL:[self urlWithPostType:MBApiPostTypeGetHotGoods] parameters:param handleArrayBlock:^(MBApiError *error, NSArray *array, id responseObject) {
+    [self postWithTokenURL:[self urlWithPostType:MBApiPostTypeGetHotGoods] parameters:param handleArrayBlock:^(MBApiError *error, NSArray *array) {
         block(error,array);
     }];
 }
@@ -102,7 +102,7 @@ typedef void(^MBApiPostBlock)(MBApiError *error,NSArray *array,id responseObject
 + (void)getStreetShootingGoodsWithCompletionHandle:(MBApiArrayBlock)block
 {
     NSDictionary *param = nil;
-    [self postWithTokenURL:[self urlWithPostType:MBApiPostTypeGetStreetShootingGoods] parameters:param handleArrayBlock:^(MBApiError *error, NSArray *array, id responseObject) {
+    [self postWithTokenURL:[self urlWithPostType:MBApiPostTypeGetStreetShootingGoods] parameters:param handleArrayBlock:^(MBApiError *error, NSArray *array) {
         block(error,array);
     }];
 }
@@ -110,7 +110,7 @@ typedef void(^MBApiPostBlock)(MBApiError *error,NSArray *array,id responseObject
 + (void)getGoodsWithPriceRange:(MBGoodsPriceRange)range discount:(MBGoodsDiscount)discount color:(NSString *)color searchContent:(NSString *)content completionHandle:(MBApiArrayBlock)block
 {
     NSDictionary *param = @{@"priceRange":[NSString stringWithFormat:@"%ld",(long)range],@"discount":@(discount),@"color":color,@"searchContent":content};
-    [self postWithTokenURL:[self urlWithPostType:MBApiPostTypeGetGoodsWithCondition] parameters:param handleArrayBlock:^(MBApiError *error, NSArray *array, id responseObject) {
+    [self postWithTokenURL:[self urlWithPostType:MBApiPostTypeGetGoodsWithCondition] parameters:param handleArrayBlock:^(MBApiError *error, NSArray *array) {
         block(error,array);
     }];
 }
@@ -118,7 +118,7 @@ typedef void(^MBApiPostBlock)(MBApiError *error,NSArray *array,id responseObject
 + (void)getGoodsInfo:(NSInteger)goodsID completionHandle:(MBApiArrayBlock)block
 {
     NSDictionary *param = @{@"goodId":[NSString stringWithFormat:@"%ld",(long)goodsID]};
-    [self postWithTokenURL:[self urlWithPostType:MBApiPostTypeGetGoodsInfo] parameters:param handleArrayBlock:^(MBApiError *error, NSArray *array, id responseObject) {
+    [self postWithTokenURL:[self urlWithPostType:MBApiPostTypeGetGoodsInfo] parameters:param handleArrayBlock:^(MBApiError *error, NSArray *array) {
         block(error,array);
     }];
 }
@@ -126,7 +126,7 @@ typedef void(^MBApiPostBlock)(MBApiError *error,NSArray *array,id responseObject
 + (void)collecteGoods:(NSInteger)goodsID completionHandle:(MBApiErrorBlock)block
 {
     NSDictionary *parems = @{@"goodId":[NSString stringWithFormat:@"%ld",(long)goodsID]};
-    [self postWithTokenURL:[self urlWithPostType:MBApiPostTypeCollecteGoods] parameters:parems handleErrorBlock:^(MBApiError *error, NSArray *array, id responseObject) {
+    [self postWithTokenURL:[self urlWithPostType:MBApiPostTypeCollecteGoods] parameters:parems handleErrorBlock:^(MBApiError *error, NSArray *array) {
         block(error);
     }];
 }
@@ -134,7 +134,7 @@ typedef void(^MBApiPostBlock)(MBApiError *error,NSArray *array,id responseObject
 + (void)collectOrderGoodCompletionHandle:(MBApiArrayBlock)block
 {
     NSDictionary *parems = nil;
-    [self postWithTokenURL:[self urlWithPostType:MBApiPostTypeGetCollecteOrderGoods] parameters:parems handleArrayBlock:^(MBApiError *error, NSArray *array, id responseObject) {
+    [self postWithTokenURL:[self urlWithPostType:MBApiPostTypeGetCollecteOrderGoods] parameters:parems handleArrayBlock:^(MBApiError *error, NSArray *array) {
         block(error,array);
     }];
 }
@@ -142,7 +142,7 @@ typedef void(^MBApiPostBlock)(MBApiError *error,NSArray *array,id responseObject
 + (void)feedbackWithMesage:(NSString *)message completionHandle:(MBApiErrorBlock)block
 {
     NSDictionary *parems = @{@"content":message};
-    [self postWithTokenURL:[self urlWithPostType:MBApiPostTypeFeedback] parameters:parems handleErrorBlock:^(MBApiError *error, NSArray *array, id responseObject) {
+    [self postWithTokenURL:[self urlWithPostType:MBApiPostTypeFeedback] parameters:parems handleErrorBlock:^(MBApiError *error, NSArray *array) {
         block(error);
     }];
 }
@@ -208,39 +208,15 @@ typedef void(^MBApiPostBlock)(MBApiError *error,NSArray *array,id responseObject
     return [MBApiError shareWithCode:[responseObject integerForKey:@"code"] message:[(NSDictionary *)responseObject stringForKey:@"message"]];
 }
 
-+ (MBApiError *)dealWithRegisterFailureResult:(NSData *)date
-{
-    NSDictionary *dic;
-    if (date && (dic = [NSJSONSerialization JSONObjectWithData:date options:0 error:nil])) {
-        MBApiError *error = [MBApiError shareWithDictionary:dic];
-        return error;
-    }else{
-        return [MBApiError shareNetworkError];
-    }
-}
-
 #pragma mark - 处理登录的结果
 
 + (MBApiError *)dealWithLoginSuccessResult:(NSDictionary *)responseObject
 {
     MBApiError *error = [MBApiError shareWithDictionary:responseObject];
     if (error.code == MBApiCodeLoginSuccess) {
-        [[NSUserDefaults standardUserDefaults] setObject:[[(NSDictionary *)responseObject dictionaryForKey:@"result"] stringForKey:@"token"] forKey:@"MBTOKEN"];
+        [[NSUserDefaults standardUserDefaults] setObject:[[responseObject dictionaryForKey:@"result"] stringForKey:@"token"] forKey:@"MBTOKEN"];
     }
     return error;
-}
-
-+ (MBApiError *)dealWithLoginFailureResult:(NSData *)date
-{
-    NSDictionary *dic;
-    if (date && (dic = [NSJSONSerialization JSONObjectWithData:date options:0 error:nil])) {
-        if ([dic integerForKey:@"code"] == 0) {
-            [[NSUserDefaults standardUserDefaults] setObject:[[dic dictionaryForKey:@"result"] stringForKey:@"token"] forKey:@"MBTOKEN"];
-        }
-        return [MBApiError shareWithDictionary:dic];
-    }else{
-        return [MBApiError shareNetworkError];
-    }
 }
 
 

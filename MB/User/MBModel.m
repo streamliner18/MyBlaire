@@ -12,7 +12,7 @@
 
 #define kMBMODELTOKENKEY @"MBTOKEN"
 
-+ (instancetype)shared
++ (instancetype)shareModel
 {
     static MBModel *userModel = nil;
     static dispatch_once_t predicate;

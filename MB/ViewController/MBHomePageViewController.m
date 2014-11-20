@@ -118,9 +118,10 @@ typedef void(^MBKeywordsBlock)(NSArray *keys);
 - (void)refreshKeywords:(MBKeywordsBlock)block
 {
     [MBApi getKeyWordWithCompletionHandle:^(MBApiError *error, NSArray *array) {
-        DLog(@"%@",error.message);
-        if (array) {
-            block(array);
+        if (error.code == 0) {
+            [[[UIAlertView alloc] initWithTitle:@"" message:@"获取keyword成功" delegate:nil cancelButtonTitle:@"yes" otherButtonTitles:nil, nil] show];
+        }else{
+            [[[UIAlertView alloc] initWithTitle:@"" message:error.message delegate:nil cancelButtonTitle:@"yes" otherButtonTitles:nil, nil] show];
         }
     }];
 }

@@ -53,12 +53,25 @@
     [self buildLoginButton];
     self.passwordTextField.returnKeyType = UIReturnKeyNext;
     
+//    @weakify (self);
+    self.loginAfterRegisterBlock = ^(NSString *userName,NSString *password,MBApiError *error){
+        if (error.code == 0) {
+            [[[UIAlertView alloc] initWithTitle:@"" message:@"注册success" delegate:nil cancelButtonTitle:@"yes" otherButtonTitles:nil, nil] show];
+        }else{
+            [[[UIAlertView alloc] initWithTitle:@"" message:error.message delegate:nil cancelButtonTitle:@"yes" otherButtonTitles:nil, nil] show];
+        }
+//        @strongify (self);
+//        [self showProgressHUD];
+//        [MBApi loginWithType:MBLoginTypeNormal userName:userName password:password token:nil handle:^(MBApiError *error) {
+//            [self hideProgressHUD];
+//        }];
+    };
     @weakify (self);
-    self.loginAfterRegisterBlock = ^(NSString *userName,NSString *password){
+    self.loginWithTokenBlock = ^(MBLoginType type, NSString *token){
         @strongify (self);
         [self showProgressHUD];
-        [MBApi loginWithType:MBLoginTypeNormal userName:userName password:password token:nil handle:^(MBApiError *error) {
-            [self hideProgressHUD];
+        [MBApi loginWithType:type userName:nil password:nil token:token handle:^(MBApiError *error) {
+            [self dealWithLoginResult:error];
         }];
     };
 }

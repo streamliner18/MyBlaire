@@ -11,7 +11,7 @@
 @interface MBModel : NSObject
 @property (nonatomic) NSString *token;
 
-+ (instancetype)shared;
++ (instancetype)shareModel;
 
 - (void)save;
 

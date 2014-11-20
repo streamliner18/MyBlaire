@@ -20,7 +20,9 @@
 #define kSnsSinaWeiboAppSecret          @"83e8511087b9476d63d4e1c542dcb847"
 #define kSnsSinaWeiboRedirectUrl        @"http://www.meituliaoliao.com"
 
-#define MBURLBASE                       @"http://182.92.243.125:8080"
+#define MYDEBUG (1)
+
+#define MBURLBASE                       (MYDEBUG ? @"http://182.92.243.125:8080" : @"http://192.168.100.102:8080")
 
 
 //需要展示引导页的版本

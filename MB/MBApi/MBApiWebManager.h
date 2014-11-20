@@ -9,6 +9,17 @@
 #import <AFHTTPRequestOperationManager.h>
 
 @interface MBApiWebManager : AFHTTPRequestOperationManager
+
+/**
+ *  header包含token
+ */
+
 + (instancetype)shareWithToken;
+
+/**
+ *  header不包含token
+ */
+
 + (instancetype)shareWithoutToken;
+
 @end

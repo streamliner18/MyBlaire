@@ -23,4 +23,6 @@
 
 - (void)hideKeyBoard:(UITapGestureRecognizer *)sender;
 
+- (void)dealWithLoginResult:(MBApiError *)error;
+
 @end
