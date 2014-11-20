@@ -10,6 +10,7 @@
 
 @protocol UINavigationProtocol <NSObject>
 
++ (UIColor *)viewBackgroundColor;
 + (NSString *)navigationItemTitle;
 + (NSString *)navigationItemDisappearTitle;
 + (BOOL)automaticallyAdjustsScrollViewInsets;

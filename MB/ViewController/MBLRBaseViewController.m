@@ -54,6 +54,15 @@
     [self buildPasswordView];
     UITapGestureRecognizer *tapGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyBoard:)];
     [self.view addGestureRecognizer:tapGes];
+    
+    @weakify (self);
+    self.loginWithTokenBlock = ^(MBLoginType type, NSString *token){
+        @strongify (self);
+        [self showProgressHUD];
+        [MBApi loginWithType:type userName:nil password:nil token:token handle:^(MBApiError *error) {
+            [self dealWithLoginResult:error];
+        }];
+    };
 }
 
 - (void)buildUserNameView
@@ -100,7 +109,7 @@
 
 - (void)dealWithLoginResult:(MBApiError *)error
 {
-    if (error.code == MBApiCodeLoginSuccess) {
+    if (error.code == MBApiCodeSuccess) {
         [self postUserLoginNotification];
         [self.navigationController dismissViewControllerAnimated:YES completion:nil];
     }else{

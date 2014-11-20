@@ -10,4 +10,6 @@
 
 @interface MBKeyWord : NSObject
 @property (nonatomic) NSString *wordKey, *wordValue;
+
++ (NSArray *)shareWithArray:(NSArray *)array;
 @end

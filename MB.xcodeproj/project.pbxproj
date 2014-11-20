@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		42C993DB1A1B9C2A009E930F /* 111.png in Resources */ = {isa = PBXBuildFile; fileRef = 42C993DA1A1B9C2A009E930F /* 111.png */; };
+		42D444011A1E327300C7BAE8 /* MBSearchResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D444001A1E327300C7BAE8 /* MBSearchResultViewController.m */; };
+		42D444041A1E34EF00C7BAE8 /* UIImage+color.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D444031A1E34EF00C7BAE8 /* UIImage+color.m */; };
+		42D444071A1E3B1700C7BAE8 /* MBGoodsInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D444061A1E3B1700C7BAE8 /* MBGoodsInfoViewController.m */; };
+		42D4440A1A1E3BF100C7BAE8 /* MBGoodsImagesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D444091A1E3BF100C7BAE8 /* MBGoodsImagesView.m */; };
 		750C31941A110672009B8242 /* TTXMessageHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 750C31901A110672009B8242 /* TTXMessageHUD.m */; };
 		750C31951A110672009B8242 /* TTXProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 750C31931A110672009B8242 /* TTXProgressHUD.m */; };
 		75194BA31A1489F0002C7038 /* TTXSearchBarTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75194BA21A1489F0002C7038 /* TTXSearchBarTableViewController.m */; };
@@ -60,6 +64,14 @@
 /* Begin PBXFileReference section */
 		12CF74056A394297B13E98AA /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		42C993DA1A1B9C2A009E930F /* 111.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 111.png; sourceTree = "<group>"; };
+		42D443FF1A1E327300C7BAE8 /* MBSearchResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBSearchResultViewController.h; sourceTree = "<group>"; };
+		42D444001A1E327300C7BAE8 /* MBSearchResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBSearchResultViewController.m; sourceTree = "<group>"; };
+		42D444021A1E34EF00C7BAE8 /* UIImage+color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+color.h"; sourceTree = "<group>"; };
+		42D444031A1E34EF00C7BAE8 /* UIImage+color.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+color.m"; sourceTree = "<group>"; };
+		42D444051A1E3B1700C7BAE8 /* MBGoodsInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBGoodsInfoViewController.h; sourceTree = "<group>"; };
+		42D444061A1E3B1700C7BAE8 /* MBGoodsInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBGoodsInfoViewController.m; sourceTree = "<group>"; };
+		42D444081A1E3BF100C7BAE8 /* MBGoodsImagesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBGoodsImagesView.h; sourceTree = "<group>"; };
+		42D444091A1E3BF100C7BAE8 /* MBGoodsImagesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBGoodsImagesView.m; sourceTree = "<group>"; };
 		6E39AD4A044145C6ABB96EA3 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		750C318F1A110672009B8242 /* TTXMessageHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTXMessageHUD.h; sourceTree = "<group>"; };
 		750C31901A110672009B8242 /* TTXMessageHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTXMessageHUD.m; sourceTree = "<group>"; };
@@ -312,6 +324,8 @@
 				75194D3D1A15D489002C7038 /* MBSearchView.m */,
 				75194D421A16083A002C7038 /* MBProductListView.h */,
 				75194D431A16083A002C7038 /* MBProductListView.m */,
+				42D444081A1E3BF100C7BAE8 /* MBGoodsImagesView.h */,
+				42D444091A1E3BF100C7BAE8 /* MBGoodsImagesView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -366,6 +380,10 @@
 				756D711B1A13BF920023F8F8 /* MBLoveViewController.m */,
 				756D711D1A13BFAE0023F8F8 /* MBAboutViewController.h */,
 				756D711E1A13BFAE0023F8F8 /* MBAboutViewController.m */,
+				42D443FF1A1E327300C7BAE8 /* MBSearchResultViewController.h */,
+				42D444001A1E327300C7BAE8 /* MBSearchResultViewController.m */,
+				42D444051A1E3B1700C7BAE8 /* MBGoodsInfoViewController.h */,
+				42D444061A1E3B1700C7BAE8 /* MBGoodsInfoViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -433,6 +451,8 @@
 				75942FF51A1327B70013AFEA /* NSString+Extent.m */,
 				756D71071A13B8D60023F8F8 /* UIImage+ImageWithoutCache.h */,
 				756D71081A13B8D60023F8F8 /* UIImage+ImageWithoutCache.m */,
+				42D444021A1E34EF00C7BAE8 /* UIImage+color.h */,
+				42D444031A1E34EF00C7BAE8 /* UIImage+color.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -573,6 +593,7 @@
 				7582848E1A124BFF00FD13E9 /* MBConfig.m in Sources */,
 				75942FF31A1325D70013AFEA /* MBRegisterViewController.m in Sources */,
 				756EEC2B1A1A07290007D495 /* NSDictionary+SafeAccessor.m in Sources */,
+				42D444041A1E34EF00C7BAE8 /* UIImage+color.m in Sources */,
 				75194D471A1609B0002C7038 /* MBProductCell.m in Sources */,
 				75194BA31A1489F0002C7038 /* TTXSearchBarTableViewController.m in Sources */,
 				756D711C1A13BF920023F8F8 /* MBLoveViewController.m in Sources */,
@@ -591,6 +612,7 @@
 				750C31951A110672009B8242 /* TTXProgressHUD.m in Sources */,
 				758284851A12488E00FD13E9 /* TTXBaseViewController.m in Sources */,
 				756D70FB1A13A8300023F8F8 /* MBSocialManager.m in Sources */,
+				42D4440A1A1E3BF100C7BAE8 /* MBGoodsImagesView.m in Sources */,
 				75CF8A5B1A1B2B380051C241 /* UIFont+Replacement.m in Sources */,
 				75942FF91A13289E0013AFEA /* MBLRBaseViewController.m in Sources */,
 				75194D4A1A16175F002C7038 /* Test_Products.m in Sources */,
@@ -603,7 +625,9 @@
 				756EEC311A1A49D80007D495 /* MBKeyWord.m in Sources */,
 				756D71091A13B8D60023F8F8 /* UIImage+ImageWithoutCache.m in Sources */,
 				756D711F1A13BFAE0023F8F8 /* MBAboutViewController.m in Sources */,
+				42D444011A1E327300C7BAE8 /* MBSearchResultViewController.m in Sources */,
 				758284961A124F7E00FD13E9 /* UIButton+Factory.m in Sources */,
+				42D444071A1E3B1700C7BAE8 /* MBGoodsInfoViewController.m in Sources */,
 				758284A51A1257A900FD13E9 /* MBLoginViewController.m in Sources */,
 				7582849D1A12553300FD13E9 /* TTXBaseNavigationController.m in Sources */,
 				75194CFA1A15B59A002C7038 /* UISearchBar+Factory.m in Sources */,

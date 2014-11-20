@@ -10,6 +10,8 @@
 #import "MBGuideViewController.h"
 #import "MBSearchView.h"
 #import "MBHomePageCellModel.h"
+#import "MBKeyWord.h"
+#import "MBSearchResultViewController.h"
 
 typedef void(^MBKeywordsBlock)(NSArray *keys);
 
@@ -17,6 +19,7 @@ typedef void(^MBKeywordsBlock)(NSArray *keys);
 @property (nonatomic, strong) NSArray *dataSource;
 @property (nonatomic, strong) UISearchBar *searchBar;
 @property (nonatomic, strong) MBSearchView *searchView;
+@property (nonatomic, strong) NSArray *keyWordArray;
 @end
 
 @implementation MBHomePageViewController
@@ -110,20 +113,37 @@ typedef void(^MBKeywordsBlock)(NSArray *keys);
     }];
     self.searchView.tagTapAction = ^(NSString *tag,NSInteger index){
         @strongify(self);
-        [self searchWithKey:tag];
+        MBKeyWord *keyWord = [self.keyWordArray objectAtIndex:index];
+        [self searchWithKey:nil/*keyWord.wordKey*/];
     };
     [self.tableView addSubview:self.searchView];
 }
 
 - (void)refreshKeywords:(MBKeywordsBlock)block
 {
-    [MBApi getKeyWordWithCompletionHandle:^(MBApiError *error, NSArray *array) {
-        if (error.code == 0) {
-            [[[UIAlertView alloc] initWithTitle:@"" message:@"获取keyword成功" delegate:nil cancelButtonTitle:@"yes" otherButtonTitles:nil, nil] show];
-        }else{
-            [[[UIAlertView alloc] initWithTitle:@"" message:error.message delegate:nil cancelButtonTitle:@"yes" otherButtonTitles:nil, nil] show];
+    if (self.keyWordArray) {
+        block([self currentKeywords]);
+    }else{
+        [MBApi getKeyWordWithCompletionHandle:^(MBApiError *error, NSArray *array) {
+            if (error.code == 0) {
+                self.keyWordArray = [MBKeyWord shareWithArray:array];
+                block ([self currentKeywords]);
+            }else{
+                [self showMessageHUDWithMessage:@"获取关键词失败"];
+            }
+        }];
+    }
+}
+
+- (NSArray *)currentKeywords
+{
+    NSMutableArray *keys = @[].mutableCopy;
+    for (MBKeyWord *object in self.keyWordArray) {
+        if (object.wordValue) {
+            [keys addObject:object.wordValue];
         }
-    }];
+    }
+    return keys;
 }
 
 - (void)hideSearchView
@@ -142,9 +162,8 @@ typedef void(^MBKeywordsBlock)(NSArray *keys);
 - (void)searchWithKey:(NSString *)key
 {
     [self.searchBar resignFirstResponder];
-    UIViewController *view =[[UIViewController alloc] init];
-    view.view.backgroundColor = [UIColor whiteColor];
-    [self.navigationController pushViewController:view animated:YES];
+    MBSearchResultViewController *searchResultViewController = [[MBSearchResultViewController alloc] initWithSearchKey:key];
+    [self.navigationController pushViewController:searchResultViewController animated:YES];
 }
 
 #pragma mark - UINavigationProtocol
@@ -152,11 +171,6 @@ typedef void(^MBKeywordsBlock)(NSArray *keys);
 + (NSString *)navigationItemTitle
 {
     return @"蜜包";
-}
-
-+ (NSString *)navigationItemDisappearTitle
-{
-    return @"";
 }
 
 - (void)didReceiveMemoryWarning {

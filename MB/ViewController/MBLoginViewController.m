@@ -32,15 +32,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self buildLoginButton];
-    
-    @weakify (self);
-    self.loginWithTokenBlock = ^(MBLoginType type, NSString *token){
-        @strongify (self);
-        [self showProgressHUD];
-        [MBApi loginWithType:type userName:nil password:nil token:token handle:^(MBApiError *error) {
-            [self dealWithLoginResult:error];
-        }];
-    };
 }
 
 - (void)buildLoginButton

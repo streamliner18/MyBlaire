@@ -33,6 +33,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.view.backgroundColor = [[self class] viewBackgroundColor];
     if (iOS7) {
         self.automaticallyAdjustsScrollViewInsets = [[self class] automaticallyAdjustsScrollViewInsets];
     }
@@ -115,6 +116,11 @@
 + (BOOL)automaticallyAdjustsScrollViewInsets
 {
     return NO;
+}
+
++ (UIColor *)viewBackgroundColor
+{
+    return [UIColor whiteColor];
 }
 
 - (void)dealloc

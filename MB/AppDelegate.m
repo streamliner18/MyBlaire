@@ -22,6 +22,9 @@
 #import <AFNetworkActivityLogger.h>
 #import <AFNetworkActivityIndicatorManager.h>
 
+
+#import "UIImage+color.h"
+
 @interface AppDelegate ()
 
 @end
@@ -40,10 +43,13 @@
     [[UITabBarItem appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],UITextAttributeTextColor, nil]forState:UIControlStateSelected];
     if (iOS7) {
         [[UITabBar appearance] setBarTintColor:[UIColor blackColor]];
+        [[UINavigationBar appearance] setBarTintColor:[UIColor blackColor]];
+    }else{
+        [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
     }
+    [[UINavigationBar appearance] setShadowImage:[UIImage imageWithColor:[UIColor clearColor] size:CGSizeMake(320, 3)]];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{UITextAttributeTextColor:[UIColor whiteColor]}];
     /////
-    [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
-    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     
     [TTXTransitionManager validatePanPackWithTransitionGestureRecognizerType:TransitionGestureRecognizerTypePan];
     [MBSocialManager registSocialShare];
@@ -78,7 +84,7 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-    [MB_Model clear];
+//    [MB_Model clear];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {

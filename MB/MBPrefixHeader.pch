@@ -25,6 +25,8 @@
 #import "MBApiError.h"
 #import "MBModel.h"
 #import "MBApi.h"
+#import <BlocksKit.h>
+#import <BlocksKit+UIKit.h>
 //-Test-//
 
 #import "Test_Products.h"

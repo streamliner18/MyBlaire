@@ -109,7 +109,15 @@ typedef void(^MBApiPostBlock)(MBApiError *error,NSArray *array);
 
 + (void)getGoodsWithPriceRange:(MBGoodsPriceRange)range discount:(MBGoodsDiscount)discount color:(NSString *)color searchContent:(NSString *)content completionHandle:(MBApiArrayBlock)block
 {
-    NSDictionary *param = @{@"priceRange":[NSString stringWithFormat:@"%ld",(long)range],@"discount":@(discount),@"color":color,@"searchContent":content};
+    NSMutableDictionary *param = @{}.mutableCopy;
+    if (range != MBGoodsConditionNoRange) {
+        [param setObject:[NSString stringWithFormat:@"%ld",(long)range] forKey:@"priceRange"];
+    }
+    if (discount != MBGoodsDiscountNoneLimit) {
+        [param setObject:@(discount) forKey:@"discount"];
+    }
+    [param setValue:content forKey:@"searchContent"];
+    [param setValue:color forKey:@"color"];
     [self postWithTokenURL:[self urlWithPostType:MBApiPostTypeGetGoodsWithCondition] parameters:param handleArrayBlock:^(MBApiError *error, NSArray *array) {
         block(error,array);
     }];
@@ -213,7 +221,7 @@ typedef void(^MBApiPostBlock)(MBApiError *error,NSArray *array);
 + (MBApiError *)dealWithLoginSuccessResult:(NSDictionary *)responseObject
 {
     MBApiError *error = [MBApiError shareWithDictionary:responseObject];
-    if (error.code == MBApiCodeLoginSuccess) {
+    if (error.code == MBApiCodeSuccess) {
         [[NSUserDefaults standardUserDefaults] setObject:[[responseObject dictionaryForKey:@"result"] stringForKey:@"token"] forKey:@"MBTOKEN"];
     }
     return error;

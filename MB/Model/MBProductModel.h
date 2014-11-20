@@ -11,16 +11,12 @@
 @interface MBProductModel : NSObject
 @property (nonatomic) NSString *goodId;
 @property (nonatomic) NSString *goodName;
-@property (nonatomic) CGFloat currentPrice;
+@property (nonatomic) long currentPrice;
 @property (nonatomic) NSString *smallPicture;
-@property (nonatomic) NSString *collectCount;
-@property (nonatomic) NSString *isCollect;
+@property (nonatomic) int collectCount;
+@property (nonatomic) BOOL isCollect;
 @property (nonatomic) CGFloat imageWidth;
 @property (nonatomic) CGFloat imageHeight;
-
-
-
-
 
 
 @property (nonatomic) NSString *detailed;
@@ -31,5 +27,9 @@
 @property (nonatomic) NSString *bigPctureUrl;
 @property (nonatomic) NSString *bigPctureUrl2;
 @property (nonatomic) NSString *bigPctureUrl3;
+
++ (instancetype)shareProduct:(NSDictionary *)dic;
+
++ (NSArray *)productsWithArray:(NSArray *)array;
 
 @end

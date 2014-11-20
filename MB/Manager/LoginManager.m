@@ -72,6 +72,12 @@
           registerView.loginAfterRegisterBlock (userName,password,error);
       }];
     };
+    registerView.loginActionBlock = ^(NSString *userName,NSString *password){
+        @strongify (registerView);
+        [MBApi loginWithType:MBLoginTypeNormal userName:userName password:password token:nil handle:^(MBApiError *error) {
+            [registerView dealWithLoginResult:error];
+        }];
+    };
 }
 
 @end

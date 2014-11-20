@@ -14,14 +14,16 @@ typedef NS_ENUM(NSUInteger, MBLoginType) {
     MBLoginTypeSina,
 };
 
-typedef NS_ENUM(NSUInteger, MBGoodsPriceRange) {
+typedef NS_ENUM(NSInteger, MBGoodsPriceRange) {
+    MBGoodsConditionNoRange = -1,
     MBGoodsConditionMoreThan10000 = 0,
     MBGoodsConditionBetween5000And10000 = 1,
     MBGoodsConditionBetween1000And5000 = 2,
     MBGoodsConditionLessThan1000 = 3,
 };
 
-typedef NS_ENUM(NSUInteger, MBGoodsDiscount) {
+typedef NS_ENUM(NSInteger, MBGoodsDiscount) {
+    MBGoodsDiscountNoneLimit = -1,
     MBGoodsDiscount9 = 9,
     MBGoodsDiscount8 = 8,
     MBGoodsDiscount7 = 7,
