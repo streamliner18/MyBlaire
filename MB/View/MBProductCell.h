@@ -8,6 +8,12 @@
 
 #import <PSCollectionViewCell.h>
 
+typedef NS_ENUM(NSUInteger, MBProductCellType) {
+    MBProductCellTypeNormal = 0,
+    MBProductCellTypeStreet = 1,
+};
+
 @interface MBProductCell : PSCollectionViewCell
+@property (nonatomic) MBProductCellType type;
 @property (nonatomic, copy) TTXActionBlock collecteGoodsBlock;
 @end

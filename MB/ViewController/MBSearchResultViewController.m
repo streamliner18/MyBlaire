@@ -10,10 +10,12 @@
 #import "MBProductListView.h"
 #import "MBProductModel.h"
 #import "MBGoodsInfoViewController.h"
+#import "MBHomePageCellModel.h"
 
 @interface MBSearchResultViewController ()
 @property (nonatomic) NSString *searchKey;
 @property (nonatomic, strong) MBProductListView *productListView;
+@property (nonatomic, strong) MBHomePageCellModel *model;
 @end
 
 @implementation MBSearchResultViewController
@@ -22,6 +24,16 @@
 {
     if (self = [super init]) {
         self.searchKey = searchKey;
+        self.model = nil;
+    }
+    return self;
+}
+
+- (instancetype)initWithModel:(MBHomePageCellModel *)model
+{
+    if (self = [super init]) {
+        self.searchKey = nil;
+        self.model = model;
     }
     return self;
 }
@@ -31,9 +43,25 @@
     self.productListView = [[MBProductListView alloc] initWithFrame:self.view.bounds];
     [self.view addSubview:self.productListView];
     
-    [MBApi getGoodsWithPriceRange:MBGoodsConditionNoRange discount:MBGoodsDiscountNoneLimit color:nil searchContent:self.searchKey completionHandle:^(MBApiError *error, NSArray *array) {
-        [self reloadProductListView:array];
-    }];
+    if (self.searchKey) {
+        self.navigationItem.title = @"搜索结果";
+        [self showProgressHUD];
+        [MBApi getGoodsWithPriceRange:MBGoodsConditionNoRange discount:MBGoodsDiscountNoneLimit color:nil searchContent:self.searchKey completionHandle:^(MBApiError *error, NSArray *array) {
+            [self dealWithResult:error array:array];
+        }];
+    }else if (self.model) {
+        self.navigationItem.title = self.model.title;
+        [self showProgressHUD];
+        if (self.model.type == MBHomePageCellModelTypePopular) {
+            [MBApi getHotGoodsWithCompletionHandle:^(MBApiError *error, id array) {
+                [self dealWithResult:error array:array];
+            }];
+        }else if (self.model.type == MBHomePageCellModelTypeStarSame) {
+            [MBApi getStreetShootingGoodsWithCompletionHandle:^(MBApiError *error, id array) {
+                [self dealWithResult:error array:array];
+            }];
+        }
+    }
     
     @weakify(self);
     self.productListView.selecteGoodsBlock = ^(MBProductModel *model){
@@ -51,6 +79,16 @@
     };
 }
 
+- (void)dealWithResult:(MBApiError *)error array:(NSArray *)array
+{
+    [self hideProgressHUD];
+    if (error.code == MBApiCodeSuccess) {
+        [self reloadProductListView:array];
+    }else{
+        [self showMessageHUDWithMessage:error.message];
+    }
+}
+
 - (void)reloadProductListView:(NSArray *)array
 {
     [self.productListView resetDatasource:[MBProductModel productsWithArray:array]];
@@ -64,11 +102,6 @@
 + (BOOL)automaticallyAdjustsScrollViewInsets
 {
     return YES;
-}
-
-+ (NSString *)navigationItemTitle
-{
-    return @"搜索结果";
 }
 
 @end

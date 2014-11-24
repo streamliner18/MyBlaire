@@ -196,7 +196,7 @@ typedef void(^MBApiPostBlock)(MBApiError *error,id array);
             url = @"MyBlaire/app/getGoods";
             break;
         case MBApiPostTypeGetStreetShootingGoods:
-            url = @"MyBlaire/app/getStreetShootingGoods";;
+            url = @"MyBlaire/app/getStreetShootingGoods";
             break;
         case MBApiPostTypeGetKeyWord:
             url = @"MyBlaire/app/getKeyWord";

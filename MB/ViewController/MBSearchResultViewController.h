@@ -8,6 +8,12 @@
 
 #import "TTXBaseViewController.h"
 
+@class MBHomePageCellModel;
+
 @interface MBSearchResultViewController : TTXBaseViewController
+
 - (instancetype)initWithSearchKey:(NSString *)searchKey;
+
+- (instancetype)initWithModel:(MBHomePageCellModel *)model;
+
 @end

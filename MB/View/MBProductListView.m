@@ -15,7 +15,7 @@
 
 @property (nonatomic, strong) NSArray *dataSource;
 @property (nonatomic, strong) PSCollectionView *listView;
-
+@property (nonatomic) MBProductListViewType type;
 @end
 
 @implementation MBProductListView
@@ -27,7 +27,6 @@
     if (!_listView) {
         _listView = ({
             PSCollectionView *view = [[PSCollectionView alloc] initWithFrame:self.bounds];
-            view.numColsPortrait = 2;
             view.collectionViewDataSource = self;
             view.collectionViewDelegate = self;
             view.backgroundColor = [UIColor clearColor];
@@ -37,9 +36,15 @@
     return _listView;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame
+- (instancetype)initWithFrame:(CGRect)frame type:(MBProductListViewType)type
 {
     if (self = [super initWithFrame:frame]) {
+        self.type = type;
+        if (type == MBProductListViewTypeNormal) {
+            self.listView.numColsPortrait = 2;
+        }else{
+            self.listView.numColsPortrait = 1;
+        }
         [self addSubview:self.listView];
     }
     return self;
@@ -55,6 +60,7 @@
 {
     return self.dataSource.count;
 }
+
 - (PSCollectionViewCell *)collectionView:(PSCollectionView *)collectionView cellForRowAtIndex:(NSInteger)index
 {
     MBProductCell *cell = (MBProductCell *)[collectionView dequeueReusableViewForClass:[MBProductCell class]];

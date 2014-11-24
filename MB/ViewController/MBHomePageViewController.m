@@ -12,7 +12,7 @@
 #import "MBHomePageCellModel.h"
 #import "MBKeyWord.h"
 #import "MBSearchResultViewController.h"
-#import "MBSortView.h"
+#import "MBHomePageSubViewController.h"
 
 typedef void(^MBKeywordsBlock)(NSArray *keys);
 
@@ -21,7 +21,6 @@ typedef void(^MBKeywordsBlock)(NSArray *keys);
 @property (nonatomic, strong) UISearchBar *searchBar;
 @property (nonatomic, strong) MBSearchView *searchView;
 @property (nonatomic, strong) NSArray *keyWordArray;
-@property (nonatomic, strong) MBSortView *sortView;
 @end
 
 @implementation MBHomePageViewController
@@ -50,25 +49,6 @@ typedef void(^MBKeywordsBlock)(NSArray *keys);
     self.tableView.backgroundColor = [UIColor colorWithRed:245/255.0 green:243/255.0 blue:243/255.0 alpha:1.0];
     self.dataSource = [MBHomePageCellModel shareModels];
     [self.tableView reloadData];
-    
-    UIButton *sortButton = [UIButton sortButton];
-    [sortButton addTarget:self action:@selector(showSortView) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:sortButton];
-}
-
-- (void)showSortView
-{
-    if (!self.sortView) {
-        self.sortView = [[MBSortView alloc] initWithFrame:CGRectMake(-self.view.width, 0+(iOS7?64:0), self.view.width, self.view.height - (iOS7?64:0))];
-        [self.view addSubview:self.sortView];
-    }
-    [UIView animateWithDuration:0.3 animations:^{
-        if (self.sortView.left < 0) {
-            self.sortView.center = CGPointMake(self.sortView.center.x+self.view.width, self.sortView.center.y);
-        }else{
-            self.sortView.center = CGPointMake(self.sortView.center.x-self.view.width, self.sortView.center.y);
-        }
-    }];
 }
 
 - (NSString *)cellIdentifyAtIndexPath:(NSIndexPath *)indexPath
@@ -94,7 +74,13 @@ typedef void(^MBKeywordsBlock)(NSArray *keys);
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     MBHomePageCellModel *model = self.dataSource[indexPath.row];
-    DLog(@"%d",model.type);
+    if (model.subModelArray) {
+        MBHomePageSubViewController *viewController = [[MBHomePageSubViewController alloc] initWithModel:model];
+        [self.navigationController pushViewController:viewController animated:YES];
+    }else{
+        MBSearchResultViewController *viewController = [[MBSearchResultViewController alloc] initWithModel:model];
+        [self.navigationController pushViewController:viewController animated:YES];
+    }
 }
 
 #pragma mark - searchBar delegate

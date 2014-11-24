@@ -8,6 +8,7 @@
 
 #import "MBLoveViewController.h"
 #import "MBProductListView.h"
+#import "MBProductModel.h"
 
 @interface MBLoveViewController ()
 @property (nonatomic, strong) MBProductListView *productListView;
@@ -28,7 +29,9 @@
     [super viewDidLoad];
     self.productListView = [[MBProductListView alloc] initWithFrame:self.view.bounds];
     [self.view addSubview:self.productListView];
-    [self.productListView resetDatasource:[Test_Products test_products:30]];
+    [MBApi collectOrderGoodCompletionHandle:^(MBApiError *error, id array) {
+        [self.productListView resetDatasource:[MBProductModel productsWithArray:array]];
+    }];
     // Do any additional setup after loading the view.
 }
 

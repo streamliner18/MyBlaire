@@ -30,7 +30,7 @@
 
 + (NSString *)navigationItemTitle
 {
-    return @"关于";
+    return @"关于我们";
 }
 
 - (void)didReceiveMemoryWarning {

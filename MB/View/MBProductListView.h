@@ -10,8 +10,12 @@
 
 @class MBProductModel;
 
-typedef void(^MBProductListViewSelecteGoodsBlock)(MBProductModel *model);
+typedef NS_ENUM(NSUInteger, MBProductListViewType) {
+    MBProductListViewTypeNormal = 0,
+    MBProductListViewTypeStreet = 1,
+};
 
+typedef void(^MBProductListViewSelecteGoodsBlock)(MBProductModel *model);
 
 @interface MBProductListView : UIView
 

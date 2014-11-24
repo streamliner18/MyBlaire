@@ -1,19 +1,19 @@
 //
-//  MBHomePageViewCell.m
+//  MBHomePageSubTableViewCell.m
 //  MB
 //
-//  Created by Tongtong Xu on 14/11/13.
+//  Created by xt-work on 14/11/24.
 //  Copyright (c) 2014年 xxx Innovation Co. Ltd. All rights reserved.
 //
 
-#import "MBHomePageViewCell.h"
+#import "MBHomePageSubTableViewCell.h"
 #import "MBHomePageCellModel.h"
 
-@interface MBHomePageViewCell ()
+@interface MBHomePageSubTableViewCell ()
 @property (nonatomic, strong) UIImageView *showImageView;
 @end
 
-@implementation MBHomePageViewCell
+@implementation MBHomePageSubTableViewCell
 
 #define kShowImageViewTopMargin (5)
 #define kShowImageViewBottomMargin (5)
@@ -42,9 +42,10 @@
 {
     [super layoutSubviews];
     if (self.model) {
-        MBHomePageCellModel *model = self.model;
-        self.showImageView.image = [UIImage imageNamed:model.imageName];
-        self.showImageView.frame = CGRectMake(kShowImageViewLeftMargin, kShowImageViewTopMargin, self.width - kShowImageViewLeftMargin - kShowImageViewRightMargin, self.height - kShowImageViewTopMargin - kShowImageViewBottomMargin);
+        MBHomePageCellSubModel *model = self.model;
+        self.textLabel.text = model.title;
+//        self.showImageView.image = [UIImage imageNamed:model.imageName];
+//        self.showImageView.frame = CGRectMake(kShowImageViewLeftMargin, kShowImageViewTopMargin, self.width - kShowImageViewLeftMargin - kShowImageViewRightMargin, self.height - kShowImageViewTopMargin - kShowImageViewBottomMargin);
     }
 }
 

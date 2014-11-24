@@ -8,11 +8,14 @@
 
 #import "MBSearchViewController.h"
 #import "MBSearchResultViewController.h"
+#import "MBSortView.h"
 
 @interface MBSearchViewController ()<UISearchBarDelegate,UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) UISearchBar *searchBar;
 @property (nonatomic, strong) UITableView *searchWordsListView;
 @property (nonatomic, strong) NSArray *userSearchWords;
+@property (nonatomic, strong) MBSortView *sortView;
+
 @end
 
 @implementation MBSearchViewController
@@ -50,7 +53,6 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [self.searchBar becomeFirstResponder];
 }
 
 - (void)viewDidLoad {
@@ -66,7 +68,29 @@
     
     self.searchWordsListView.frame = self.view.bounds;
     [self.view addSubview:self.searchWordsListView];
-    
+    self.navigationItem.leftBarButtonItem = [self sortItem];
+}
+
+- (UIBarButtonItem *)sortItem
+{
+    UIButton *sortButton = [UIButton sortButton];
+    [sortButton addTarget:self action:@selector(showHideSortView) forControlEvents:UIControlEventTouchUpInside];
+    return [[UIBarButtonItem alloc] initWithCustomView:sortButton];
+}
+
+- (void)showHideSortView
+{
+    if (!self.sortView) {
+        self.sortView = [[MBSortView alloc] initWithFrame:CGRectMake(-self.view.width, 0+(iOS7?64:0), self.view.width, self.view.height - (iOS7?64:0))];
+        [self.view addSubview:self.sortView];
+    }
+    [UIView animateWithDuration:0.3 animations:^{
+        if (self.sortView.left < 0) {
+            self.sortView.center = CGPointMake(self.sortView.center.x+self.view.width, self.sortView.center.y);
+        }else{
+            self.sortView.center = CGPointMake(self.sortView.center.x-self.view.width, self.sortView.center.y);
+        }
+    }];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -92,12 +116,15 @@
 
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
 {
+    self.navigationItem.leftBarButtonItem = nil;
+    [self showHideSortView];
     [searchBar setShowsCancelButton:YES animated:YES];
     return YES;
 }
 
 - (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar
 {
+    self.navigationItem.leftBarButtonItem = [self sortItem];
     [searchBar setShowsCancelButton:NO animated:YES];
     return YES;
 }
