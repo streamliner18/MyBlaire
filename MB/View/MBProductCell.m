@@ -142,11 +142,19 @@
         self.price.text = [@"$" stringByAppendingFormat:@"%0ld",model.currentPrice];
         
         self.loveButton.frame = CGRectMake(CGRectGetMaxX(self.showImageView.frame) - kLoveButtonWidth, CGRectGetMinY(self.name.frame), kLoveButtonWidth, kLoveButtonHeight);
+        [self.loveButton addTarget:self action:@selector(addCollecte) forControlEvents:UIControlEventTouchUpInside];
         self.loveButton.backgroundColor = [UIColor lightGrayColor];
         
         self.loveCount.frame = CGRectMake(CGRectGetMinX(self.loveButton.frame) - 25, CGRectGetMinY(self.name.frame), 25, kLoveCountHeight);
         self.loveCount.text = [NSString stringWithFormat:@"%d",model.collectCount];
         
+    }
+}
+
+- (void)addCollecte
+{
+    if (self.collecteGoodsBlock) {
+        self.collecteGoodsBlock(self.object);
     }
 }
 

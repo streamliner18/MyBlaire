@@ -30,8 +30,16 @@ typedef NS_ENUM(NSInteger, MBGoodsDiscount) {
     MBGoodsDiscount0 = 0,
 };
 
+typedef NS_ENUM(NSInteger, MBGoodsColor) {
+    MBGoodsColorBlack = 0,
+    MBGoodsColorOrigion = 1,
+    MBGoodsColorBlue = 2,
+    MBGoodsColorWhite = 3,
+    MBGoodsColorRed = 4,
+};
+
 typedef void(^MBApiErrorBlock)(MBApiError *error);
-typedef void(^MBApiArrayBlock)(MBApiError *error, NSArray *array);
+typedef void(^MBApiArrayBlock)(MBApiError *error, id array);
 
 @interface MBApi : NSObject
 
@@ -84,17 +92,19 @@ typedef void(^MBApiArrayBlock)(MBApiError *error, NSArray *array);
 /**
  *  商品详情
  */
-+ (void)getGoodsInfo:(NSInteger)goodsID completionHandle:(MBApiArrayBlock)block;
++ (void)getGoodsInfo:(NSString *)goodsID completionHandle:(MBApiArrayBlock)block;
 /**
  *  收藏
  */
-+ (void)collecteGoods:(NSInteger)goodsID completionHandle:(MBApiErrorBlock)block;
++ (void)collecteGoods:(NSString *)goodsID completionHandle:(MBApiErrorBlock)block;
 /**
  *  心愿单
  */
 + (void)collectOrderGoodCompletionHandle:(MBApiArrayBlock)block;
-
+/**
+ *  反馈
+ */
 + (void)feedbackWithMesage:(NSString *)message completionHandle:(MBApiErrorBlock)block;
 
-
++ (NSString *)serverImageURLWithImageName:(NSString *)imageName;
 @end

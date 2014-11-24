@@ -8,9 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@class MBProductModel;
+
+typedef void(^MBProductListViewSelecteGoodsBlock)(MBProductModel *model);
+
 
 @interface MBProductListView : UIView
 
 - (void)resetDatasource:(NSArray *)array;
+
+@property (nonatomic, copy) MBProductListViewSelecteGoodsBlock selecteGoodsBlock;
+@property (nonatomic, copy) TTXActionBlock collecteGoodsBlock;
 
 @end

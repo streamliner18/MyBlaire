@@ -7,9 +7,12 @@
 //
 
 #import "MBSearchViewController.h"
+#import "MBSearchResultViewController.h"
 
-@interface MBSearchViewController ()<UISearchBarDelegate>
-
+@interface MBSearchViewController ()<UISearchBarDelegate,UITableViewDataSource,UITableViewDelegate>
+@property (nonatomic, strong) UISearchBar *searchBar;
+@property (nonatomic, strong) UITableView *searchWordsListView;
+@property (nonatomic, strong) NSArray *userSearchWords;
 @end
 
 @implementation MBSearchViewController
@@ -23,29 +26,68 @@
     return self;
 }
 
+- (UITableView *)searchWordsListView
+{
+    if (!_searchWordsListView) {
+        _searchWordsListView = ({
+            UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+            tableView.dataSource = self;
+            tableView.delegate = self;
+            tableView.backgroundColor = [UIColor clearColor];
+            tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+            tableView;
+        });
+    }
+    return _searchWordsListView;
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
 //    [[self navigationController] setNavigationBarHidden:YES animated:animated];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self.searchBar becomeFirstResponder];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectZero];
-    [searchBar sizeToFit];
-    searchBar.delegate = self;
-    self.navigationItem.titleView = searchBar;
+    _searchBar = [[UISearchBar alloc] initWithFrame:CGRectZero];
+    [_searchBar sizeToFit];
+    _searchBar.placeholder = @"Search";
+    _searchBar.delegate = self;
+    self.navigationItem.titleView = _searchBar;
     
-    [self.view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ddddd)]];
-    // Do any additional setup after loading the view.
+    self.userSearchWords = [[NSUserDefaults standardUserDefaults] arrayForKey:@"USERSEARCHWORDS"] ? [[NSUserDefaults standardUserDefaults] arrayForKey:@"USERSEARCHWORDS"] : @[];
+    
+    self.searchWordsListView.frame = self.view.bounds;
+    [self.view addSubview:self.searchWordsListView];
+    
 }
 
-- (void)ddddd
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    UIViewController *c = [[UIViewController alloc] init];
-    c.view.backgroundColor = [UIColor whiteColor];
-    [self.navigationController pushViewController:c animated:YES];
+    return self.userSearchWords.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CELLLL"];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CELLLL"];
+    }
+    cell.textLabel.text = self.userSearchWords[indexPath.row];
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self searchWithKeyWord:self.userSearchWords[indexPath.row]];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
@@ -62,8 +104,23 @@
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
-    
+    NSString *searchText = [searchBar.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    if (searchText.length > 0) {
+        [self searchWithKeyWord:searchText];
+        NSMutableArray *array = self.userSearchWords.mutableCopy;
+        [array addObject:searchText];
+        [[NSUserDefaults standardUserDefaults] setObject:array forKey:@"USERSEARCHWORDS"];
+        self.userSearchWords = array;
+        [self.searchWordsListView reloadData];
+    }
 }
+
+- (void)searchWithKeyWord:(NSString *)searchKey
+{
+    MBSearchResultViewController *searchResultViewController = [[MBSearchResultViewController alloc] initWithSearchKey:nil/*searchKey*/];
+    [self.navigationController pushViewController:searchResultViewController animated:YES];
+}
+
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
 {
     [searchBar resignFirstResponder];
@@ -74,6 +131,11 @@
 + (NSString *)navigationItemTitle
 {
     return @"";
+}
+
++ (BOOL)automaticallyAdjustsScrollViewInsets
+{
+    return YES;
 }
 
 - (void)didReceiveMemoryWarning {

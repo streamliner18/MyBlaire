@@ -27,8 +27,11 @@
 @property (nonatomic) NSString *bigPctureUrl;
 @property (nonatomic) NSString *bigPctureUrl2;
 @property (nonatomic) NSString *bigPctureUrl3;
+@property (nonatomic) NSString *buyURL;
 
 + (instancetype)shareProduct:(NSDictionary *)dic;
+
+- (void)updateWithDic:(NSDictionary *)dic;
 
 + (NSArray *)productsWithArray:(NSArray *)array;
 

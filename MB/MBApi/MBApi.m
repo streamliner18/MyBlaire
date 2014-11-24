@@ -23,7 +23,7 @@ typedef NS_ENUM(NSUInteger, MBApiPostType) {
     MBApiPostTypeFeedback,//反馈
 };
 
-typedef void(^MBApiPostBlock)(MBApiError *error,NSArray *array);
+typedef void(^MBApiPostBlock)(MBApiError *error,id array);
 
 @implementation MBApi
 
@@ -44,7 +44,9 @@ typedef void(^MBApiPostBlock)(MBApiError *error,NSArray *array);
 {
     if (url && url.length > 0) {
         [[MBApiWebManager shareWithToken] POST:url parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            block([MBApiError shareWithCode:[(NSDictionary *)responseObject integerForKey:@"code"] message:[(NSDictionary *)responseObject stringForKey:@"message"]], [(NSDictionary *)responseObject arrayForKey:@"result"]);
+            NSDictionary *object = responseObject;
+            id result = [object objectForKey:@"result"];
+            block([MBApiError shareWithDictionary:object], result);
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             block([MBApiError shareNetworkError],nil);
         }];
@@ -123,17 +125,17 @@ typedef void(^MBApiPostBlock)(MBApiError *error,NSArray *array);
     }];
 }
 
-+ (void)getGoodsInfo:(NSInteger)goodsID completionHandle:(MBApiArrayBlock)block
++ (void)getGoodsInfo:(NSString *)goodsID completionHandle:(MBApiArrayBlock)block
 {
-    NSDictionary *param = @{@"goodId":[NSString stringWithFormat:@"%ld",(long)goodsID]};
-    [self postWithTokenURL:[self urlWithPostType:MBApiPostTypeGetGoodsInfo] parameters:param handleArrayBlock:^(MBApiError *error, NSArray *array) {
-        block(error,array);
+    NSDictionary *param = @{@"goodId":goodsID};
+    [self postWithTokenURL:[self urlWithPostType:MBApiPostTypeGetGoodsInfo] parameters:param handleArrayBlock:^(MBApiError *error, NSDictionary *dic) {
+        block(error,dic);
     }];
 }
 
-+ (void)collecteGoods:(NSInteger)goodsID completionHandle:(MBApiErrorBlock)block
++ (void)collecteGoods:(NSString *)goodsID completionHandle:(MBApiErrorBlock)block
 {
-    NSDictionary *parems = @{@"goodId":[NSString stringWithFormat:@"%ld",(long)goodsID]};
+    NSDictionary *parems = @{@"goodId":goodsID};
     [self postWithTokenURL:[self urlWithPostType:MBApiPostTypeCollecteGoods] parameters:parems handleErrorBlock:^(MBApiError *error, NSArray *array) {
         block(error);
     }];
@@ -153,6 +155,11 @@ typedef void(^MBApiPostBlock)(MBApiError *error,NSArray *array);
     [self postWithTokenURL:[self urlWithPostType:MBApiPostTypeFeedback] parameters:parems handleErrorBlock:^(MBApiError *error, NSArray *array) {
         block(error);
     }];
+}
+
++ (NSString *)serverImageURLWithImageName:(NSString *)imageName
+{
+    return [MBURLBASE stringByAppendingFormat:@"/MyBlaire/upload/%@",imageName];
 }
 
 #pragma mark - 功能性url

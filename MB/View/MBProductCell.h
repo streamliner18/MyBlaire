@@ -9,5 +9,5 @@
 #import <PSCollectionViewCell.h>
 
 @interface MBProductCell : PSCollectionViewCell
-
+@property (nonatomic, copy) TTXActionBlock collecteGoodsBlock;
 @end

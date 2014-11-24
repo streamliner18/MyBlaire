@@ -9,6 +9,7 @@
 #import "MBSearchResultViewController.h"
 #import "MBProductListView.h"
 #import "MBProductModel.h"
+#import "MBGoodsInfoViewController.h"
 
 @interface MBSearchResultViewController ()
 @property (nonatomic) NSString *searchKey;
@@ -34,7 +35,20 @@
         [self reloadProductListView:array];
     }];
     
-    // Do any additional setup after loading the view.
+    @weakify(self);
+    self.productListView.selecteGoodsBlock = ^(MBProductModel *model){
+        @strongify(self);
+        MBGoodsInfoViewController *goods = [[MBGoodsInfoViewController alloc] initWithModel:model];
+        [self.navigationController pushViewController:goods animated:YES];
+    };
+    self.productListView.collecteGoodsBlock = ^(MBProductModel *model){
+        @strongify(self);
+        [self showProgressHUD];
+        [MBApi collecteGoods:model.goodId completionHandle:^(MBApiError *error) {
+            [self hideProgressHUD];
+            [self showMessageHUDWithMessage:error.message];
+        }];
+    };
 }
 
 - (void)reloadProductListView:(NSArray *)array

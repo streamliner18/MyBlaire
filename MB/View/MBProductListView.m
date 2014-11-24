@@ -62,6 +62,7 @@
         cell = [[MBProductCell alloc] initWithFrame:CGRectZero];
     }
     [cell collectionView:collectionView fillCellWithObject:self.dataSource[index] atIndex:index];
+    cell.collecteGoodsBlock = self.collecteGoodsBlock;
     return cell;
 }
 
@@ -72,6 +73,9 @@
 
 - (void)collectionView:(PSCollectionView *)collectionView didSelectCell:(PSCollectionViewCell *)cell atIndex:(NSInteger)index
 {
+    if (self.selecteGoodsBlock) {
+        self.selecteGoodsBlock (self.dataSource[index]);
+    }
 }
 
 - (Class)collectionView:(PSCollectionView *)collectionView cellClassForRowAtIndex:(NSInteger)index

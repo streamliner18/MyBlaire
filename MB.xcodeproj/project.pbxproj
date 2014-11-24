@@ -11,7 +11,6 @@
 		42D444011A1E327300C7BAE8 /* MBSearchResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D444001A1E327300C7BAE8 /* MBSearchResultViewController.m */; };
 		42D444041A1E34EF00C7BAE8 /* UIImage+color.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D444031A1E34EF00C7BAE8 /* UIImage+color.m */; };
 		42D444071A1E3B1700C7BAE8 /* MBGoodsInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D444061A1E3B1700C7BAE8 /* MBGoodsInfoViewController.m */; };
-		42D4440A1A1E3BF100C7BAE8 /* MBGoodsImagesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D444091A1E3BF100C7BAE8 /* MBGoodsImagesView.m */; };
 		750C31941A110672009B8242 /* TTXMessageHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 750C31901A110672009B8242 /* TTXMessageHUD.m */; };
 		750C31951A110672009B8242 /* TTXProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 750C31931A110672009B8242 /* TTXProgressHUD.m */; };
 		75194BA31A1489F0002C7038 /* TTXSearchBarTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75194BA21A1489F0002C7038 /* TTXSearchBarTableViewController.m */; };
@@ -24,6 +23,10 @@
 		7522E5FC1A10AE9D007024E6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7522E5FB1A10AE9D007024E6 /* main.m */; };
 		7522E5FF1A10AE9D007024E6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7522E5FE1A10AE9D007024E6 /* AppDelegate.m */; };
 		7522E6071A10AE9D007024E6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7522E6061A10AE9D007024E6 /* Images.xcassets */; };
+		756AC5DC1A22291800C7CD07 /* MBGoodsDetailInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 756AC5DB1A22291800C7CD07 /* MBGoodsDetailInfoView.m */; };
+		756AC5DF1A2233B400C7CD07 /* TTXActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 756AC5DE1A2233B400C7CD07 /* TTXActivity.m */; };
+		756AC5E21A2240F300C7CD07 /* MBSortView.m in Sources */ = {isa = PBXBuildFile; fileRef = 756AC5E11A2240F300C7CD07 /* MBSortView.m */; };
+		756AC5E51A22411000C7CD07 /* MBSortModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 756AC5E41A22411000C7CD07 /* MBSortModel.m */; };
 		756D70F81A13A7F80023F8F8 /* MBHomePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 756D70F71A13A7F80023F8F8 /* MBHomePageViewController.m */; };
 		756D70FB1A13A8300023F8F8 /* MBSocialManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 756D70FA1A13A8300023F8F8 /* MBSocialManager.m */; };
 		756D70FE1A13ACE10023F8F8 /* TTXBaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 756D70FD1A13ACE10023F8F8 /* TTXBaseTableViewController.m */; };
@@ -70,8 +73,6 @@
 		42D444031A1E34EF00C7BAE8 /* UIImage+color.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+color.m"; sourceTree = "<group>"; };
 		42D444051A1E3B1700C7BAE8 /* MBGoodsInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBGoodsInfoViewController.h; sourceTree = "<group>"; };
 		42D444061A1E3B1700C7BAE8 /* MBGoodsInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBGoodsInfoViewController.m; sourceTree = "<group>"; };
-		42D444081A1E3BF100C7BAE8 /* MBGoodsImagesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBGoodsImagesView.h; sourceTree = "<group>"; };
-		42D444091A1E3BF100C7BAE8 /* MBGoodsImagesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBGoodsImagesView.m; sourceTree = "<group>"; };
 		6E39AD4A044145C6ABB96EA3 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		750C318F1A110672009B8242 /* TTXMessageHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTXMessageHUD.h; sourceTree = "<group>"; };
 		750C31901A110672009B8242 /* TTXMessageHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTXMessageHUD.m; sourceTree = "<group>"; };
@@ -100,6 +101,14 @@
 		7522E5FE1A10AE9D007024E6 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		7522E6061A10AE9D007024E6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		75352C341A10D00300110F2D /* MBPrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBPrefixHeader.pch; sourceTree = "<group>"; };
+		756AC5DA1A22291800C7CD07 /* MBGoodsDetailInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBGoodsDetailInfoView.h; sourceTree = "<group>"; };
+		756AC5DB1A22291800C7CD07 /* MBGoodsDetailInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBGoodsDetailInfoView.m; sourceTree = "<group>"; };
+		756AC5DD1A2233B400C7CD07 /* TTXActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTXActivity.h; sourceTree = "<group>"; };
+		756AC5DE1A2233B400C7CD07 /* TTXActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTXActivity.m; sourceTree = "<group>"; };
+		756AC5E01A2240F300C7CD07 /* MBSortView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBSortView.h; sourceTree = "<group>"; };
+		756AC5E11A2240F300C7CD07 /* MBSortView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBSortView.m; sourceTree = "<group>"; };
+		756AC5E31A22411000C7CD07 /* MBSortModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBSortModel.h; sourceTree = "<group>"; };
+		756AC5E41A22411000C7CD07 /* MBSortModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBSortModel.m; sourceTree = "<group>"; };
 		756D70F61A13A7F80023F8F8 /* MBHomePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBHomePageViewController.h; sourceTree = "<group>"; };
 		756D70F71A13A7F80023F8F8 /* MBHomePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBHomePageViewController.m; sourceTree = "<group>"; };
 		756D70F91A13A8300023F8F8 /* MBSocialManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBSocialManager.h; sourceTree = "<group>"; };
@@ -324,8 +333,12 @@
 				75194D3D1A15D489002C7038 /* MBSearchView.m */,
 				75194D421A16083A002C7038 /* MBProductListView.h */,
 				75194D431A16083A002C7038 /* MBProductListView.m */,
-				42D444081A1E3BF100C7BAE8 /* MBGoodsImagesView.h */,
-				42D444091A1E3BF100C7BAE8 /* MBGoodsImagesView.m */,
+				756AC5DA1A22291800C7CD07 /* MBGoodsDetailInfoView.h */,
+				756AC5DB1A22291800C7CD07 /* MBGoodsDetailInfoView.m */,
+				756AC5DD1A2233B400C7CD07 /* TTXActivity.h */,
+				756AC5DE1A2233B400C7CD07 /* TTXActivity.m */,
+				756AC5E01A2240F300C7CD07 /* MBSortView.h */,
+				756AC5E11A2240F300C7CD07 /* MBSortView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -357,6 +370,8 @@
 			children = (
 				756D71141A13BEB50023F8F8 /* MBHomePageCellModel.h */,
 				756D71151A13BEB50023F8F8 /* MBHomePageCellModel.m */,
+				756AC5E31A22411000C7CD07 /* MBSortModel.h */,
+				756AC5E41A22411000C7CD07 /* MBSortModel.m */,
 				75194D3F1A15FA20002C7038 /* MBProductModel.h */,
 				75194D401A15FA20002C7038 /* MBProductModel.m */,
 				756EEC2F1A1A49D80007D495 /* MBKeyWord.h */,
@@ -598,21 +613,24 @@
 				75194BA31A1489F0002C7038 /* TTXSearchBarTableViewController.m in Sources */,
 				756D711C1A13BF920023F8F8 /* MBLoveViewController.m in Sources */,
 				756EEC251A1A02AA0007D495 /* MBApi.m in Sources */,
+				756AC5E51A22411000C7CD07 /* MBSortModel.m in Sources */,
 				75194D3E1A15D489002C7038 /* MBSearchView.m in Sources */,
 				758284921A124D4B00FD13E9 /* LoginManager.m in Sources */,
 				756EEC341A1A4A1E0007D495 /* MBStreetShootingPrroduct.m in Sources */,
 				7522E5FF1A10AE9D007024E6 /* AppDelegate.m in Sources */,
 				758284A11A12559C00FD13E9 /* TTXTransitionManager.m in Sources */,
+				756AC5DC1A22291800C7CD07 /* MBGoodsDetailInfoView.m in Sources */,
 				756EEC281A1A03940007D495 /* MBApiWebManager.m in Sources */,
 				75194D411A15FA20002C7038 /* MBProductModel.m in Sources */,
 				750C31941A110672009B8242 /* TTXMessageHUD.m in Sources */,
 				7522E5FC1A10AE9D007024E6 /* main.m in Sources */,
 				756D71191A13BF3C0023F8F8 /* MBSearchViewController.m in Sources */,
+				756AC5E21A2240F300C7CD07 /* MBSortView.m in Sources */,
 				758284AC1A12630700FD13E9 /* UILabel+Factory.m in Sources */,
+				756AC5DF1A2233B400C7CD07 /* TTXActivity.m in Sources */,
 				750C31951A110672009B8242 /* TTXProgressHUD.m in Sources */,
 				758284851A12488E00FD13E9 /* TTXBaseViewController.m in Sources */,
 				756D70FB1A13A8300023F8F8 /* MBSocialManager.m in Sources */,
-				42D4440A1A1E3BF100C7BAE8 /* MBGoodsImagesView.m in Sources */,
 				75CF8A5B1A1B2B380051C241 /* UIFont+Replacement.m in Sources */,
 				75942FF91A13289E0013AFEA /* MBLRBaseViewController.m in Sources */,
 				75194D4A1A16175F002C7038 /* Test_Products.m in Sources */,

@@ -7,7 +7,7 @@
 //
 
 #import "TTXBaseViewController.h"
-
+@class MBProductModel;
 @interface MBGoodsInfoViewController : TTXBaseViewController
-
+- (instancetype)initWithModel:(MBProductModel *)model;
 @end

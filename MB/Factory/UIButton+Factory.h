@@ -14,4 +14,5 @@
 + (instancetype)loginButton;
 + (instancetype)sinaLoginButton;
 + (instancetype)qqLoginButton;
++ (instancetype)sortButton;
 @end

@@ -53,4 +53,11 @@
     return button;
 }
 
++ (instancetype)sortButton
+{
+    UIButton *button = [self textButtonWithNormalText:@"sort" highlightedText:@"sort"];
+    button.frame = CGRectMake(0, 0, 44, 44);
+    return button;
+}
+
 @end

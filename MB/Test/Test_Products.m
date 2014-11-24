@@ -20,7 +20,7 @@
         model.currentPrice = 1000;
         model.imageWidth = 120;
         model.imageHeight = 90;
-        model.collectCount = @"99";
+        model.collectCount = 99;
         [array addObject:model];
     }
     return array;
