@@ -65,7 +65,7 @@
 {
     MBProductCell *cell = (MBProductCell *)[collectionView dequeueReusableViewForClass:[MBProductCell class]];
     if (cell == nil) {
-        cell = [[MBProductCell alloc] initWithFrame:CGRectZero];
+        cell = [[MBProductCell alloc] initWithFrame:CGRectZero type:(MBProductCellType)self.type];
     }
     [cell collectionView:collectionView fillCellWithObject:self.dataSource[index] atIndex:index];
     cell.collecteGoodsBlock = self.collecteGoodsBlock;

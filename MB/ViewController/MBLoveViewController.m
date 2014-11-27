@@ -27,7 +27,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.productListView = [[MBProductListView alloc] initWithFrame:self.view.bounds];
+    self.productListView = [[MBProductListView alloc] initWithFrame:self.view.bounds type:MBProductListViewTypeNormal];
     [self.view addSubview:self.productListView];
     [MBApi collectOrderGoodCompletionHandle:^(MBApiError *error, id array) {
         [self.productListView resetDatasource:[MBProductModel productsWithArray:array]];

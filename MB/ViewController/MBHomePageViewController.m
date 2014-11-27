@@ -42,6 +42,11 @@ typedef void(^MBKeywordsBlock)(NSArray *keys);
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    if (iOS7) {
+//        self.automaticallyAdjustsScrollViewInsets = NO;
+        self.tableView.top += 64;
+        self.tableView.height -= 108;
+    }
     self.searchBar = [UISearchBar homePageSearchBar];
     self.searchBar.delegate = self;
     self.tableView.tableHeaderView = self.searchBar;

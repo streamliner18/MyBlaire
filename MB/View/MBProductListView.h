@@ -20,7 +20,7 @@ typedef void(^MBProductListViewSelecteGoodsBlock)(MBProductModel *model);
 @interface MBProductListView : UIView
 
 - (void)resetDatasource:(NSArray *)array;
-
+- (instancetype)initWithFrame:(CGRect)frame type:(MBProductListViewType)type;
 @property (nonatomic, copy) MBProductListViewSelecteGoodsBlock selecteGoodsBlock;
 @property (nonatomic, copy) TTXActionBlock collecteGoodsBlock;
 

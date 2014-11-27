@@ -32,7 +32,7 @@ typedef void(^MBApiPostBlock)(MBApiError *error,id array);
 + (void)postWithTokenURL:(NSString *)url parameters:(NSDictionary *)dic handleErrorBlock:(MBApiPostBlock)block
 {
     if (url && url.length > 0) {
-        [[MBApiWebManager shareWithoutToken] POST:url parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [[MBApiWebManager shareWithToken] POST:url parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
             block([MBApiError shareWithCode:[(NSDictionary *)responseObject integerForKey:@"code"] message:[(NSDictionary *)responseObject stringForKey:@"message"]],nil);
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             block([MBApiError shareNetworkError],nil);
@@ -57,15 +57,11 @@ typedef void(^MBApiPostBlock)(MBApiError *error,id array);
 
 + (void)registerNewUserWithUserName:(NSString *)userName password:(NSString *)password email:(NSString *)mail handle:(MBApiErrorBlock)block
 {
-    if ([self checkEmail:mail]) {
-        [[MBApiWebManager shareWithoutToken] POST:[self urlWithPostType:MBApiPostTypeRegister] parameters:@{@"userName":userName,@"password":password,@"email":mail} success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            block ([self dealWithRegisterSuccessResult:responseObject]);
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            block ([MBApiError shareNetworkError]);
-        }];
-    }else{
-        block([MBApiError shareWithCode:MBApiCodeRegisterFaildWithEmailError message:@"邮箱填写错误"]);
-    }
+    [[MBApiWebManager shareWithoutToken] POST:[self urlWithPostType:MBApiPostTypeRegister] parameters:@{@"userName":userName,@"password":password,@"email":mail} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        block ([self dealWithRegisterSuccessResult:responseObject]);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        block ([MBApiError shareNetworkError]);
+    }];
 }
 
 + (void)loginWithType:(MBLoginType)type userName:(NSString *)userName password:(NSString *)password token:(NSString *)token handle:(MBApiErrorBlock)block
@@ -205,15 +201,6 @@ typedef void(^MBApiPostBlock)(MBApiError *error,id array);
             break;
     }
     return url;
-}
-
-#pragma mark - 检查邮箱
-
-+ (BOOL)checkEmail:(NSString *)mail
-{
-    NSString *Regex=@"[A-Z0-9a-z._%+-]+@[A-Z0-9a-z._]+\\.[A-Za-z]{2,4}";
-    NSPredicate *emailTest=[NSPredicate predicateWithFormat:@"SELF MATCHES %@",Regex];
-    return [emailTest evaluateWithObject:mail];
 }
 
 #pragma mark - 处理注册的结果

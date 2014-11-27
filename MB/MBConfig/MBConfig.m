@@ -23,3 +23,8 @@ BOOL TTX_AppVersion_Is_FirstLoad(NSString *version)
     return NO;
 //    return ![[NSUserDefaults standardUserDefaults] boolForKey:TTX_AppVersion(version)];
 }
+
+NSString* MB_ShouldHideLaunchView(void)
+{
+    return @"NotificationKey_ShouldHideLaunchView";
+}

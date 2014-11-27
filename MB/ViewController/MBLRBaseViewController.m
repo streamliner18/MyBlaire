@@ -45,52 +45,58 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor lightGrayColor];
     self.userNameBackView.frame = CGRectMake(0, 64, self.view.width, 44);
     self.passwordBackView.frame = CGRectMake(0, self.userNameBackView.bottom + 1, self.view.width, 44);
-    [self.view addSubview:self.userNameBackView];
-    [self.view addSubview:self.passwordBackView];
+    [self.mbView addSubview:self.userNameBackView];
+    [self.mbView addSubview:self.passwordBackView];
     [self buildUserNameView];
     [self buildPasswordView];
     UITapGestureRecognizer *tapGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyBoard:)];
     [self.view addGestureRecognizer:tapGes];
     
-    @weakify (self);
-    self.loginWithTokenBlock = ^(MBLoginType type, NSString *token){
-        @strongify (self);
-        [self showProgressHUD];
-        [MBApi loginWithType:type userName:nil password:nil token:token handle:^(MBApiError *error) {
-            [self dealWithLoginResult:error];
-        }];
-    };
+
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardHide:) name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void)keyboardShow:(NSNotification *)sender
+{
+
+}
+
+- (void)keyboardHide:(NSNotification *)sender
+{
+    
 }
 
 - (void)buildUserNameView
 {
-    UILabel *label = [UILabel userNameLabel];
-    label.frame = CGRectMake(20, 11, 52, 22);
-    [self.userNameBackView addSubview:label];
+//    UILabel *label = [UILabel userNameLabel];
+//    label.frame = CGRectMake(20, 11, 52, 22);
+//    [self.userNameBackView addSubview:label];
     
     self.userNameTextField = ({
         UITextField *textField = [UITextField userNameTextFieldWithDelegate:self];
-        textField.frame = CGRectMake(label.right + 10, label.top, self.view.width - label.right - 10 - 20, label.height);
+        textField.frame = CGRectZero;
         textField;
     });
-    [self.userNameBackView addSubview:self.userNameTextField];
+    [self.mbView addSubview:self.userNameTextField];
 }
 
 - (void)buildPasswordView
 {
-    UILabel *label = [UILabel passwordLabel];
-    label.frame = CGRectMake(20, 11, 52, 22);
-    [self.passwordBackView addSubview:label];
+//    UILabel *label = [UILabel passwordLabel];
+//    label.frame = CGRectMake(20, 11, 52, 22);
+//    [self.passwordBackView addSubview:label];
     
     self.passwordTextField = ({
         UITextField *textField = [UITextField passwordTextFieldWithDelegate:self];
-        textField.frame = CGRectMake(label.right + 10, label.top, self.view.width - label.right - 10 - 20, label.height);
+        textField.frame = CGRectZero;
         textField;
     });
-    [self.passwordBackView addSubview:self.passwordTextField];
+    [self.mbView addSubview:self.passwordTextField];
 }
 
 #pragma mark - textfielddelegate
@@ -109,13 +115,13 @@
 
 - (void)dealWithLoginResult:(MBApiError *)error
 {
+    [self hideProgressHUD];
     if (error.code == MBApiCodeSuccess) {
         [self postUserLoginNotification];
         [self.navigationController dismissViewControllerAnimated:YES completion:nil];
     }else{
         [self showAlertTitle:@"" message:error.message];
     }
-    [self hideProgressHUD];
 }
 
 - (void)postUserLoginNotification

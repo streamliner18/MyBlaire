@@ -17,7 +17,7 @@
         MBProductModel *model = [[MBProductModel alloc] init];
         model.smallPicture = @"http://e.hiphotos.baidu.com/news/crop%3D0%2C0%2C583%2C350%3Bw%3D638/sign=0d57a2ba9f82d158afcd03f1bd3a35e8/d01373f082025aaf78515a9ff8edab64034f1a06.jpg";
         model.goodName = @"测试";
-        model.currentPrice = 1000;
+        model.currentPrice = @"1000.0";
         model.imageWidth = 120;
         model.imageHeight = 90;
         model.collectCount = 99;

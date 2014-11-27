@@ -12,4 +12,5 @@
 #import "UILabel+Factory.h"
 #import "UITextField+Factory.h"
 #import "UISearchBar+Factory.h"
+#import "UIBarButtonItem+Factory.h"
 #endif

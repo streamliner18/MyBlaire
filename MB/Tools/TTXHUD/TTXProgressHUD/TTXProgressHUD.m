@@ -18,19 +18,19 @@ static NSInteger _width = 55;
     if (self) {
         _blackBackground = [[UIView alloc] init];
         _blackBackground.layer.cornerRadius = 4;
-        _blackBackground.backgroundColor = [UIColor blackColor];
+        _blackBackground.backgroundColor = [UIColor clearColor];
         _blackBackground.frame = CGRectMake((self.frame.size.width-_width)/2,
                                            (self.frame.size.height-_width)/2,
                                            _width,
                                            _width);
         [self addSubview:_blackBackground];
         
-        _indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-        [_indicator startAnimating];
-        _indicator.frame = CGRectMake((self.frame.size.width-20)/2,
-                                     (self.frame.size.height-20)/2,
-                                     20,
-                                     20);
+        _indicator = [[TTXActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 42, 42)];
+        _indicator.frame = CGRectMake((self.frame.size.width-42)/2,
+                                     (self.frame.size.height-42)/2,
+                                     42,
+                                     42);
+        [_indicator startLoading];
         [self addSubview:_indicator];
         
         _label = [[UILabel alloc] initWithFrame:CGRectMake(_blackBackground.frame.origin.x,

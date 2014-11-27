@@ -17,9 +17,29 @@
     return [[self alloc] initWithNibName:NSStringFromClass([self class]) bundle:nil];
 }
 
+- (void)resetLeftBarButtonItem:(LeftBarButtonItemType)type
+{
+    switch (type) {
+        case LeftBarButtonItemTypeBack:
+        {
+            UIBarButtonItem *backItem = [UIBarButtonItem backBarbuttonItem];
+            [(UIButton *)backItem.customView addTarget:self action:@selector(backItemAction:) forControlEvents:UIControlEventTouchUpInside];
+            self.navigationItem.leftBarButtonItem = backItem;
+            break;
+        }
+        default:
+            break;
+    }
+}
+
+- (void)backItemAction:(UIButton *)sender
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
-    return UIStatusBarStyleLightContent;
+    return UIStatusBarStyleDefault;
 }
 
 - (instancetype)init
@@ -33,7 +53,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.view.backgroundColor = [[self class] viewBackgroundColor];
+    self.view.backgroundColor = [UIColor whiteColor];
+    self.mbView = [[UIView alloc] initWithFrame:self.view.bounds];
+    self.mbView.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:self.mbView];
     if (iOS7) {
         self.automaticallyAdjustsScrollViewInsets = [[self class] automaticallyAdjustsScrollViewInsets];
     }

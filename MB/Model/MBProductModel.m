@@ -17,7 +17,7 @@
     MBProductModel *model = [[MBProductModel alloc] init];
     model.goodId = [dic stringForKey:@"goodId"];
     model.goodName = [dic stringForKey:@"goodName"];
-    model.currentPrice = [dic longForKey:@"currentPrice"];
+    model.currentPrice = [dic stringForKey:@"currentPrice"];
     model.collectCount = [dic intForKey:@"collectCount"];
     model.smallPicture = [MBApi serverImageURLWithImageName:[dic stringForKey:@"smallPicture"]];
     DLog(@"%@",model.smallPicture);

@@ -7,31 +7,22 @@
 //
 
 #import "MBRegisterViewController.h"
+#import "TTXLoginManager.h"
+#import "NSString+Extent.h"
 
 @interface MBRegisterViewController ()
-@property (nonatomic, strong) UIView *mailBackView;
 @property (nonatomic, strong) UITextField *mailTextField;
+@property (nonatomic, strong) UITextField *rePassWordTextField;
 @property (nonatomic, strong) UIButton *registButton;
+@property (nonatomic, strong) UISwitch *swichButton;
 @end
 
 @implementation MBRegisterViewController
 
-- (UIView *)mailBackView
-{
-    if (!_mailBackView) {
-        _mailBackView = ({
-            UIView *view = [[UIView alloc] initWithFrame:CGRectZero];
-            view.backgroundColor = [UIColor whiteColor];
-            view;
-        });
-    }
-    return _mailBackView;
-}
-
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self setTextFieldBecomeResponder];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -46,19 +37,30 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.mailBackView.frame = CGRectMake(0, self.passwordBackView.bottom + 1, self.view.width, 44);
-    [self.view addSubview:self.mailBackView];
-    [self buildMailView];
+    [self resetLeftBarButtonItem:LeftBarButtonItemTypeBack];
     [self buildRegisterButton];
+    [self buildOtherView];
     [self buildLoginButton];
     self.passwordTextField.returnKeyType = UIReturnKeyNext;
     
     @weakify (self);
+    
+    self.loginWithTokenBlock = ^(MBLoginType type, NSString *token){
+        @strongify (self);
+        [self showProgressHUD];
+        [MBApi loginWithType:type userName:nil password:nil token:token handle:^(MBApiError *error) {
+            [self dealWithLoginResult:error];
+        }];
+    };
+    
     self.loginAfterRegisterBlock = ^(NSString *userName,NSString *password,MBApiError *error){
         if (error.code == 0) {
             [UIAlertView bk_showAlertViewWithTitle:@"" message:@"注册成功" cancelButtonTitle:@"确定" otherButtonTitles:nil handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
                 @strongify (self);
-                self.loginActionBlock(userName,password);
+                [self showProgressHUD];
+                [MBApi loginWithType:MBLoginTypeNormal userName:userName password:password token:nil handle:^(MBApiError *error) {
+                    [self dealWithLoginResult:error];
+                }];
             }];
         }else{
             [[[UIAlertView alloc] initWithTitle:@"" message:error.message delegate:nil cancelButtonTitle:@"yes" otherButtonTitles:nil, nil] show];
@@ -66,42 +68,88 @@
     };
 }
 
-- (void)buildMailView
+- (void)buildOtherView
 {
-    UILabel *label = [UILabel mailLabel];
-    label.frame = CGRectMake(20, 11, 52, 22);
-    [self.mailBackView addSubview:label];
-    
+    self.userNameTextField.frame = CGRectMake(10, (iOS7?64:0) + 58, self.mbView.width-10, 58);
     self.mailTextField = ({
         UITextField *textField = [UITextField mailTextFieldWithDelegate:self];
-        textField.frame = CGRectMake(label.right + 10, label.top, self.view.width - label.right - 10 - 20, label.height);
+        textField.returnKeyType = UIReturnKeyNext;
+        textField.frame = CGRectMake(self.userNameTextField.left, self.userNameTextField.bottom, self.userNameTextField.width, 58);
         textField;
     });
-    [self.mailBackView addSubview:self.mailTextField];
+    [self.mbView addSubview:self.mailTextField];
+    self.passwordTextField.frame = CGRectMake(self.userNameTextField.left, self.mailTextField.bottom, self.userNameTextField.width, 58);
+    self.rePassWordTextField = ({
+        UITextField *textField = [UITextField passwordTextFieldWithDelegate:self];
+        textField.frame = CGRectMake(self.userNameTextField.left, self.passwordTextField.bottom, self.userNameTextField.width, 58);
+        textField.returnKeyType = UIReturnKeyDone;
+        textField;
+    });
+    [self.mbView addSubview:self.rePassWordTextField];
+    
+    UITextField *enLabel = [UITextField normalTextField];
+    enLabel.frame = CGRectMake(self.userNameTextField.left, self.rePassWordTextField.bottom, self.userNameTextField.width, 58);
+    enLabel.userInteractionEnabled = NO;
+    [self.mbView addSubview:enLabel];
+    
+    self.swichButton = [[UISwitch alloc] initWithFrame:CGRectMake(self.mbView.width - 125*0.5, self.rePassWordTextField.bottom+12, 50, 40)];
+    [self.mbView addSubview:self.swichButton];
+    
+    self.userNameTextField.placeholder = @"用户名";
+    self.mailTextField.placeholder = @"Email";
+    self.passwordTextField.placeholder = @"密码";
+    self.rePassWordTextField.placeholder = @"确认密码";
+    enLabel.placeholder = @"I agree to the Terms of Service";
+}
+
+- (void)keyboardShow:(NSNotification *)sender
+{
+    CGRect keyboardFrame = [[[sender userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    NSTimeInterval duration = [[[sender userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    
+    CGRect rect = [self.mbView convertRect:self.rePassWordTextField.frame toView:self.view];
+    if (CGRectGetMinY(keyboardFrame) < CGRectGetMaxY(rect)) {
+        [UIView animateWithDuration:duration animations:^{
+            self.mbView.top -= (CGRectGetMaxY(rect) + 10 - CGRectGetMinY(keyboardFrame));
+        }];
+    }
+}
+
+- (void)keyboardHide:(NSNotification *)sender
+{
+    NSTimeInterval duration = [[[sender userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    [UIView animateWithDuration:duration animations:^{
+        self.mbView.top = 0;
+    }];
 }
 
 - (void)buildRegisterButton
 {
     self.registButton = [UIButton registButton];
-    self.registButton.center = CGPointMake(self.view.width * 0.5, self.mailBackView.bottom + 40);
+    self.registButton.frame = CGRectMake(195*0.5, self.mbView.height - (88+57)*0.5, 125, 44);
     [self.registButton addTarget:self action:@selector(doRegistUser:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.registButton];
-    
-    UIImageView *imageview = [[UIImageView alloc] initWithFrame:CGRectMake(0, self.registButton.bottom + 20, self.view.width, 10)];
-    imageview.backgroundColor = [UIColor darkGrayColor];
-    [self.view addSubview:imageview];
 }
 
 - (void)buildLoginButton
 {
+    UILabel *label = [UILabel normalLabel];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.frame = CGRectMake(0, iOS7?64:0, (82+192)*0.5, 58);
+    label.text = @"现有账号登录：";
+    [self.mbView addSubview:label];
+    
+    
     UIButton *sina = [UIButton sinaLoginButton];
     [sina addTarget:self action:@selector(doSinaLoginAction:) forControlEvents:UIControlEventTouchUpInside];
     UIButton *qq = [UIButton qqLoginButton];
     [qq addTarget:self action:@selector(doQQLoginAction:) forControlEvents:UIControlEventTouchUpInside];
-    sina.center = CGPointMake(100, self.registButton.bottom + 50 + 10);
-    qq.center = CGPointMake(100 + 100, self.registButton.bottom + 50 + 10);
-    [self.view addSubview:sina];
-    [self.view addSubview:qq];
+    
+    
+    sina.frame = CGRectMake(label.right, label.top, 58, 58);
+    qq.frame = CGRectMake(sina.right, sina.top, 58, 58);
+    [self.mbView addSubview:sina];
+    [self.mbView addSubview:qq];
 }
 
 #pragma mark - actions
@@ -109,49 +157,58 @@
 - (void)doRegistUser:(UIButton *)sender
 {
     NSString *userName = [self.userNameTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    NSString *password = [self.passwordTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     NSString *email = [self.mailTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    NSString *password = [self.passwordTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    NSString *repassword = [self.rePassWordTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     if (userName.length == 0) {
         [self showAlertTitle:@"提示" message:@"请检查用户名"];
+        return;
+    }
+    if (email.length == 0 || ![email isValidateEmail]) {
+        [self showAlertTitle:@"提示" message:@"请检查邮箱"];
         return;
     }
     if (password.length == 0) {
         [self showAlertTitle:@"提示" message:@"请检查密码"];
         return;
     }
-    if (email.length == 0) {
-        [self showAlertTitle:@"提示" message:@"请检查邮箱"];
+    if (![password isEqualToString:repassword]) {
+        [self showAlertTitle:@"提示" message:@"两次密码不一致"];
         return;
     }
-    
-    if (self.registerActionBlock) {
-        self.registerActionBlock(userName,password,email);
+    if (!self.swichButton.isOn) {
+        [self showAlertTitle:@"提示" message:@"请同意条款"];
+        return;
     }
+    @weakify(self);
+    [MBApi registerNewUserWithUserName:userName password:password email:email handle:^(MBApiError *error) {
+        @strongify (self);
+        if(self.loginAfterRegisterBlock){
+            self.loginAfterRegisterBlock(userName,password,error);
+        }
+    }];
 }
 
 - (void)doSinaLoginAction:(UIButton *)sender
 {
-    if (self.sinaLoginActionBlock) {
-        self.sinaLoginActionBlock();
-    }
+    [[TTXLoginManager shared] sinaLoginWithViewController:self];
 }
 
 - (void)doQQLoginAction:(UIButton *)sender
 {
-    if (self.qqLoginActionBlock) {
-        self.qqLoginActionBlock();
-    }
+    [[TTXLoginManager shared] qqLoginWithViewController:self];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     if (textField == self.userNameTextField) {
-        [self.passwordTextField becomeFirstResponder];
-    }else if (textField == self.passwordTextField) {
         [self.mailTextField becomeFirstResponder];
+    }else if (textField == self.passwordTextField) {
+        [self.rePassWordTextField becomeFirstResponder];
     }else if (textField == self.mailTextField) {
+        [self.passwordTextField becomeFirstResponder];
+    }else if (textField == self.rePassWordTextField) {
         [textField resignFirstResponder];
-        [self doRegistUser:nil];
     }
     return YES;
 }
@@ -162,17 +219,6 @@
 {
     if ([self.userNameTextField isFirstResponder] || [self.passwordTextField isFirstResponder] || [self.mailTextField isFirstResponder]) {
         [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
-    }
-}
-
-- (void)setTextFieldBecomeResponder
-{
-    if (self.userNameTextField.text.length == 0) {
-        [self.userNameTextField becomeFirstResponder];
-    }else if (self.passwordTextField.text.length == 0) {
-        [self.passwordTextField becomeFirstResponder];
-    }else{
-        [self.mailTextField becomeFirstResponder];
     }
 }
 

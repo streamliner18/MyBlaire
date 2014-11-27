@@ -25,6 +25,9 @@
 
 #import "UIImage+color.h"
 
+
+#import "LaunchView.h"
+
 @interface AppDelegate ()
 
 @end
@@ -37,18 +40,17 @@
     [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
     
     MB_Model;
-    
-    //设定Tabbar的颜色
-    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor lightGrayColor], UITextAttributeTextColor, nil] forState:UIControlStateNormal];
-    [[UITabBarItem appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],UITextAttributeTextColor, nil]forState:UIControlStateSelected];
     if (iOS7) {
-        [[UITabBar appearance] setBarTintColor:[UIColor blackColor]];
-        [[UINavigationBar appearance] setBarTintColor:[UIColor blackColor]];
-    }else{
-        [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
+        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     }
+    //设定Tabbar的颜色
+    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:67/255.00f green:74/255.00f blue:84/255.00f alpha:1.0], UITextAttributeTextColor, nil] forState:UIControlStateSelected];
+    [[UITabBarItem appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:220/255.00f green:221/255.00f blue:221/255.00f alpha:1.0],UITextAttributeTextColor, nil]forState:UIControlStateNormal];
+    [[UINavigationBar appearance] setBarStyle:UIBarStyleDefault];
+    [[UITabBar appearance] setBarTintColor:[UIColor whiteColor]];
+    
     [[UINavigationBar appearance] setShadowImage:[UIImage imageWithColor:[UIColor clearColor] size:CGSizeMake(320, 3)]];
-    [[UINavigationBar appearance] setTitleTextAttributes:@{UITextAttributeTextColor:[UIColor whiteColor]}];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{UITextAttributeTextColor:[UIColor blackColor]}];
     /////
     
     [TTXTransitionManager validatePanPackWithTransitionGestureRecognizerType:TransitionGestureRecognizerTypePan];
@@ -64,7 +66,11 @@
                             ];
     self.window.rootViewController = tab;
     [self.window makeKeyWindow];
-    [self.window makeKeyAndVisible];    
+    [self.window makeKeyAndVisible];
+    
+    
+    LaunchView *launchView = [[LaunchView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    [self.window addSubview:launchView];    
     return YES;
 }
 

@@ -29,3 +29,5 @@
 extern NSString* TTX_ShowGuide_AppVersion(void);
 //是否第一次运行当前版本
 extern BOOL TTX_AppVersion_Is_FirstLoad(NSString *version);
+
+extern NSString* MB_ShouldHideLaunchView(void);

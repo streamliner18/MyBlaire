@@ -9,5 +9,5 @@
 #import <Foundation/Foundation.h>
 
 @interface NSString (Extent)
--(BOOL)isValidateEmail:(NSString *)email;
+-(BOOL)isValidateEmail;
 @end

@@ -13,7 +13,7 @@
 + (instancetype)normalButton
 {
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.backgroundColor = [UIColor redColor];
+    button.backgroundColor = [UIColor clearColor];
     return button;
 }
 
@@ -27,8 +27,10 @@
 
 + (instancetype)registButton
 {
-    UIButton *button = [self textButtonWithNormalText:@"注册" highlightedText:@"注册"];
-    button.frame = CGRectMake(0, 0, 55, 30);
+    UIButton *button = [self normalButton];
+    [button setImage:[UIImage bt_imageWithBundleName:@"Source" filepath:@"RegisterView" imageName:@"RegisterButton"] forState:UIControlStateNormal];
+    [button setImage:[UIImage bt_imageWithBundleName:@"Source" filepath:@"RegisterView" imageName:@"RegisterButtonPressed"] forState:UIControlStateHighlighted];
+    button.frame = CGRectMake(0, 0, 125, 44);
     return button;
 }
 
@@ -41,15 +43,28 @@
 
 + (instancetype)sinaLoginButton
 {
-    UIButton *button = [self textButtonWithNormalText:@"微博登录" highlightedText:@"微博登录"];
-    button.frame = CGRectMake(0, 0, 75, 30);
+    UIButton *button = [self normalButton];
+    [button setImage:[UIImage bt_imageWithBundleName:@"Source" filepath:@"RegisterView" imageName:@"SNSWeiboButton"] forState:UIControlStateNormal];
+    [button setImage:[UIImage bt_imageWithBundleName:@"Source" filepath:@"RegisterView" imageName:@"SNSWeiboButtonPressed"] forState:UIControlStateHighlighted];
+    button.frame = CGRectMake(0, 0, 58, 58);
     return button;
 }
 
 + (instancetype)qqLoginButton
 {
-    UIButton *button = [self textButtonWithNormalText:@"QQ登录" highlightedText:@"QQ登录"];
-    button.frame = CGRectMake(0, 0, 65, 30);
+    UIButton *button = [self normalButton];
+    [button setImage:[UIImage bt_imageWithBundleName:@"Source" filepath:@"RegisterView" imageName:@"SNSQQButton"] forState:UIControlStateNormal];
+    [button setImage:[UIImage bt_imageWithBundleName:@"Source" filepath:@"RegisterView" imageName:@"SNSQQButtonPressed"] forState:UIControlStateHighlighted];
+    button.frame = CGRectMake(0, 0, 58, 58);
+    return button;
+}
+
++ (instancetype)backButton
+{
+    UIButton *button = [self normalButton];
+    button.frame = CGRectMake(0, 0, 44, 44);
+    [button setImage:[UIImage bt_imageWithBundleName:@"Source" filepath:@"Common" imageName:@"BackButton"] forState:UIControlStateNormal];
+    [button setImage:[UIImage bt_imageWithBundleName:@"Source" filepath:@"Common" imageName:@"BackButtonPressed"] forState:UIControlStateHighlighted];
     return button;
 }
 

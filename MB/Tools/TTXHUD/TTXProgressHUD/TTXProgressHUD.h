@@ -4,11 +4,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TTXActivityIndicatorView.h"
 
 @interface TTXProgressHUD : UIView
 
 @property (nonatomic, strong) UIView *blackBackground;
-@property (nonatomic, strong) UIActivityIndicatorView *indicator;
+@property (nonatomic, strong) TTXActivityIndicatorView *indicator;
 @property (nonatomic, strong) UILabel *label;
 
 + (TTXProgressHUD *)showProgressHUDInView:(UIView *)view;

@@ -14,6 +14,7 @@ typedef NS_ENUM(NSUInteger, MBProductCellType) {
 };
 
 @interface MBProductCell : PSCollectionViewCell
+- (id)initWithFrame:(CGRect)frame type:(MBProductCellType)type;
 @property (nonatomic) MBProductCellType type;
 @property (nonatomic, copy) TTXActionBlock collecteGoodsBlock;
 @end

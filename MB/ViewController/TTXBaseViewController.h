@@ -6,10 +6,17 @@
 #import <UIKit/UIKit.h>
 #import "UINavigationProtocol.h"
 
-@interface TTXBaseViewController : UIViewController <UINavigationProtocol>
+typedef NS_ENUM(NSUInteger, LeftBarButtonItemType) {
+    LeftBarButtonItemTypeBack,
+};
 
+@interface TTXBaseViewController : UIViewController <UINavigationProtocol>
+@property (nonatomic,strong) UIView *mbView;
 + (instancetype)loadFromXib;
 
+
+- (void)resetLeftBarButtonItem:(LeftBarButtonItemType)type;
+- (void)backItemAction:(UIBarButtonItem *)sender;
 #pragma mark - UI Util Elements
 
 - (void)showProgressHUD;

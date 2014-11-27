@@ -30,6 +30,13 @@
 		756AC5DF1A2233B400C7CD07 /* TTXActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 756AC5DE1A2233B400C7CD07 /* TTXActivity.m */; };
 		756AC5E21A2240F300C7CD07 /* MBSortView.m in Sources */ = {isa = PBXBuildFile; fileRef = 756AC5E11A2240F300C7CD07 /* MBSortView.m */; };
 		756AC5E51A22411000C7CD07 /* MBSortModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 756AC5E41A22411000C7CD07 /* MBSortModel.m */; };
+		756AC62F1A24BA7300C7CD07 /* LaunchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 756AC62E1A24BA7300C7CD07 /* LaunchView.m */; };
+		756AC6671A24BFC400C7CD07 /* TTXActivityIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 756AC6661A24BFC400C7CD07 /* TTXActivityIndicatorView.m */; };
+		756AC66C1A24C66800C7CD07 /* LaunchDefault(iphone5).png in Resources */ = {isa = PBXBuildFile; fileRef = 756AC6681A24C66800C7CD07 /* LaunchDefault(iphone5).png */; };
+		756AC66D1A24C66800C7CD07 /* LaunchDefault(iphone4).png in Resources */ = {isa = PBXBuildFile; fileRef = 756AC6691A24C66800C7CD07 /* LaunchDefault(iphone4).png */; };
+		756AC66E1A24C66800C7CD07 /* LaunchDefault(iphone6).png in Resources */ = {isa = PBXBuildFile; fileRef = 756AC66A1A24C66800C7CD07 /* LaunchDefault(iphone6).png */; };
+		756AC66F1A24C66800C7CD07 /* LaunchDefault(iphone6+).png in Resources */ = {isa = PBXBuildFile; fileRef = 756AC66B1A24C66800C7CD07 /* LaunchDefault(iphone6+).png */; };
+		756AC6721A24D9CC00C7CD07 /* UIBarButtonItem+Factory.m in Sources */ = {isa = PBXBuildFile; fileRef = 756AC6711A24D9CC00C7CD07 /* UIBarButtonItem+Factory.m */; };
 		756D70F81A13A7F80023F8F8 /* MBHomePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 756D70F71A13A7F80023F8F8 /* MBHomePageViewController.m */; };
 		756D70FB1A13A8300023F8F8 /* MBSocialManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 756D70FA1A13A8300023F8F8 /* MBSocialManager.m */; };
 		756D70FE1A13ACE10023F8F8 /* TTXBaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 756D70FD1A13ACE10023F8F8 /* TTXBaseTableViewController.m */; };
@@ -118,6 +125,16 @@
 		756AC5E11A2240F300C7CD07 /* MBSortView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBSortView.m; sourceTree = "<group>"; };
 		756AC5E31A22411000C7CD07 /* MBSortModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBSortModel.h; sourceTree = "<group>"; };
 		756AC5E41A22411000C7CD07 /* MBSortModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBSortModel.m; sourceTree = "<group>"; };
+		756AC62D1A24BA7300C7CD07 /* LaunchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaunchView.h; sourceTree = "<group>"; };
+		756AC62E1A24BA7300C7CD07 /* LaunchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchView.m; sourceTree = "<group>"; };
+		756AC6651A24BFC400C7CD07 /* TTXActivityIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTXActivityIndicatorView.h; sourceTree = "<group>"; };
+		756AC6661A24BFC400C7CD07 /* TTXActivityIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTXActivityIndicatorView.m; sourceTree = "<group>"; };
+		756AC6681A24C66800C7CD07 /* LaunchDefault(iphone5).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LaunchDefault(iphone5).png"; sourceTree = "<group>"; };
+		756AC6691A24C66800C7CD07 /* LaunchDefault(iphone4).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LaunchDefault(iphone4).png"; sourceTree = "<group>"; };
+		756AC66A1A24C66800C7CD07 /* LaunchDefault(iphone6).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LaunchDefault(iphone6).png"; sourceTree = "<group>"; };
+		756AC66B1A24C66800C7CD07 /* LaunchDefault(iphone6+).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LaunchDefault(iphone6+).png"; sourceTree = "<group>"; };
+		756AC6701A24D9CC00C7CD07 /* UIBarButtonItem+Factory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+Factory.h"; sourceTree = "<group>"; };
+		756AC6711A24D9CC00C7CD07 /* UIBarButtonItem+Factory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Factory.m"; sourceTree = "<group>"; };
 		756D70F61A13A7F80023F8F8 /* MBHomePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBHomePageViewController.h; sourceTree = "<group>"; };
 		756D70F71A13A7F80023F8F8 /* MBHomePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBHomePageViewController.m; sourceTree = "<group>"; };
 		756D70F91A13A8300023F8F8 /* MBSocialManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBSocialManager.h; sourceTree = "<group>"; };
@@ -239,6 +256,8 @@
 		750C31911A110672009B8242 /* TTXProgressHUD */ = {
 			isa = PBXGroup;
 			children = (
+				756AC6651A24BFC400C7CD07 /* TTXActivityIndicatorView.h */,
+				756AC6661A24BFC400C7CD07 /* TTXActivityIndicatorView.m */,
 				750C31921A110672009B8242 /* TTXProgressHUD.h */,
 				750C31931A110672009B8242 /* TTXProgressHUD.m */,
 			);
@@ -315,6 +334,10 @@
 			isa = PBXGroup;
 			children = (
 				7522E5FA1A10AE9D007024E6 /* Info.plist */,
+				756AC6681A24C66800C7CD07 /* LaunchDefault(iphone5).png */,
+				756AC6691A24C66800C7CD07 /* LaunchDefault(iphone4).png */,
+				756AC66A1A24C66800C7CD07 /* LaunchDefault(iphone6).png */,
+				756AC66B1A24C66800C7CD07 /* LaunchDefault(iphone6+).png */,
 				75352C341A10D00300110F2D /* MBPrefixHeader.pch */,
 				7522E5FB1A10AE9D007024E6 /* main.m */,
 			);
@@ -350,6 +373,8 @@
 				756AC5DE1A2233B400C7CD07 /* TTXActivity.m */,
 				756AC5E01A2240F300C7CD07 /* MBSortView.h */,
 				756AC5E11A2240F300C7CD07 /* MBSortView.m */,
+				756AC62D1A24BA7300C7CD07 /* LaunchView.h */,
+				756AC62E1A24BA7300C7CD07 /* LaunchView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -464,6 +489,8 @@
 				758284AE1A1264D000FD13E9 /* UITextField+Factory.m */,
 				75194CF81A15B59A002C7038 /* UISearchBar+Factory.h */,
 				75194CF91A15B59A002C7038 /* UISearchBar+Factory.m */,
+				756AC6701A24D9CC00C7CD07 /* UIBarButtonItem+Factory.h */,
+				756AC6711A24D9CC00C7CD07 /* UIBarButtonItem+Factory.m */,
 			);
 			path = Factory;
 			sourceTree = "<group>";
@@ -570,7 +597,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				756AC66E1A24C66800C7CD07 /* LaunchDefault(iphone6).png in Resources */,
+				756AC66F1A24C66800C7CD07 /* LaunchDefault(iphone6+).png in Resources */,
 				42C993DB1A1B9C2A009E930F /* 111.png in Resources */,
+				756AC66D1A24C66800C7CD07 /* LaunchDefault(iphone4).png in Resources */,
+				756AC66C1A24C66800C7CD07 /* LaunchDefault(iphone5).png in Resources */,
 				756D71061A13B8A20023F8F8 /* Source.bundle in Resources */,
 				7522E6071A10AE9D007024E6 /* Images.xcassets in Resources */,
 			);
@@ -630,6 +661,7 @@
 				756EEC251A1A02AA0007D495 /* MBApi.m in Sources */,
 				756AC5E51A22411000C7CD07 /* MBSortModel.m in Sources */,
 				75194D3E1A15D489002C7038 /* MBSearchView.m in Sources */,
+				756AC62F1A24BA7300C7CD07 /* LaunchView.m in Sources */,
 				758284921A124D4B00FD13E9 /* LoginManager.m in Sources */,
 				756EEC341A1A4A1E0007D495 /* MBStreetShootingPrroduct.m in Sources */,
 				7522E5FF1A10AE9D007024E6 /* AppDelegate.m in Sources */,
@@ -641,6 +673,7 @@
 				7522E5FC1A10AE9D007024E6 /* main.m in Sources */,
 				756D71191A13BF3C0023F8F8 /* MBSearchViewController.m in Sources */,
 				42B719271A23824A00B42E72 /* MBHomePageSubViewController.m in Sources */,
+				756AC6671A24BFC400C7CD07 /* TTXActivityIndicatorView.m in Sources */,
 				756AC5E21A2240F300C7CD07 /* MBSortView.m in Sources */,
 				758284AC1A12630700FD13E9 /* UILabel+Factory.m in Sources */,
 				756AC5DF1A2233B400C7CD07 /* TTXActivity.m in Sources */,
@@ -656,6 +689,7 @@
 				756EEC2E1A1A0C000007D495 /* MBApiError.m in Sources */,
 				7582849A1A1251E400FD13E9 /* UIView+Frame.m in Sources */,
 				756EEC211A19FE560007D495 /* MBModel.m in Sources */,
+				756AC6721A24D9CC00C7CD07 /* UIBarButtonItem+Factory.m in Sources */,
 				75194D441A16083A002C7038 /* MBProductListView.m in Sources */,
 				42B719241A236F2500B42E72 /* MBSorter.m in Sources */,
 				756EEC311A1A49D80007D495 /* MBKeyWord.m in Sources */,

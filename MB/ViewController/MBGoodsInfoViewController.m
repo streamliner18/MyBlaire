@@ -201,7 +201,7 @@
     [self.backView addSubview:self.pageCotrol];
     
     self.priceLabel.frame = CGRectMake(self.backView.width - kPriceRightMargin - kPriceWidth, self.backView.height - kPriceBottomMargin - kPriceHeight, kPriceWidth, kPriceHeight);
-    self.priceLabel.text = [NSString stringWithFormat:@"$%ld",self.model.currentPrice];
+    self.priceLabel.text = [NSString stringWithFormat:@"$%@",self.model.currentPrice];
     [self.backView addSubview:self.priceLabel];
 
     self.addToCollecteButton.frame = CGRectMake(kAddCollecteLeftMargin, self.view.height - kAddCollecteHeight - kAddCollecteBottomMargin - (iOS7?44:0), kAddCollecteWidth, kAddCollecteHeight);
@@ -316,11 +316,9 @@
 
 - (void)shareGoods
 {
-    NSArray *shareButtonTitleArray = [[NSArray alloc] init];
-    NSArray *shareButtonImageNameArray = [[NSArray alloc] init];
-    shareButtonTitleArray = @[@"新浪微博",@"微信",@"微信朋友圈"];
-    shareButtonImageNameArray = @[@"sns_icon_1",@"sns_icon_22",@"sns_icon_23"];
-    
+    NSArray *shareButtonTitleArray = @[@"新浪微博",@"微信",@"微信朋友圈"];
+    NSArray *shareButtonImageNameArray = @[@"sns_icon_1",@"sns_icon_22",@"sns_icon_23"];
+
     TTXActivity *activity = [[TTXActivity alloc] initWithTitle:@"分享到社交平台" delegate:self cancelButtonTitle:@"取消" ShareButtonTitles:shareButtonTitleArray withShareButtonImagesName:shareButtonImageNameArray];
     [activity showInView:self.view];
 

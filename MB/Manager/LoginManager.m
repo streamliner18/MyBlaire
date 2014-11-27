@@ -18,10 +18,13 @@
 + (void)showLoginView
 {
     if (!MB_Model.token) {
-        MBGuideViewController *guideView = [[MBGuideViewController alloc] init];
-        [LoginManager configGuideViewAction:guideView];
         UIViewController *controller = [[[UIApplication sharedApplication] keyWindow] rootViewController];
-        [controller presentViewController:[[TTXBaseNavigationController alloc] initWithRootViewController:guideView] animated:YES completion:nil];
+        MBLoginViewController *loginViewController = [[MBLoginViewController alloc] init];
+        [controller presentViewController:[[TTXBaseNavigationController alloc] initWithRootViewController:loginViewController] animated:YES completion:^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:MB_ShouldHideLaunchView() object:nil];
+        }];
+    }else{
+        [[NSNotificationCenter defaultCenter] postNotificationName:MB_ShouldHideLaunchView() object:nil];
     }
 }
 

@@ -15,4 +15,6 @@
 + (instancetype)sinaLoginButton;
 + (instancetype)qqLoginButton;
 + (instancetype)sortButton;
+
++ (instancetype)backButton;
 @end

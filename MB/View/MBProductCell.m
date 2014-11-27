@@ -171,7 +171,7 @@
             self.name.frame = CGRectMake(self.showImageView.left, self.showImageView.bottom + kImageBottomMargin, self.showImageView.width - 50, kNameHeight);
             self.name.text = model.goodName;
             self.price.frame = CGRectMake(self.showImageView.left, self.name.bottom + kNameBottomMargin, self.name.width, kPriceHeight);
-            self.price.text = [@"$" stringByAppendingFormat:@"%0ld",model.currentPrice];
+            self.price.text = [@"$" stringByAppendingFormat:@"%@",model.currentPrice];
             
             self.loveButton.frame = CGRectMake(CGRectGetMaxX(self.showImageView.frame) - kLoveButtonWidth, CGRectGetMinY(self.name.frame), kLoveButtonWidth, kLoveButtonHeight);
             [self.loveButton addTarget:self action:@selector(addCollecte) forControlEvents:UIControlEventTouchUpInside];

@@ -40,28 +40,31 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.productListView = [[MBProductListView alloc] initWithFrame:self.view.bounds];
-    [self.view addSubview:self.productListView];
     
-    if (self.searchKey) {
+    
+    if (self.model) {
+        self.navigationItem.title = self.model.title;
+        [self showProgressHUD];
+        if (self.model.type == MBHomePageCellModelTypePopular) {
+            self.productListView = [[MBProductListView alloc] initWithFrame:self.view.bounds type:MBProductListViewTypeNormal];
+            [MBApi getHotGoodsWithCompletionHandle:^(MBApiError *error, id array) {
+                [self dealWithResult:error array:array];
+            }];
+        }else if (self.model.type == MBHomePageCellModelTypeStarSame) {
+            self.productListView = [[MBProductListView alloc] initWithFrame:self.view.bounds type:MBProductListViewTypeStreet];
+            [MBApi getStreetShootingGoodsWithCompletionHandle:^(MBApiError *error, id array) {
+                [self dealWithResult:error array:array];
+            }];
+        }
+    }else {
+        self.productListView = [[MBProductListView alloc] initWithFrame:self.view.bounds type:MBProductListViewTypeNormal];
         self.navigationItem.title = @"搜索结果";
         [self showProgressHUD];
         [MBApi getGoodsWithPriceRange:MBGoodsConditionNoRange discount:MBGoodsDiscountNoneLimit color:nil searchContent:self.searchKey completionHandle:^(MBApiError *error, NSArray *array) {
             [self dealWithResult:error array:array];
         }];
-    }else if (self.model) {
-        self.navigationItem.title = self.model.title;
-        [self showProgressHUD];
-        if (self.model.type == MBHomePageCellModelTypePopular) {
-            [MBApi getHotGoodsWithCompletionHandle:^(MBApiError *error, id array) {
-                [self dealWithResult:error array:array];
-            }];
-        }else if (self.model.type == MBHomePageCellModelTypeStarSame) {
-            [MBApi getStreetShootingGoodsWithCompletionHandle:^(MBApiError *error, id array) {
-                [self dealWithResult:error array:array];
-            }];
-        }
     }
+    [self.view addSubview:self.productListView];
     
     @weakify(self);
     self.productListView.selecteGoodsBlock = ^(MBProductModel *model){

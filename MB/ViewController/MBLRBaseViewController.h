@@ -25,4 +25,6 @@
 
 - (void)dealWithLoginResult:(MBApiError *)error;
 
+- (void)keyboardShow:(NSNotification *)sender;
+- (void)keyboardHide:(NSNotification *)sender;
 @end
