@@ -58,7 +58,8 @@
     if (!_showImageView) {
         _showImageView = ({
             UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
-            imageView.backgroundColor = V_COLOR(67, 74, 84, 1.0);
+            imageView.backgroundColor = V_COLOR(255,255,255, 1.0);
+            imageView.contentMode = UIViewContentModeScaleAspectFill;
             imageView;
         });
     }
