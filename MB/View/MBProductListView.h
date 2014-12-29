@@ -13,6 +13,7 @@
 typedef NS_ENUM(NSUInteger, MBProductListViewType) {
     MBProductListViewTypeNormal = 0,
     MBProductListViewTypeStreet = 1,
+    MBProductListViewTypeWithoutLove = 2,
 };
 
 typedef void(^MBProductListViewSelecteGoodsBlock)(MBProductModel *model);
@@ -23,5 +24,5 @@ typedef void(^MBProductListViewSelecteGoodsBlock)(MBProductModel *model);
 - (instancetype)initWithFrame:(CGRect)frame type:(MBProductListViewType)type;
 @property (nonatomic, copy) MBProductListViewSelecteGoodsBlock selecteGoodsBlock;
 @property (nonatomic, copy) TTXActionBlock collecteGoodsBlock;
-
+- (void)reloadDate;
 @end

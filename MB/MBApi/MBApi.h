@@ -31,8 +31,8 @@ typedef NS_ENUM(NSInteger, MBGoodsDiscount) {
 };
 
 typedef NS_ENUM(NSInteger, MBGoodsColor) {
-    MBGoodsColorBlack = 0,
-    MBGoodsColorOrigion = 1,
+    MBGoodsColorNoneLimit = -1,
+    MBGoodsColorOrange = 1,
     MBGoodsColorBlue = 2,
     MBGoodsColorWhite = 3,
     MBGoodsColorRed = 4,
@@ -72,6 +72,11 @@ typedef void(^MBApiArrayBlock)(MBApiError *error, id array);
 + (void)getKeyWordWithCompletionHandle:(MBApiArrayBlock)block;
 
 /**
+ *  最新折扣
+ *
+ */
++ (void)getNewDiscountGoodsWithCompletionHandle:(MBApiArrayBlock)block;
+/**
  *  最具人气
  */
 
@@ -96,7 +101,7 @@ typedef void(^MBApiArrayBlock)(MBApiError *error, id array);
 /**
  *  收藏
  */
-+ (void)collecteGoods:(NSString *)goodsID completionHandle:(MBApiErrorBlock)block;
++ (void)collecteGoods:(NSString *)goodsID collecteState:(NSString *)isCollected completionHandle:(MBApiErrorBlock)block;
 /**
  *  心愿单
  */
@@ -105,6 +110,12 @@ typedef void(^MBApiArrayBlock)(MBApiError *error, id array);
  *  反馈
  */
 + (void)feedbackWithMesage:(NSString *)message completionHandle:(MBApiErrorBlock)block;
+/**
+ *  找回密码
+ */
++ (void)findPasswordWithEmail:(NSString *)email completionHandle:(MBApiErrorBlock)block;
+
+
 
 + (NSString *)serverImageURLWithImageName:(NSString *)imageName;
 @end

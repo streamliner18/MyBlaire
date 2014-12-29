@@ -37,20 +37,17 @@
     fullImageName2x = [bundle pathForResource:fullImageName2x ofType:@"png"];
     fullImageName = [bundle pathForResource:fullImageName ofType:@"png"];
     
-    if (fullImageName3x && [[NSFileManager defaultManager] fileExistsAtPath:fullImageName3x] && [[UIScreen mainScreen] bounds].size.width > 400) {
-        
+    if (fullImageName3x && [[NSFileManager defaultManager] fileExistsAtPath:fullImageName3x] && ([UIScreen mainScreen].scale == 3.0?YES:NO)) {
+//        DLog(@"使用3x图片");
         return [UIImage imageWithContentsOfFile:fullImageName3x];
-        
-    }else if (fullImageName2x && [[NSFileManager defaultManager] fileExistsAtPath:fullImageName2x] && ([UIScreen mainScreen].scale == 2.0?YES:NO)) {
-        
+    }else if (fullImageName2x && [[NSFileManager defaultManager] fileExistsAtPath:fullImageName2x] && ([UIScreen mainScreen].scale >= 2.0?YES:NO)) {
+//        DLog(@"使用2x图片");
         return [UIImage imageWithContentsOfFile:fullImageName2x];
-        
     }else if (fullImageName && [[NSFileManager defaultManager] fileExistsAtPath:fullImageName]) {
-        
         return [UIImage imageWithContentsOfFile:fullImageName];
     }
     
-    NSLog(@"图片:%@不存在",imageName);
+//    NSLog(@"图片:%@不存在",imageName);
     
     return nil;
     

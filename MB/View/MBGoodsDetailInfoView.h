@@ -6,11 +6,11 @@
 //  Copyright (c) 2014年 xxx Innovation Co. Ltd. All rights reserved.
 //
 
-#import "FXBlurView.h"
+#import <UIKit/UIKit.h>
 
 @class MBProductModel;
 
-@interface MBGoodsDetailInfoView : FXBlurView
+@interface MBGoodsDetailInfoView : UIView
 
 - (instancetype)initWithFrame:(CGRect)frame model:(MBProductModel *)model;
 

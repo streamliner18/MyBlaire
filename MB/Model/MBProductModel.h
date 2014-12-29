@@ -17,6 +17,10 @@
 @property (nonatomic) BOOL isCollect;
 @property (nonatomic) CGFloat imageWidth;
 @property (nonatomic) CGFloat imageHeight;
+@property (nonatomic) NSString *imageSlideshow;//折扣
+@property (nonatomic) NSString *imageTrending;//人气
+@property (nonatomic) NSString *imageHighlight;//明星
+
 
 
 @property (nonatomic) NSString *detailed;
@@ -27,6 +31,7 @@
 @property (nonatomic) NSString *bigPctureUrl;
 @property (nonatomic) NSString *bigPctureUrl2;
 @property (nonatomic) NSString *bigPctureUrl3;
+@property (nonatomic, strong) NSArray *bigPictures;
 @property (nonatomic) NSString *buyURL;
 
 + (instancetype)shareProduct:(NSDictionary *)dic;
@@ -34,5 +39,7 @@
 - (void)updateWithDic:(NSDictionary *)dic;
 
 + (NSArray *)productsWithArray:(NSArray *)array;
+
+- (NSString *)collecteViewNeedShowImageURL;
 
 @end

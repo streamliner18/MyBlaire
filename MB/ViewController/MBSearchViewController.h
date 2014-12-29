@@ -9,5 +9,7 @@
 #import "TTXBaseViewController.h"
 
 @interface MBSearchViewController : TTXBaseViewController
-
+- (void)searchWithKeyWord:(NSString *)searchKey;
+@property (nonatomic, copy) TTXActionBlock autoSearchAction;
+- (instancetype)initWithImage:(UIImage *)image;
 @end

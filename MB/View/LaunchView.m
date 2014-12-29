@@ -9,9 +9,6 @@
 #import "LaunchView.h"
 #import "TTXActivityIndicatorView.h"
 
-
-
-
 @implementation LaunchView
 
 - (instancetype)initWithFrame:(CGRect)frame

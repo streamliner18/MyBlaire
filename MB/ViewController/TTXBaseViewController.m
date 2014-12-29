@@ -53,11 +53,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor colorWithHexString:@"#f1f2f6"];
     self.mbView = [[UIView alloc] initWithFrame:self.view.bounds];
     self.mbView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:self.mbView];
-    if (iOS7) {
+    if (kiOS7) {
         self.automaticallyAdjustsScrollViewInsets = [[self class] automaticallyAdjustsScrollViewInsets];
     }
     [self configBackButton];
@@ -68,9 +68,14 @@
 //    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
 }
 
-- (void)showProgressHUD;
+- (void)showProgressHUD
 {
-    [TTXProgressHUD showProgressHUDInView:self.view];
+    [TTXProgressHUD showProgressHUDInView:self.view type:TTXProgressHUDTypeSprite];
+}
+
+- (void)showSpriteProgressHUD
+{
+    [TTXProgressHUD showProgressHUDInView:self.view type:TTXProgressHUDTypeNormal];
 }
 
 - (void)hideProgressHUD;
@@ -115,13 +120,13 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.navigationItem.title = [[self class] navigationItemTitle];
+//    self.navigationItem.title = [[self class] navigationItemTitle];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    self.navigationItem.title = [[self class] navigationItemDisappearTitle];
+//    self.navigationItem.title = [[self class] navigationItemDisappearTitle];
 }
 
 #pragma mark - UINavigationProtocol

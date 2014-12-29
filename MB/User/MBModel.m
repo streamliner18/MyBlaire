@@ -10,8 +10,6 @@
 
 @implementation MBModel
 
-#define kMBMODELTOKENKEY @"MBTOKEN"
-
 + (instancetype)shareModel
 {
     static MBModel *userModel = nil;
@@ -27,6 +25,7 @@
 - (void)configSelf
 {
     self.token = [[NSUserDefaults standardUserDefaults] stringForKey:kMBMODELTOKENKEY];
+    self.userName = [[NSUserDefaults standardUserDefaults] stringForKey:kMBMODELUSERNAMEKEY];
     if (self.token) {
         DLog(@"%@",self.token);
     }
@@ -51,11 +50,13 @@
 - (void)save
 {
     [[NSUserDefaults standardUserDefaults] setObject:self.token forKey:kMBMODELTOKENKEY];
+    [[NSUserDefaults standardUserDefaults] setObject:self.userName forKey:kMBMODELUSERNAMEKEY];
 }
 
 - (void)clear
 {
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:kMBMODELTOKENKEY];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:kMBMODELUSERNAMEKEY];
     [self configSelf];
 }
 

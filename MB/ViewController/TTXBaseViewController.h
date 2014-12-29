@@ -21,6 +21,7 @@ typedef NS_ENUM(NSUInteger, LeftBarButtonItemType) {
 
 - (void)showProgressHUD;
 - (void)hideProgressHUD;
+- (void)showSpriteProgressHUD;
 
 - (void)showAlertTitle:(NSString *)title message:(NSString *)message;
 - (void)showError:(NSError *)error message:(NSString *)message;

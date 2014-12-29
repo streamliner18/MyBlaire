@@ -27,8 +27,8 @@ static NSString * const kTTXSearchBarTableViewControllerDefaultTableViewCellIden
 {
     [super viewDidLoad];
     
-    if (iOS7) {
-        self.automaticallyAdjustsScrollViewInsets = YES;
+    if (kiOS7) {
+        self.automaticallyAdjustsScrollViewInsets = NO;
     }
     
     self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectZero];

@@ -11,13 +11,13 @@
 
 typedef void(^MBSearchViewTagSearchBlock)(NSString *tag,NSInteger index);
 
-@interface MBSearchView : UIView<DWTagListDelegate>
+@interface MBSearchView : UIImageView<DWTagListDelegate>
 
 @property (nonatomic, strong) UIView *toolBar;
 
 @property (nonatomic, copy) MBSearchViewTagSearchBlock tagTapAction;
 
-- (instancetype)initWithFrame:(CGRect)frame tags:(NSArray *)array;
+- (instancetype)initWithFrame:(CGRect)frame tags:(NSArray *)array image:(UIImage *)image;
 
 - (void)resetTags:(NSArray *)array;
 

@@ -31,7 +31,7 @@
              [GoodsDetailInfoRowObject shareWithTitle:@"颜色" value:model.color],
              [GoodsDetailInfoRowObject shareWithTitle:@"描述" value:model.goodDesc],
              [GoodsDetailInfoRowObject shareWithTitle:@"购买链接" value:model.buyURL?model.buyURL:@""],
-             [GoodsDetailInfoRowObject shareWithTitle:@"如何购买" value:@""]
+             [GoodsDetailInfoRowObject shareWithTitle:@"如何购买" value:@"_____"]
              ];
 }
 @end
@@ -47,29 +47,19 @@
 - (instancetype)initWithFrame:(CGRect)frame model:(MBProductModel *)model
 {
     if (self = [super initWithFrame:frame]) {
+        self.backgroundColor = V_COLOR(241, 242, 246, 1.0);
         self.model = model;
         self.dataSource = [GoodsDetailInfoRowObject arrayWithModel:model];
-        self.listView.frame = CGRectMake(0, 100, self.width, 280);
+        self.listView.frame = self.bounds;
         self.listView.scrollEnabled = NO;
         [self addSubview:self.listView];
-        
-        @weakify(self);
-        [self bk_whenTapped:^{
-            @strongify(self);
-            [self removeFromSuperview];
-        }];
+        UIScrollView *s = (UIScrollView *)self.superview;
+        s.contentSize = CGSizeMake(s.width, s.contentSize.height - self.height);
+        self.height = self.listView.contentSize.height + 40;
+        self.listView.height = self.height;
+        s.contentSize = CGSizeMake(s.width, s.contentSize.height + self.height);
     }
     return self;
-}
-
-- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
-{
-    if (CGRectContainsPoint(self.listView.frame, point)) {
-        [(UIGestureRecognizer *)[self.gestureRecognizers firstObject] setEnabled:NO];
-        return self.listView;
-    }
-    [(UIGestureRecognizer *)[self.gestureRecognizers firstObject] setEnabled:YES];
-    return [super hitTest:point withEvent:event];
 }
 
 #pragma mark - properties
@@ -80,11 +70,12 @@
         _listView = ({
             UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
             tableView.dataSource = self;
-            tableView.delegate = self;
             tableView.backgroundColor = [UIColor clearColor];
             tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
             UILabel *headerView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, tableView.width, 40)];
-            headerView.text = @"  商品详情";
+            headerView.text = @"     商 品 详 情";
+            headerView.textColor = [UIColor colorWithHexString:@"#434a54"];
+            headerView.backgroundColor = V_COLOR(252, 252, 253, 1.0);
             tableView.tableHeaderView = headerView;
             tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
             tableView;
@@ -95,7 +86,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.dataSource.count;
+    return self.dataSource.count * 2;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -106,9 +97,36 @@
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-    GoodsDetailInfoRowObject *object = self.dataSource[indexPath.row];
-    cell.textLabel.text = [object.title stringByAppendingFormat:@":    %@",object.defaultValue];
+    cell.textLabel.text = [self stringWihtIndexPath:indexPath];
+    cell.textLabel.font = [UIFont systemFontOfSize:15];
+    cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    cell.textLabel.numberOfLines = 0;
+    cell.textLabel.textColor = [UIColor colorWithHexString:@"#434a54"];
     return cell;
 }
+
+- (NSString *)stringWihtIndexPath:(NSIndexPath *)indexPath
+{
+    NSInteger index = indexPath.row / 2;
+    GoodsDetailInfoRowObject *object = self.dataSource[index];
+    if ((indexPath.row % 2) % 2 == 1) {
+        return object.defaultValue;
+    }else{
+        return [NSString stringWithFormat:@"%@:",object.title];
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *string = [self stringWihtIndexPath:indexPath];
+    CGSize size = BT_TEXTSIZE(string, [UIFont systemFontOfSize:15]);
+    return size.height;
+}
+
+//- (void)totalHeihgt
+//{
+//    CGFloat height = 0;
+//    height +
+//}
 
 @end

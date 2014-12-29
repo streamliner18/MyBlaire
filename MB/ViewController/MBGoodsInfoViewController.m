@@ -11,18 +11,24 @@
 #import "MBProductModel.h"
 #import "MBGoodsDetailInfoView.h"
 #import "TTXActivity.h"
+#import <SMPageControl.h>
+#import "MBShareViewController.h"
+#import "MLBlackTransition.h"
 
 @interface MBGoodsInfoViewController ()<SwipeViewDataSource,SwipeViewDelegate,TTXActivityDelegate>
 @property (nonatomic, strong) MBProductModel *model;
-@property (nonatomic, strong) UIView *backView;
-@property (nonatomic, strong) UILabel *goodsTitlelabel;
+@property (nonatomic, strong) UIScrollView *backView;
 @property (nonatomic, strong) SwipeView *goodsImages;
 @property (nonatomic, strong) NSMutableArray *imageItems;
 @property (nonatomic, strong) UIButton *detailButton;
-@property (nonatomic, strong) UIPageControl *pageCotrol;
-@property (nonatomic, strong) UILabel *priceLabel;
+@property (nonatomic, strong) SMPageControl *pageCotrol;
 @property (nonatomic, strong) UIButton *addToCollecteButton;
 @property (nonatomic, strong) UIButton *shareButton;
+
+@property (nonatomic, strong) UIView *colorView;
+
+@property (nonatomic) BOOL shareViewShow;
+
 @end
 
 @implementation MBGoodsInfoViewController
@@ -30,36 +36,39 @@
 - (instancetype)initWithModel:(MBProductModel *)model
 {
     if (self = [super init]) {
+        self.showCollecteCount = YES;
         self.model = model;
+        if (model) {
+            [MBSta staWithType:MBStaTypeClickGoods param:model.goodId];
+        }
     }
     return self;
 }
 
 #pragma mark - properties
 
-- (UIView *)backView
+- (UIScrollView *)backView
 {
     if (!_backView) {
         _backView = ({
-            UIView *view = [[UIView alloc] initWithFrame:CGRectZero];
-            view.backgroundColor = [UIColor lightGrayColor];
+            UIScrollView *view = [[UIScrollView alloc] initWithFrame:CGRectZero];
+            view.backgroundColor = [UIColor clearColor];
             view;
         });
     }
     return _backView;
 }
 
-- (UILabel *)goodsTitlelabel
+- (UIView *)colorView
 {
-    if (!_goodsTitlelabel) {
-        _goodsTitlelabel = ({
-            UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
-            label.backgroundColor = [UIColor redColor];
-            label.textAlignment = NSTextAlignmentCenter;
-            label;
+    if (!_colorView) {
+        _colorView = ({
+            UIView *view = [[UIView alloc] initWithFrame:CGRectZero];
+            view.backgroundColor = [UIColor colorWithHexString:@"#ffffff"];
+            view;
         });
     }
-    return _goodsTitlelabel;
+    return _colorView;
 }
 
 - (SwipeView *)goodsImages
@@ -88,28 +97,17 @@
     return _detailButton;
 }
 
-- (UIPageControl *)pageCotrol
+- (SMPageControl *)pageCotrol
 {
     if (!_pageCotrol) {
         _pageCotrol = ({
-            UIPageControl *control = [[UIPageControl alloc] initWithFrame:CGRectZero];
+            SMPageControl *control = [[SMPageControl alloc] initWithFrame:CGRectZero];
+            [control setPageIndicatorImage:[UIImage imageNamed:@"PageControl_n"]];
+            [control setCurrentPageIndicatorImage:[UIImage imageNamed:@"PageControl_s"]];
             control;
         });
     }
     return _pageCotrol;
-}
-
-- (UILabel *)priceLabel
-{
-    if (!_priceLabel) {
-        _priceLabel = ({
-            UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
-            label.backgroundColor = [UIColor redColor];
-            label.textAlignment = NSTextAlignmentRight;
-            label;
-        });
-    }
-    return _priceLabel;
 }
 
 - (UIButton *)addToCollecteButton
@@ -128,8 +126,6 @@
     if (!_shareButton) {
         _shareButton = ({
             UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-            button.backgroundColor = [UIColor yellowColor];
-            [button setTitle:@"分享" forState:UIControlStateNormal];
             button;
         });
     }
@@ -144,12 +140,12 @@
     return _imageItems;
 }
 
-#define kBackViewTopMargin (10)
-#define kBackViewLeftMargin (10)
+#define kBackViewTopMargin (0)
+#define kBackViewLeftMargin (0)
 
-#define kSwipeViewTopMargin (50)
-#define kSwipeViewBottomMargin (10)
-#define kSwipeViewLeftMargin (10)
+#define kSwipeViewTopMargin (0)
+#define kSwipeViewBottomMargin (0)
+#define kSwipeViewLeftMargin (4.5)
 
 #define kTitleLabelTopMargin (10)
 #define kTitleLabelHeight (30)
@@ -159,9 +155,9 @@
 #define kDetailButtonWidth (60)
 #define kDetailButtonHeight (30)
 
-#define kPageControlBottomMargin (30)
+#define kPageControlBottomMargin (0)
 #define kPageControlWidth (80)
-#define kPageControlHeight (30)
+#define kPageControlHeight (25)
 
 #define kPriceWidth (100)
 #define kPriceRightMargin (10)
@@ -170,71 +166,100 @@
 
 #define kAddCollecteLeftMargin (20)
 #define kAddCollecteBottomMargin (20)
-#define kAddCollecteWidth (50)
+#define kAddCollecteWidth (36)
 #define kAddCollecteHeight (30)
 
-#define kShareRightMargin (20)
+#define kShareRightMargin (15)
 #define kShareBottomMargin (20)
-#define kShareWidth (50)
-#define kShareHeight (30)
+#define kShareWidth (28)
+#define kShareHeight (28)
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    self.backView.frame = CGRectMake(kBackViewLeftMargin, 44 + (iOS7 ? 20 : 0) + kBackViewTopMargin, self.view.width - kBackViewLeftMargin * 2, 400);
-    [self.view addSubview:self.backView];
     
-    self.goodsImages.frame = CGRectMake(kSwipeViewLeftMargin, kSwipeViewTopMargin, self.backView.width - kSwipeViewLeftMargin * 2, self.backView.height - kSwipeViewTopMargin - kSwipeViewBottomMargin);
-    self.goodsImages.backgroundColor = [UIColor orangeColor];
+    self.navigationItem.title = [self.model.goodName stringByAppendingFormat:@" / ￥%@",self.model.currentPrice];
+    if (kiOS7) {
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
+    [self resetLeftBarButtonItem:LeftBarButtonItemTypeBack];
+
+    self.backView.frame = CGRectMake(kBackViewLeftMargin, kBackViewTopMargin, self.view.width - kBackViewLeftMargin * 2, self.mbView.height - (kiOS7 ? 64 : 0) - 49);
+    self.backView.backgroundColor = [UIColor colorWithHexString:@"#f1f2f6"];
+    [self.mbView addSubview:self.backView];
+    
+    self.goodsImages.frame = CGRectMake(kSwipeViewLeftMargin, kSwipeViewTopMargin, self.backView.width - kSwipeViewLeftMargin * 2, 625 / 603.0 * (self.backView.width - kSwipeViewLeftMargin * 2));
+    self.goodsImages.backgroundColor = [UIColor clearColor];
     [self.backView addSubview:self.goodsImages];
     
-    self.goodsTitlelabel.frame = CGRectMake(0, kTitleLabelTopMargin, self.backView.width, kTitleLabelHeight);
-    self.goodsTitlelabel.text = self.model.goodName;
-    [self.backView addSubview:self.goodsTitlelabel];
     
-    self.detailButton.frame = CGRectMake(self.backView.width - kDetailButtonRightMargin - kDetailButtonWidth, kDetailButtonTopMargin, kDetailButtonWidth, kDetailButtonHeight);
-    self.detailButton.userInteractionEnabled = NO;
-    [self.detailButton addTarget:self action:@selector(showDetailAction) forControlEvents:UIControlEventTouchUpInside];
-    [self.backView addSubview:self.detailButton];
+    self.colorView.frame = CGRectMake(self.goodsImages.left, self.goodsImages.bottom, self.goodsImages.width, 89);
+    [self.backView addSubview:self.colorView];
     
-    self.pageCotrol.frame = CGRectMake((self.backView.width - kPageControlWidth) / 2.0, self.backView.height - kPageControlBottomMargin - kPageControlHeight, kPageControlWidth, kPageControlHeight);
+//    self.detailButton.frame = CGRectMake(self.backView.width - kDetailButtonRightMargin - kDetailButtonWidth, kDetailButtonTopMargin, kDetailButtonWidth, kDetailButtonHeight);
+//    self.detailButton.userInteractionEnabled = NO;
+//    [self.detailButton addTarget:self action:@selector(showDetailAction) forControlEvents:UIControlEventTouchUpInside];
+//    [self.backView addSubview:self.detailButton];
+    
+    self.pageCotrol.frame = CGRectMake((self.backView.width - kPageControlWidth) / 2.0, self.goodsImages.height + kPageControlBottomMargin, kPageControlWidth, kPageControlHeight);
     [self.backView addSubview:self.pageCotrol];
     
-    self.priceLabel.frame = CGRectMake(self.backView.width - kPriceRightMargin - kPriceWidth, self.backView.height - kPriceBottomMargin - kPriceHeight, kPriceWidth, kPriceHeight);
-    self.priceLabel.text = [NSString stringWithFormat:@"$%@",self.model.currentPrice];
-    [self.backView addSubview:self.priceLabel];
-
-    self.addToCollecteButton.frame = CGRectMake(kAddCollecteLeftMargin, self.view.height - kAddCollecteHeight - kAddCollecteBottomMargin - (iOS7?44:0), kAddCollecteWidth, kAddCollecteHeight);
-    [self.addToCollecteButton addTarget:self action:@selector(addCollecteAction) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:self.addToCollecteButton];
     
-    self.shareButton.frame = CGRectMake(self.view.width - kShareRightMargin - kShareWidth, self.view.height - kShareBottomMargin - kShareHeight - (iOS7?44:0), kShareWidth, kShareRightMargin);
+    self.addToCollecteButton.frame = CGRectMake(self.backView.width - kAddCollecteWidth - 25, self.pageCotrol.bottom + 15, kAddCollecteWidth, kAddCollecteHeight);
+    [self.addToCollecteButton addTarget:self action:@selector(addCollecteAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.backView addSubview:self.addToCollecteButton];
+    
+    self.shareButton.frame = CGRectMake(self.backView.width - kShareRightMargin - kShareWidth, self.goodsImages.bottom - kShareHeight - 15, kShareWidth, kShareHeight);
+    [self.shareButton setImage:[UIImage bt_imageWithBundleName:@"Source" filepath:@"GoodsInfo" imageName:@"ProductShare"] forState:UIControlStateNormal];
     [self.shareButton addTarget:self action:@selector(shareGoods) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:self.shareButton];
+    [self.backView addSubview:self.shareButton];
+    
+    self.backView.contentSize = CGSizeMake(self.backView.width, CGRectGetMaxY(self.addToCollecteButton.frame));
     
     [self resetCollecteState];
     
     [self showProgressHUD];
     
+    @weakify(self);
     [MBApi getGoodsInfo:self.model.goodId completionHandle:^(MBApiError *error, NSDictionary *dic) {
+        @strongify(self);
         [self hideProgressHUD];
         if (error.code == MBApiCodeSuccess && dic) {
             [self.model updateWithDic:dic];
             [self resetDatasource];
+            [self addGoodsInfoView];
         }else{
             [self showMessageHUDWithMessage:error.message];
         }
     }];
 }
 
+- (void)addGoodsInfoView
+{
+    MBGoodsDetailInfoView *view = [[MBGoodsDetailInfoView alloc] initWithFrame:CGRectMake(4.5, CGRectGetMaxY(self.addToCollecteButton.frame)+18+4.5, self.backView.width - 9, 280) model:self.model];
+    [self.backView addSubview:view];
+    self.backView.contentSize = CGSizeMake(self.backView.width, view.bottom);
+}
+
 - (void)resetCollecteState
 {
     if (self.model.isCollect) {
-        [self.addToCollecteButton setImage:[UIImage bt_imageWithBundleName:@"Source" imageName:@"collected_n"] forState:UIControlStateNormal];
-        [self.addToCollecteButton setImage:[UIImage bt_imageWithBundleName:@"Source" imageName:@"collecte_n"] forState:UIControlStateHighlighted];
+        [self.addToCollecteButton setBackgroundImage:[UIImage bt_imageWithBundleName:@"Source" filepath:@"GoodsInfo" imageName:@"ProductLikeClicked"] forState:UIControlStateNormal];
+        [self.addToCollecteButton setBackgroundImage:[UIImage bt_imageWithBundleName:@"Source" filepath:@"GoodsInfo" imageName:@"ProductLike"] forState:UIControlStateHighlighted];
     }else{
-        [self.addToCollecteButton setImage:[UIImage bt_imageWithBundleName:@"Source" imageName:@"collecte_n"] forState:UIControlStateNormal];
-        [self.addToCollecteButton setImage:[UIImage bt_imageWithBundleName:@"Source" imageName:@"collected_n"] forState:UIControlStateHighlighted];
+        [self.addToCollecteButton setBackgroundImage:[UIImage bt_imageWithBundleName:@"Source" filepath:@"GoodsInfo" imageName:@"ProductLike"] forState:UIControlStateNormal];
+        [self.addToCollecteButton setBackgroundImage:[UIImage bt_imageWithBundleName:@"Source" filepath:@"GoodsInfo" imageName:@"ProductLikeClicked"] forState:UIControlStateHighlighted];
+    }
+    if (self.showCollecteCount) {
+        if (self.model.collectCount) {
+            [self.addToCollecteButton setTitle:[NSString stringWithFormat:@"%d",self.model.collectCount] forState:UIControlStateNormal];
+        }else{
+            [self.addToCollecteButton setTitle:nil forState:UIControlStateNormal];
+        }
+        if (self.model.isCollect) {
+            [self.addToCollecteButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        }else{
+            [self.addToCollecteButton setTitleColor:[UIColor colorWithHexString:@"#434a54"] forState:UIControlStateNormal];
+        }
     }
 }
 
@@ -242,14 +267,18 @@
 {
     if (self.model) {
         [self.imageItems removeAllObjects];
-        if (self.model.bigPctureUrl) {
-            [self.imageItems addObject:self.model.bigPctureUrl];
-        }
-        if (self.model.bigPctureUrl2) {
-            [self.imageItems addObject:self.model.bigPctureUrl2];
-        }
-        if (self.model.bigPctureUrl3) {
-            [self.imageItems addObject:self.model.bigPctureUrl3];
+        if (self.model.bigPictures.count) {
+            [self.imageItems addObjectsFromArray:self.model.bigPictures];
+        }else{
+            if (self.model.bigPctureUrl) {
+                [self.imageItems addObject:self.model.bigPctureUrl];
+            }
+            if (self.model.bigPctureUrl2) {
+                [self.imageItems addObject:self.model.bigPctureUrl2];
+            }
+            if (self.model.bigPctureUrl3) {
+                [self.imageItems addObject:self.model.bigPctureUrl3];
+            }
         }
     }
     [self.goodsImages reloadData];
@@ -274,7 +303,7 @@
         view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         
         imageView = [[UIImageView alloc] initWithFrame:view.bounds];
-        imageView.backgroundColor = [UIColor yellowColor];
+        imageView.backgroundColor = V_COLOR(67, 74, 84, 1.0);
         imageView.tag = 1;
         [view addSubview:imageView];
     } else {
@@ -282,7 +311,8 @@
     }
     
     if (index < self.imageItems.count) {
-        [imageView sd_setImageWithURL:[NSURL URLWithString:[MBApi serverImageURLWithImageName:self.imageItems[index]]]];
+        [imageView sd_setImageWithURL:[NSURL URLWithString:self.imageItems[index]]];
+        DLog(@"%@",[MBApi serverImageURLWithImageName:self.imageItems[index]]);
     }
     
     return view;
@@ -300,28 +330,72 @@
 
 - (void)showDetailAction
 {
-    MBGoodsDetailInfoView *view = [[MBGoodsDetailInfoView alloc] initWithFrame:[[[UIApplication sharedApplication] keyWindow] bounds] model:self.model];
-    view.tintColor = [UIColor whiteColor];
-    view.blurRadius = 50;
-    view.dynamic = NO;
-    [[[UIApplication sharedApplication] keyWindow] addSubview:view];
+    
 }
 
 - (void)addCollecteAction
 {
-    [MBApi collecteGoods:self.model.goodId completionHandle:^(MBApiError *error) {
-        [self showMessageHUDWithMessage:error.message];
+    [MBSta staWithType:MBStaTypeClickCollecte param:self.model.goodId];
+    [MBApi collecteGoods:self.model.goodId collecteState:self.model.isCollect?@"1":@"0" completionHandle:^(MBApiError *error) {
+        if (error.code == MBApiCodeSuccess) {
+            if (self.model.isCollect) {
+                self.model.collectCount = MAX(0, self.model.collectCount - 1);
+                [self showMessageHUDWithMessage:@"取消收藏"];
+            }else{
+                self.model.collectCount = MAX(0, self.model.collectCount + 1);
+                [self showMessageHUDWithMessage:@"已收藏到心愿单"];
+            }
+            self.model.isCollect = !self.model.isCollect;
+            [self resetCollecteState];
+        }else{
+            [self showMessageHUDWithMessage:error.message];
+        }
     }];
 }
 
 - (void)shareGoods
 {
-    NSArray *shareButtonTitleArray = @[@"新浪微博",@"微信",@"微信朋友圈"];
-    NSArray *shareButtonImageNameArray = @[@"sns_icon_1",@"sns_icon_22",@"sns_icon_23"];
+    [MBSta staWithType:MBStaTypeClickShare param:self.model.goodId];
+    MBShareViewController *viewController = [[MBShareViewController alloc] initWithModel:self.model];
+    [self.navigationController enabledMLBlackTransition:NO];
+    @weakify(viewController);
+    viewController.hideBlock = ^(){
+        @strongify(viewController);
+        [self.navigationController enabledMLBlackTransition:YES];
+        self.tabBarController.tabBar.hidden = NO;
+        [UIView animateWithDuration:0.3 animations:^{
+            viewController.view.alpha = 0;
+        }completion:^(BOOL finished) {
+            [viewController.view removeFromSuperview];
+            [viewController removeFromParentViewController];
+        }];
+    };
+    [self.view addSubview:viewController.view];
+    self.tabBarController.tabBar.hidden = YES;
+    [self addChildViewController:viewController];
+    
+    viewController.view.alpha = 0;
+    [UIView animateWithDuration:0.3 animations:^{
+        viewController.view.alpha = 1;
+    }];
+}
 
-    TTXActivity *activity = [[TTXActivity alloc] initWithTitle:@"分享到社交平台" delegate:self cancelButtonTitle:@"取消" ShareButtonTitles:shareButtonTitleArray withShareButtonImagesName:shareButtonImageNameArray];
-    [activity showInView:self.view];
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    self.tabBarController.tabBar.hidden = NO;
+}
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:animated];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [self.navigationController enabledMLBlackTransition:YES];
+    [super viewDidDisappear:animated];
 }
 
 - (void)didClickOnImageIndex:(NSInteger)imageIndex

@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "TTXTransitionManager.h"
+#import "MLBlackTransition.h"
 #import "MBSocialManager.h"
 #import "TTXBaseNavigationController.h"
 #import "MBHomePageViewController.h"
@@ -19,14 +19,20 @@
 
 #import "MBApi.h"
 
-#import <AFNetworkActivityLogger.h>
+//#import <AFNetworkActivityLogger.h>
 #import <AFNetworkActivityIndicatorManager.h>
 
 
 #import "UIImage+color.h"
 
-
 #import "LaunchView.h"
+#import "MBNewSortView.h"
+#import "MBSorter.h"
+
+#import "MBSortViewController.h"
+
+#import "UIFont+Replacement.h"
+
 
 @interface AppDelegate ()
 
@@ -35,28 +41,49 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [UIFont setReplacementDictionary:@{
+                                       @"Helvetica" : @"QuicksandBook-Regular",
+                                       @"Helvetica-Bold":@"QuicksandBold-Regular",
+                                       @"HelveticaNeueInterface-Italic" : @"QuicksandBookOblique-Regular"
+                                       }];
+
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.backgroundColor = [UIColor whiteColor];
+    [self.window makeKeyWindow];
+    [self.window makeKeyAndVisible];
+    
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+    
+    [MBSta registSta];
     
 //    if (DEBUG) [[AFNetworkActivityLogger sharedLogger] startLogging];
     [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
     
     MB_Model;
-    if (iOS7) {
+    
+    [[MBSorter shared] buildSorters];
+    if (kiOS7) {
         [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+        [[UITabBar appearance] setBarStyle:UIBarStyleDefault];
+        [[UITabBar appearance] setTranslucent:NO];
+        [[UITabBar appearance] setBackgroundImage:[UIImage imageWithColor:[UIColor whiteColor] size:CGSizeMake(self.window.width, 49)]];
     }
     //设定Tabbar的颜色
-    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:67/255.00f green:74/255.00f blue:84/255.00f alpha:1.0], UITextAttributeTextColor, nil] forState:UIControlStateSelected];
-    [[UITabBarItem appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:220/255.00f green:221/255.00f blue:221/255.00f alpha:1.0],UITextAttributeTextColor, nil]forState:UIControlStateNormal];
+    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithHexString:@"#6c6c6c"], UITextAttributeTextColor, nil] forState:UIControlStateSelected];
+    [[UITabBarItem appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithHexString:@"#6c6c6c"],UITextAttributeTextColor, nil]forState:UIControlStateNormal];
     [[UINavigationBar appearance] setBarStyle:UIBarStyleDefault];
-    [[UITabBar appearance] setBarTintColor:[UIColor whiteColor]];
     
-    [[UINavigationBar appearance] setShadowImage:[UIImage imageWithColor:[UIColor clearColor] size:CGSizeMake(320, 3)]];
-    [[UINavigationBar appearance] setTitleTextAttributes:@{UITextAttributeTextColor:[UIColor blackColor]}];
+    UIFont* font = [UIFont systemFontOfSize:18];
+    NSDictionary* textAttributes = @{NSFontAttributeName:font,
+                                     NSForegroundColorAttributeName:[UIColor colorWithHexString:@"#434a54"]};
+    [[UINavigationBar appearance] setTitleTextAttributes:textAttributes];
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageWithColor:[UIColor whiteColor] size:CGSizeMake(self.window.width, kiOS7?64:44)] forBarMetrics:UIBarMetricsDefault];
+//    [[UINavigationBar appearance] setShadowImage:[UIImage imageWithColor:[UIColor clearColor] size:CGSizeMake(320, 3)]];
+//    [[UINavigationBar appearance] setTitleTextAttributes:@{UITextAttributeTextColor:[UIColor blackColor]}];
     /////
     
-    [TTXTransitionManager validatePanPackWithTransitionGestureRecognizerType:TransitionGestureRecognizerTypePan];
+    [MLBlackTransition validatePanPackWithMLBlackTransitionGestureRecognizerType:MLBlackTransitionGestureRecognizerTypePan];
     [MBSocialManager registSocialShare];
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.window.backgroundColor = [UIColor whiteColor];
     UITabBarController *tab = [[UITabBarController alloc] init];
     tab.viewControllers = @[
                             [[TTXBaseNavigationController alloc] initWithRootViewController:[[MBHomePageViewController alloc] init]],
@@ -64,13 +91,11 @@
                             [[TTXBaseNavigationController alloc] initWithRootViewController:[[MBLoveViewController alloc] init]],
                             [[TTXBaseNavigationController alloc] initWithRootViewController:[[MBAboutViewController alloc] init]]
                             ];
-    self.window.rootViewController = tab;
-    [self.window makeKeyWindow];
-    [self.window makeKeyAndVisible];
-    
-    
+    MMDrawerController *menu = [[MMDrawerController alloc] initWithCenterViewController:tab leftDrawerViewController:[[MBSortViewController alloc] init]];
+    menu.maximumLeftDrawerWidth = self.window.width - 50;
+    self.window.rootViewController = menu;
     LaunchView *launchView = [[LaunchView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    [self.window addSubview:launchView];    
+    [self.window addSubview:launchView];
     return YES;
 }
 

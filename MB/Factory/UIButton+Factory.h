@@ -17,4 +17,6 @@
 + (instancetype)sortButton;
 
 + (instancetype)backButton;
++ (instancetype)searchButton;
++ (instancetype)categoryButton;
 @end

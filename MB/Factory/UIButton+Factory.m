@@ -29,7 +29,7 @@
 {
     UIButton *button = [self normalButton];
     [button setImage:[UIImage bt_imageWithBundleName:@"Source" filepath:@"RegisterView" imageName:@"RegisterButton"] forState:UIControlStateNormal];
-    [button setImage:[UIImage bt_imageWithBundleName:@"Source" filepath:@"RegisterView" imageName:@"RegisterButtonPressed"] forState:UIControlStateHighlighted];
+    [button setImage:[UIImage bt_imageWithBundleName:@"Source" filepath:@"RegisterView" imageName:@"RegisterButtonClicked"] forState:UIControlStateHighlighted];
     button.frame = CGRectMake(0, 0, 125, 44);
     return button;
 }
@@ -65,6 +65,24 @@
     button.frame = CGRectMake(0, 0, 44, 44);
     [button setImage:[UIImage bt_imageWithBundleName:@"Source" filepath:@"Common" imageName:@"BackButton"] forState:UIControlStateNormal];
     [button setImage:[UIImage bt_imageWithBundleName:@"Source" filepath:@"Common" imageName:@"BackButtonPressed"] forState:UIControlStateHighlighted];
+    return button;
+}
+
++ (instancetype)categoryButton
+{
+    UIButton *button = [self normalButton];
+    button.frame = CGRectMake(0, 0, 44, 44);
+    [button setImage:[UIImage bt_imageWithBundleName:@"Source" filepath:nil imageName:@"ToolMenu"] forState:UIControlStateNormal];
+    [button setImage:[UIImage bt_imageWithBundleName:@"Source" filepath:nil imageName:@"ToolMenuPressed"] forState:UIControlStateHighlighted];
+    return button;
+}
+
++ (instancetype)searchButton
+{
+    UIButton *button = [self normalButton];
+    button.frame = CGRectMake(0, 0, 44, 44);
+    [button setImage:[UIImage bt_imageWithBundleName:@"Source" filepath:nil imageName:@"ToolSearch"] forState:UIControlStateNormal];
+    [button setImage:[UIImage bt_imageWithBundleName:@"Source" filepath:nil imageName:@"ToolSearchPressed"] forState:UIControlStateHighlighted];
     return button;
 }
 

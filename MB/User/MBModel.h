@@ -7,10 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#define kMBMODELTOKENKEY @"MBTOKEN"
+#define kMBMODELUSERNAMEKEY @"MBMODELUSERNAMEKEY"
 @interface MBModel : NSObject
 @property (nonatomic) NSString *token;
-
+@property (nonatomic) NSString *userName;
 + (instancetype)shareModel;
 
 - (void)save;

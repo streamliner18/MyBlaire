@@ -11,6 +11,7 @@
 typedef NS_ENUM(NSUInteger, MBApiCode) {
     MBApiCodeNetworkError = -1,
     MBApiCodeSuccess = 0,
+    MBApiCodeUnLogin = 101,
     MBApiCodeRegisterFaildWithUserNameRepeat = 1,
     MBApiCodeRegisterFaildWithEmailError = 1000,
 };

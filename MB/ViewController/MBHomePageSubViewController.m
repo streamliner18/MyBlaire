@@ -52,8 +52,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MBHomePageCellSubModel *model = self.dataSource[indexPath.row];
-    DLog(@"%@",model.title);
+//    MBHomePageCellSubModel *model = self.dataSource[indexPath.row];
+//    DLog(@"%@",model.title);
 }
 
 - (void)didReceiveMemoryWarning {

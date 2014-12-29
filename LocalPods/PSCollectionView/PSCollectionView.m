@@ -26,7 +26,7 @@
 #define kMargin 10.0
 
 static inline NSString * PSCollectionKeyForIndex(NSInteger index) {
-    return [NSString stringWithFormat:@"%ld", (long)index];
+    return [NSString stringWithFormat:@"%d", index];
 }
 
 static inline NSInteger PSCollectionIndexForKey(NSString *key) {
@@ -162,6 +162,8 @@ static inline NSInteger PSCollectionIndexForKey(NSString *key) {
         self.visibleViews = [NSMutableDictionary dictionary];
         self.viewKeysToRemove = [NSMutableArray array];
         self.indexToRectMap = [NSMutableDictionary dictionary];
+        
+        self.margin = kMargin;
     }
     return self;
 }
@@ -223,7 +225,7 @@ static inline NSInteger PSCollectionIndexForKey(NSString *key) {
     NSInteger numViews = [self.collectionViewDataSource numberOfRowsInCollectionView:self];
     
     CGFloat totalHeight = 0.0;
-    CGFloat top = kMargin;
+    CGFloat top = self.margin;
     
     // Add headerView if it exists
     if (self.headerView) {
@@ -241,7 +243,7 @@ static inline NSInteger PSCollectionIndexForKey(NSString *key) {
         }
         
         // Calculate index to rect mapping
-        self.colWidth = floorf((self.width - kMargin * (self.numCols + 1)) / self.numCols);
+        self.colWidth = floorf((self.width - self.margin * (self.numCols + 1)) / self.numCols);
         for (NSInteger i = 0; i < numViews; i++) {
             NSString *key = PSCollectionKeyForIndex(i);
             
@@ -257,7 +259,7 @@ static inline NSInteger PSCollectionIndexForKey(NSString *key) {
                 }
             }
             
-            CGFloat left = kMargin + (col * kMargin) + (col * self.colWidth);
+            CGFloat left = self.margin + (col * self.margin) + (col * self.colWidth);
             CGFloat top = [[NSString stringWithFormat:@"%.2f",[[colOffsets objectAtIndex:col] floatValue]] floatValue];
             CGFloat colHeight = [self.collectionViewDataSource collectionView:self heightForRowAtIndex:i];
             
@@ -266,7 +268,7 @@ static inline NSInteger PSCollectionIndexForKey(NSString *key) {
             // Add to index rect map
             [self.indexToRectMap setObject:NSStringFromCGRect(viewRect) forKey:key];
             // Update the last height offset for this column
-            CGFloat heightOffset = colHeight > 0 ? top + colHeight + kMargin : top;
+            CGFloat heightOffset = colHeight > 0 ? top + colHeight + self.margin : top;
             
             [colOffsets replaceObjectAtIndex:col withObject:[NSNumber numberWithFloat:heightOffset]];
         }

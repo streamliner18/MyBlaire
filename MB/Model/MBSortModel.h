@@ -18,6 +18,7 @@ typedef NS_ENUM(NSUInteger, MBSortModelType) {
 @property (nonatomic, strong) UIColor *color;
 @property (nonatomic) NSString *title;
 @property (nonatomic) NSInteger type;
+@property (nonatomic) MBSortModelType categoryType;
 + (NSArray *)shareWithType:(MBSortModelType)type;
 @end
 
@@ -25,6 +26,7 @@ typedef NS_ENUM(NSUInteger, MBSortModelType) {
 @property (nonatomic) NSString *title;
 @property (nonatomic) MBSortModelType type;
 @property (nonatomic, strong) NSArray *subSortModels;
+@property (nonatomic) BOOL isOpen;
 
 + (instancetype)shareWithType:(MBSortModelType)type;
 

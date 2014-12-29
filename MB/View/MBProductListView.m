@@ -29,7 +29,9 @@
             PSCollectionView *view = [[PSCollectionView alloc] initWithFrame:self.bounds];
             view.collectionViewDataSource = self;
             view.collectionViewDelegate = self;
-            view.backgroundColor = [UIColor clearColor];
+            view.backgroundColor = kGoodsListViewBackgroundColor;
+            view.footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 10)];
+            view.margin = 3.5;
             view;
         });
     }
@@ -40,7 +42,7 @@
 {
     if (self = [super initWithFrame:frame]) {
         self.type = type;
-        if (type == MBProductListViewTypeNormal) {
+        if (type == MBProductListViewTypeNormal || type == MBProductCellTypeWithoutLove) {
             self.listView.numColsPortrait = 2;
         }else{
             self.listView.numColsPortrait = 1;
@@ -48,6 +50,11 @@
         [self addSubview:self.listView];
     }
     return self;
+}
+
+- (void)reloadDate
+{
+    [self.listView reloadData];
 }
 
 - (void)resetDatasource:(NSArray *)array
@@ -74,6 +81,9 @@
 
 - (CGFloat)collectionView:(PSCollectionView *)collectionView heightForRowAtIndex:(NSInteger)index;
 {
+    if (self.type == MBProductListViewTypeStreet) {
+        return 151 + 4.5;
+    }
     return [MBProductCell rowHeightForObject:self.dataSource[index] inColumnWidth:collectionView.colWidth];
 }
 

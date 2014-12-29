@@ -14,4 +14,15 @@
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:[UIButton backButton]];
     return item;
 }
++ (UIBarButtonItem *)categoryBarButtonItem
+{
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:[UIButton categoryButton]];
+    return item;
+}
++ (UIBarButtonItem *)searchBarButtonItem
+{
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:[UIButton searchButton]];
+    return item;
+}
+
 @end

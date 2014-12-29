@@ -7,6 +7,9 @@
 //
 
 #import "TTXBaseNavigationController.h"
+#import "MBShareViewController.h"
+#import "MBFeedBackViewController.h"
+#import "MBHomePageSortResultViewController.h"
 
 @interface TTXBaseNavigationController ()
 
@@ -20,9 +23,9 @@
 }
 
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated {
-//    if (self.viewControllers.count) {
-//        viewController.hidesBottomBarWhenPushed = YES;
-//    }
+    if ([viewController isMemberOfClass:[MBHomePageSortResultViewController class]] || [viewController isMemberOfClass:[MBShareViewController class]] || [viewController isMemberOfClass:[MBFeedBackViewController class]]) {
+        viewController.hidesBottomBarWhenPushed = YES;
+    }
     [super pushViewController:viewController animated:animated];
 }
 

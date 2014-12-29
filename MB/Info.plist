@@ -9,7 +9,7 @@
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.breadtrip.$(MB_APP_ID_SUFFIX)</string>
+	<string>com.baomi.xianying.$(MB_APP_ID_SUFFIX)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -37,7 +37,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>sina.5211818556240bc9ee01db2f</string>
+				<string>sina.549e26c2fd98c5294a001bda</string>
 			</array>
 		</dict>
 		<dict>
@@ -58,9 +58,15 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>6</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Quicksand_Book_Oblique.otf</string>
+		<string>Quicksand_Book.otf</string>
+		<string>Quicksand_Bold.otf</string>
+	</array>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

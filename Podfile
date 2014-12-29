@@ -1,7 +1,7 @@
 source 'https://github.com/CocoaPods/Specs.git'
 #pod 'AFNetworking', :path => 'LocalPods/AFNetworking'
 pod 'AFNetworking'
-pod 'AFNetworkActivityLogger', '~> 2.0.2'#网络请求日志打印
+#pod 'AFNetworkActivityLogger', '~> 2.0.2'#网络请求日志打印
 pod 'SVPullToRefresh', '~>0.4'#下拉刷新
 pod 'PSCollectionView', :path => 'LocalPods/PSCollectionView'
 pod 'MBProgressHUD'
@@ -14,3 +14,8 @@ pod 'ConciseKit'
 pod 'BlocksKit'
 pod 'SwipeView', '~> 1.3.2'
 pod 'FXBlurView'
+pod 'SMPageControl'
+pod 'UMengAnalytics', '~> 3.1.8'
+pod 'UI7Kit', '~> 0.9.20'
+pod 'MMDrawerController', '~> 0.5.7'
+pod 'KLSwitch'

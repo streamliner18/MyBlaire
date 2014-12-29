@@ -8,9 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+@interface TTXPasswordTextField : UITextField
+
+@end
+
+
 @interface UITextField (Factory)
 + (instancetype)normalTextField;
 + (instancetype)userNameTextFieldWithDelegate:(id <UITextFieldDelegate>) object;
 + (instancetype)passwordTextFieldWithDelegate:(id <UITextFieldDelegate>) object;
 + (instancetype)mailTextFieldWithDelegate:(id <UITextFieldDelegate>) object;
 @end
+

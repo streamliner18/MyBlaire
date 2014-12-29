@@ -10,4 +10,5 @@
 @class MBProductModel;
 @interface MBGoodsInfoViewController : TTXBaseViewController
 - (instancetype)initWithModel:(MBProductModel *)model;
+@property (nonatomic) BOOL showCollecteCount;
 @end

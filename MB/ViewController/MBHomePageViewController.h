@@ -9,5 +9,7 @@
 #import "TTXBaseTableViewController.h"
 
 @interface MBHomePageViewController : TTXBaseTableViewController
+- (void)reloadDateAfterLoginOut;
 
+- (void)sortSearch;
 @end

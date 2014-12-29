@@ -10,6 +10,7 @@
 #import "MBRegisterViewController.h"
 
 @interface MBLoginViewController ()
+@property (nonatomic, strong) UIButton *loginButton;
 @end
 
 @implementation MBLoginViewController
@@ -31,29 +32,53 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor colorWithHexString:@"#f7f8fa"];
     [self buildOtherView];
     [self buildLoginButton];
 }
 
 - (void)buildOtherView
 {
-    UIImageView *logo = [[UIImageView alloc] initWithFrame:CGRectMake(189*0.5, 214, 132, 103 * 0.5)];
+    UIImage *image = [UIImage bt_imageWithBundleName:@"Source" filepath:@"LoginView" imageName:@"Login-new_10"];
+    self.userNameBackView.hidden = YES;
+    self.passwordBackView.hidden = YES;
+    
+    UIImageView *logo = [[UIImageView alloc] initWithFrame:CGRectMake((self.view.width - 124)*0.5, 186 - (IS_IPHONE_4_OR_LESS?88:0), 124, 58)];
     logo.image = [UIImage bt_imageWithBundleName:@"Source" filepath:@"LoginView" imageName:@"LoginWelcomeMsg"];
     [self.mbView addSubview:logo];
     
-    UIImageView *userNameLogo = [[UIImageView alloc] initWithFrame:CGRectMake(87*0.5, self.mbView.height - (53+25+113+84+27+100+100)*0.5, 50, 50)];
+    UIImageView *usernamelineimageView = [[UIImageView alloc] initWithFrame:CGRectMake((self.view.width - 228) * 0.5, logo.bottom + 78, 228, 40)];
+    usernamelineimageView.image = [image resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10) resizingMode:UIImageResizingModeStretch];
+    [self.mbView addSubview:usernamelineimageView];
+    
+    UIImageView *userNameLogo = [[UIImageView alloc] initWithFrame:CGRectMake(5, 0, 40, 40)];
     userNameLogo.image = [UIImage bt_imageWithBundleName:@"Source" filepath:@"LoginView" imageName:@"LoginUsernameIcon"];
-    [self.mbView addSubview:userNameLogo];
+    [usernamelineimageView addSubview:userNameLogo];
     
-    UIImageView *passwordLogo = [[UIImageView alloc] initWithFrame:CGRectMake(87*0.5, self.mbView.height - (53+25+113+84+27+100)*0.5, 50, 50)];
+    UIImageView *passwordlineimageView = [[UIImageView alloc] initWithFrame:CGRectMake((self.view.width - 228) * 0.5, usernamelineimageView.bottom + 12, 228, 40)];
+    passwordlineimageView.image = [image resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10) resizingMode:UIImageResizingModeStretch];
+    [self.mbView addSubview:passwordlineimageView];
+    
+    UIImageView *passwordLogo = [[UIImageView alloc] initWithFrame:CGRectMake(5, 0, 40, 40)];
     passwordLogo.image = [UIImage bt_imageWithBundleName:@"Source" filepath:@"LoginView" imageName:@"LoginPwdIcon"];
-    [self.mbView addSubview:passwordLogo];
+    [passwordlineimageView addSubview:passwordLogo];
     
-    self.userNameTextField.frame = CGRectMake(userNameLogo.right, userNameLogo.top, self.mbView.width - userNameLogo.right, userNameLogo.height);
+    
+    [self.mbView bringSubviewToFront:self.userNameTextField];
+    [self.mbView bringSubviewToFront:self.passwordTextField];
+    
+    self.userNameTextField.frame = CGRectMake(usernamelineimageView.left + 45, usernamelineimageView.top, usernamelineimageView.width - 45, userNameLogo.height);
     self.userNameTextField.placeholder = @"用户名";
-    self.passwordTextField.frame = CGRectMake(passwordLogo.right, passwordLogo.top, self.mbView.width - passwordLogo.right, passwordLogo.height);
-    self.passwordTextField.placeholder = @"密码";
+    [self.userNameTextField setValue:[UIColor colorWithHexString:@"#909399"] forKeyPath:@"_placeholderLabel.textColor"];
+    [self.userNameTextField setValue:[UIFont systemFontOfSize:16] forKeyPath:@"_placeholderLabel.font"];
+
     
+    
+    self.passwordTextField.frame = CGRectMake(passwordlineimageView.left + 45, passwordlineimageView.top, passwordlineimageView.width - 45, passwordLogo.height);
+    self.passwordTextField.placeholder = @"密码";
+    [self.passwordTextField setValue:[UIColor colorWithHexString:@"#909399"] forKeyPath:@"_placeholderLabel.textColor"];
+    [self.passwordTextField setValue:[UIFont systemFontOfSize:16] forKeyPath:@"_placeholderLabel.font"];
+
     self.passwordTextField.returnKeyType = UIReturnKeyDone;
 }
 
@@ -82,29 +107,33 @@
 
 - (void)buildLoginButton
 {
-    UIButton *loginButton = [UIButton normalButton];
-    loginButton.frame = CGRectMake(87 *0.5, self.mbView.height - (53+25+113+84)*0.5, 463*0.5, 42);
-    [loginButton setBackgroundImage:[UIImage bt_imageWithBundleName:@"Source" filepath:@"LoginView" imageName:@"LoginButton"] forState:UIControlStateNormal];
-    [loginButton setBackgroundImage:[UIImage bt_imageWithBundleName:@"Source" filepath:@"LoginView" imageName:@"LoginButtonPressed"] forState:UIControlStateHighlighted];
-    [loginButton addTarget:self action:@selector(doLoginAction) forControlEvents:UIControlEventTouchUpInside];
-    [self.mbView addSubview:loginButton];
-    
-    UIButton *forgetButton = [UIButton normalButton];
-    forgetButton.frame = CGRectMake(131*0.5-kButtonMargin*0.5, self.mbView.height - 53*0.5-kButtonMargin*0.5, 107*0.5+kButtonMargin, 25*0.5+kButtonMargin);
-    forgetButton.titleLabel.font = [UIFont systemFontOfSize:10];
-    [forgetButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [forgetButton setTitle:@"忘记密码 ?" forState:UIControlStateNormal];
-    [forgetButton setTitle:@"忘记密码 ?" forState:UIControlStateHighlighted];
-    [self.mbView addSubview:forgetButton];
+    _loginButton = [UIButton normalButton];
+    _loginButton.frame = CGRectMake(0.5 * (self.view.width - 230), self.passwordTextField.bottom + 12, 230, 42.5);
+    [_loginButton setBackgroundImage:[UIImage bt_imageWithBundleName:@"Source" filepath:@"LoginView" imageName:@"LoginButton"] forState:UIControlStateNormal];
+    [_loginButton setBackgroundImage:[UIImage bt_imageWithBundleName:@"Source" filepath:@"LoginView" imageName:@"LoginButtonClicked"] forState:UIControlStateHighlighted];
+    [_loginButton addTarget:self action:@selector(doLoginAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.mbView addSubview:_loginButton];
     
     UIButton *registerButton = [UIButton normalButton];
-    registerButton.frame = CGRectMake(self.mbView.width - (46+175)*0.5-kButtonMargin*0.5, self.mbView.height - 53*0.5-kButtonMargin*0.5, 23+kButtonMargin, 25*0.5+kButtonMargin);
-    registerButton.titleLabel.font = [UIFont systemFontOfSize:10];
-    [registerButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [registerButton setTitle:@"注册" forState:UIControlStateNormal];
-    [registerButton setTitle:@"注册" forState:UIControlStateHighlighted];
+    registerButton.frame = CGRectMake(0.5 * (self.view.width - 230), self.loginButton.bottom + 12, 230, 42.5);
+    [registerButton setBackgroundImage:[UIImage bt_imageWithBundleName:@"Source" filepath:@"LoginView" imageName:@"LoginRegister"] forState:UIControlStateNormal];
+    [registerButton setBackgroundImage:[UIImage bt_imageWithBundleName:@"Source" filepath:@"LoginView" imageName:@"LoginRegister_s"] forState:UIControlStateHighlighted];
     [registerButton addTarget:self action:@selector(doRegisterAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.mbView addSubview:registerButton];
+
+    UIButton *forgetButton = [UIButton normalButton];
+    forgetButton.frame = CGRectMake(registerButton.right - 70, registerButton.bottom + 16, 70, 15);
+    forgetButton.titleLabel.font = [UIFont systemFontOfSize:14];
+    [forgetButton setTitleColor:[UIColor colorWithHexString:@"#909399"] forState:UIControlStateNormal];
+    [forgetButton setTitle:@"忘记密码 ?" forState:UIControlStateNormal];
+    [forgetButton setTitle:@"忘记密码 ?" forState:UIControlStateHighlighted];
+    [forgetButton addTarget:self action:@selector(findPassword) forControlEvents:UIControlEventTouchUpInside];
+    [self.mbView addSubview:forgetButton];
+}
+
+- (void)findPassword
+{
+    [self.navigationController pushViewController:[[NSClassFromString(@"MBFindPasswordViewController") alloc] init] animated:YES];
 }
 
 - (void)doRegisterAction:(UIButton *)sender
@@ -151,7 +180,7 @@
         [self showAlertTitle:@"提示" message:@"请检查密码"];
         return;
     }
-    [self showProgressHUD];
+    [self showSpriteProgressHUD];
     [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
     [MBApi loginWithType:MBLoginTypeNormal userName:userName password:password token:nil handle:^(MBApiError *error) {
         [self dealWithLoginResult:error];

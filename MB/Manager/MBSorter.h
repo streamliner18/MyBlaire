@@ -16,4 +16,6 @@ SINGLETON_INTERFACE(MBSorter)
 @property (nonatomic, strong) MBSortSubModel *currentDiscountSortModel;
 @property (nonatomic, strong) MBSortSubModel *currentColorSortModel;
 - (void)buildSorters;
+- (void)reset;
+- (NSString *)currentColor;
 @end

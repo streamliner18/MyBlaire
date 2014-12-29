@@ -16,6 +16,13 @@
 
 typedef void(^TTXActionBlock)();
 
+#define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+
+#define V_COLOR(r, g, b, a) \
+[UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a]
+
+#define radians( degrees ) ( degrees * M_PI / 180
+
 // 单例
 #define SINGLETON_INTERFACE(CLASSNAME)              \
 + (CLASSNAME*)shared;
@@ -60,7 +67,7 @@ return self;                                        \
 
 #define iOS5 SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"5.0")
 #define iOS6 SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"6.0")
-#define iOS7 SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")
+#define kiOS7 SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")
 #define iOS8 SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0")
 #define iOS4Only (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"4.0") && SYSTEM_VERSION_LESS_THAN(@"5.0"))
 #define iOS5Only (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"5.0") && SYSTEM_VERSION_LESS_THAN(@"6.0"))
@@ -86,4 +93,20 @@ return self;                                        \
 #define IS_IPHONE_6 (IS_IPHONE && SCREEN_MAX_LENGTH == 667.0)
 #define IS_IPHONE_6P (IS_IPHONE && SCREEN_MAX_LENGTH == 736.0)
 
+//string size
 
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
+#define BT_TEXTSIZE(text, font) [text length] > 0 ? [text \
+sizeWithAttributes:@{NSFontAttributeName:font}] : CGSizeZero;
+#else
+#define BT_TEXTSIZE(text, font) [text length] > 0 ? [text sizeWithFont:font] : CGSizeZero;
+#endif
+
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
+#define BT_MULTILINE_TEXTSIZE(text, font, maxSize, mode) [text length] > 0 ? [text \
+boundingRectWithSize:maxSize options:(NSStringDrawingUsesLineFragmentOrigin) \
+attributes:@{NSFontAttributeName:font} context:nil].size : CGSizeZero;
+#else
+#define BT_MULTILINE_TEXTSIZE(text, font, maxSize, mode) [text length] > 0 ? [text \
+sizeWithFont:font constrainedToSize:maxSize lineBreakMode:mode] : CGSizeZero;
+#endif

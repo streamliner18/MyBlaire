@@ -10,4 +10,6 @@
 
 @interface UIBarButtonItem (Factory)
 + (UIBarButtonItem *)backBarbuttonItem;
++ (UIBarButtonItem *)categoryBarButtonItem;
++ (UIBarButtonItem *)searchBarButtonItem;
 @end

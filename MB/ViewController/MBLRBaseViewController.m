@@ -7,6 +7,7 @@
 //
 
 #import "MBLRBaseViewController.h"
+#import "MBSortViewController.h"
 
 @interface MBLRBaseViewController ()
 @end
@@ -127,6 +128,9 @@
 - (void)postUserLoginNotification
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:kMBMODELUSERDIDLOGIN object:nil];
+    MMDrawerController *menu = [[UIApplication sharedApplication] keyWindow].rootViewController;
+    MBSortViewController *left = menu.leftDrawerViewController;
+    [left reloadUserName];
 }
 
 - (void)didReceiveMemoryWarning {

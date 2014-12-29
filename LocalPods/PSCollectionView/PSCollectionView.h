@@ -46,6 +46,9 @@
 @property (nonatomic, strong) NSMutableDictionary *visibleViews;
 
 @property (nonatomic, strong) NSMutableDictionary *indexToRectMap;
+
+@property (nonatomic) CGFloat margin;
+
 #pragma mark - Public Methods
 
 /**

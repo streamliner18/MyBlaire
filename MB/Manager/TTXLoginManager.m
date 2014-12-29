@@ -43,6 +43,8 @@ SINGLETON_IMPLEMENTATION(TTXLoginManager)
         if (response.responseCode == UMSResponseCodeSuccess) {
             UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary] valueForKey:platformName];
             if (viewController.loginWithTokenBlock) {
+                [MB_Model setUserName:snsAccount.userName];
+                [MB_Model save];
                 viewController.loginWithTokenBlock ((type == UMSocialSnsTypeMobileQQ ? MBLoginTypeQQ : MBLoginTypeSina),snsAccount.accessToken);
             }
             NSLog(@"username is %@, uid is %@, token is %@",snsAccount.userName,snsAccount.usid,snsAccount.accessToken);

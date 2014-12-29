@@ -8,6 +8,7 @@
 
 #import "MBHomePageViewCell.h"
 #import "MBHomePageCellModel.h"
+#import "MBHomePageCellNewModel.h"
 
 @interface MBHomePageViewCell ()
 @property (nonatomic, strong) UIImageView *showImageView;
@@ -47,5 +48,6 @@
         self.showImageView.frame = CGRectMake(kShowImageViewLeftMargin, kShowImageViewTopMargin, self.width - kShowImageViewLeftMargin - kShowImageViewRightMargin, self.height - kShowImageViewTopMargin - kShowImageViewBottomMargin);
     }
 }
+
 
 @end

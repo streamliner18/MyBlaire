@@ -12,51 +12,67 @@ static NSInteger _width = 55;
 
 @implementation TTXProgressHUD
 
-- (id)initWithFrame:(CGRect)frame
+- (id)initWithFrame:(CGRect)frame type:(TTXProgressHUDType)type
 {
     self = [super initWithFrame:frame];
     if (self) {
-        _blackBackground = [[UIView alloc] init];
-        _blackBackground.layer.cornerRadius = 4;
-        _blackBackground.backgroundColor = [UIColor clearColor];
-        _blackBackground.frame = CGRectMake((self.frame.size.width-_width)/2,
-                                           (self.frame.size.height-_width)/2,
-                                           _width,
-                                           _width);
-        [self addSubview:_blackBackground];
         
-        _indicator = [[TTXActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 42, 42)];
-        _indicator.frame = CGRectMake((self.frame.size.width-42)/2,
-                                     (self.frame.size.height-42)/2,
-                                     42,
-                                     42);
-        [_indicator startLoading];
-        [self addSubview:_indicator];
+        if (type == TTXProgressHUDTypeNormal) {
+            _blackBackground = [[UIView alloc] init];
+            _blackBackground.layer.cornerRadius = 4;
+            _blackBackground.backgroundColor = [UIColor clearColor];
+            _blackBackground.frame = CGRectMake((self.frame.size.width-_width)/2,
+                                                (self.frame.size.height-_width)/2,
+                                                _width,
+                                                _width);
+            [self addSubview:_blackBackground];
+            _indicator = [[TTXActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 42, 42)];
+            _indicator.frame = CGRectMake((self.frame.size.width-42)/2,
+                                          (self.frame.size.height-42)/2,
+                                          42,
+                                          42);
+            [_indicator startLoading];
+            [self addSubview:_indicator];
+            _label = [[UILabel alloc] initWithFrame:CGRectMake(_blackBackground.frame.origin.x,
+                                                               _blackBackground.frame.origin.y,
+                                                               _width,
+                                                               20)];
+            _label.backgroundColor = [UIColor clearColor];
+            _label.textColor = [UIColor whiteColor];
+            _label.textAlignment = NSTextAlignmentCenter;
+            _label.font = [UIFont systemFontOfSize:12];
+            
+            self.layer.zPosition = 10;
+        }else{
+            _spriteIndicator = [TTXSpriteActitityIndicatorView share];
+            _spriteIndicator.frame = CGRectMake((self.width - 64)/2, (self.height - 64)/2 - 30, 64, 64);
+            self.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.2];
+            
+            UILabel *loadingLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 20)];
+            loadingLabel.text = @"LOADING";
+            loadingLabel.center = CGPointMake(self.width / 2.0, _spriteIndicator.center.y - 50);
+            loadingLabel.textAlignment = NSTextAlignmentCenter;
+            [self addSubview:loadingLabel];
+            
+            [self addSubview:_spriteIndicator];
+            [_spriteIndicator startAnimating];
+        }
         
-        _label = [[UILabel alloc] initWithFrame:CGRectMake(_blackBackground.frame.origin.x,
-                                                          _blackBackground.frame.origin.y,
-                                                          _width,
-                                                          20)];
-        _label.backgroundColor = [UIColor clearColor];
-        _label.textColor = [UIColor whiteColor];
-        _label.textAlignment = NSTextAlignmentCenter;
-        _label.font = [UIFont systemFontOfSize:12];
         
-        self.layer.zPosition = 10;
         self.autoresizingMask = UIViewAutoresizingNone;
     }
     return self;
 }
 
-+ (TTXProgressHUD *)showProgressHUDInView:(UIView *)view
++ (TTXProgressHUD *)showProgressHUDInView:(UIView *)view type:(TTXProgressHUDType)type
 {
-    return [self showProgressHUDInView:view withTag:MB_DEFAULT_PROGRESS_HUD_TAG];
+    return [self showProgressHUDInView:view withTag:MB_DEFAULT_PROGRESS_HUD_TAG type:type];
 }
 
-+ (TTXProgressHUD *)showProgressHUDInView:(UIView *)view withTag:(NSInteger)tag
++ (TTXProgressHUD *)showProgressHUDInView:(UIView *)view withTag:(NSInteger)tag type:(TTXProgressHUDType)type
 {
     [self hideProgresssHUDInView:view withTag:tag];
-    TTXProgressHUD *me = [[self alloc] initWithFrame:view.bounds];
+    TTXProgressHUD *me = [[self alloc] initWithFrame:view.bounds type:type];
     me.blackBackground.alpha = 0.5;
     me.tag = tag;
     [view addSubview:me];

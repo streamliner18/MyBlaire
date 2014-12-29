@@ -40,8 +40,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    
+    [super resetLeftBarButtonItem:LeftBarButtonItemTypeBack];
+    if (!kiOS7) {
+        self.productListView.height -= (44+49);
+    }
     if (self.model) {
         self.navigationItem.title = self.model.title;
         [self showProgressHUD];
@@ -60,11 +62,11 @@
         self.productListView = [[MBProductListView alloc] initWithFrame:self.view.bounds type:MBProductListViewTypeNormal];
         self.navigationItem.title = @"搜索结果";
         [self showProgressHUD];
-        [MBApi getGoodsWithPriceRange:MBGoodsConditionNoRange discount:MBGoodsDiscountNoneLimit color:nil searchContent:self.searchKey completionHandle:^(MBApiError *error, NSArray *array) {
+        [MBApi getGoodsWithPriceRange:[MBSorter shared].currentPriceSortModel.type discount:[MBSorter shared].currentDiscountSortModel.type color:[[MBSorter shared] currentColor] searchContent:self.searchKey completionHandle:^(MBApiError *error, NSArray *array) {
             [self dealWithResult:error array:array];
         }];
     }
-    [self.view addSubview:self.productListView];
+    [self.mbView addSubview:self.productListView];
     
     @weakify(self);
     self.productListView.selecteGoodsBlock = ^(MBProductModel *model){
@@ -75,7 +77,7 @@
     self.productListView.collecteGoodsBlock = ^(MBProductModel *model){
         @strongify(self);
         [self showProgressHUD];
-        [MBApi collecteGoods:model.goodId completionHandle:^(MBApiError *error) {
+        [MBApi collecteGoods:model.goodId collecteState:model.isCollect?@"1":@"0" completionHandle:^(MBApiError *error) {
             [self hideProgressHUD];
             [self showMessageHUDWithMessage:error.message];
         }];
@@ -104,7 +106,7 @@
 
 + (BOOL)automaticallyAdjustsScrollViewInsets
 {
-    return YES;
+    return NO;
 }
 
 @end

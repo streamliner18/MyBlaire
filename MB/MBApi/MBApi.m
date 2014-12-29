@@ -14,6 +14,7 @@ typedef NS_ENUM(NSUInteger, MBApiPostType) {
     MBApiPostTypeLoginNormal,//正常登录
     MBApiPostTypeLoginThirdParty,//第三方登录
     MBApiPostTypeGetKeyWord,//关键词
+    MBApiPostTypeGetNewDiscount,//最新折扣
     MBApiPostTypeGetHotGoods,//热销产品
     MBApiPostTypeGetStreetShootingGoods,//明星同款
     MBApiPostTypeGetGoodsWithCondition,//条件搜索
@@ -21,6 +22,7 @@ typedef NS_ENUM(NSUInteger, MBApiPostType) {
     MBApiPostTypeCollecteGoods,//收藏商品
     MBApiPostTypeGetCollecteOrderGoods,//获取收藏的商品
     MBApiPostTypeFeedback,//反馈
+    MBApiPostTypeFindPassword,//找回密码
 };
 
 typedef void(^MBApiPostBlock)(MBApiError *error,id array);
@@ -68,6 +70,7 @@ typedef void(^MBApiPostBlock)(MBApiError *error,id array);
 {
     if (type == MBLoginTypeNormal) {
         [[MBApiWebManager shareWithoutToken] POST:[self urlWithPostType:MBApiPostTypeLoginNormal] parameters:@{@"userName":userName,@"password":password} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            [[NSUserDefaults standardUserDefaults] setObject:userName forKey:kMBMODELUSERNAMEKEY];
             block ([self dealWithLoginSuccessResult:responseObject]);
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             block ([MBApiError shareNetworkError]);
@@ -85,6 +88,14 @@ typedef void(^MBApiPostBlock)(MBApiError *error,id array);
 {
     NSDictionary *param = nil;
     [self postWithTokenURL:[self urlWithPostType:MBApiPostTypeGetKeyWord] parameters:param handleArrayBlock:^(MBApiError *error, NSArray *array) {
+        block(error,array);
+    }];
+}
+
++ (void)getNewDiscountGoodsWithCompletionHandle:(MBApiArrayBlock)block
+{
+    NSDictionary *param = nil;
+    [self postWithTokenURL:[self urlWithPostType:MBApiPostTypeGetNewDiscount] parameters:param handleArrayBlock:^(MBApiError *error, id array) {
         block(error,array);
     }];
 }
@@ -129,9 +140,9 @@ typedef void(^MBApiPostBlock)(MBApiError *error,id array);
     }];
 }
 
-+ (void)collecteGoods:(NSString *)goodsID completionHandle:(MBApiErrorBlock)block
++ (void)collecteGoods:(NSString *)goodsID collecteState:(NSString *)isCollected completionHandle:(MBApiErrorBlock)block
 {
-    NSDictionary *parems = @{@"goodId":goodsID};
+    NSDictionary *parems = @{@"goodId":goodsID,@"type":isCollected};
     [self postWithTokenURL:[self urlWithPostType:MBApiPostTypeCollecteGoods] parameters:parems handleErrorBlock:^(MBApiError *error, NSArray *array) {
         block(error);
     }];
@@ -153,9 +164,20 @@ typedef void(^MBApiPostBlock)(MBApiError *error,id array);
     }];
 }
 
++ (void)findPasswordWithEmail:(NSString *)email completionHandle:(MBApiErrorBlock)block
+{
+    NSDictionary *parems = @{@"userName":email};
+    [self postWithTokenURL:[self urlWithPostType:MBApiPostTypeFindPassword] parameters:parems handleErrorBlock:^(MBApiError *error, NSArray *array) {
+        block(error);
+    }];
+}
+
 + (NSString *)serverImageURLWithImageName:(NSString *)imageName
 {
-    return [MBURLBASE stringByAppendingFormat:@"/MyBlaire/upload/%@",imageName];
+    if (imageName.length > 0) {
+        return [MBURLBASE stringByAppendingFormat:@"/MyBlaire/upload/%@",imageName];
+    }
+    return nil;
 }
 
 #pragma mark - 功能性url
@@ -197,6 +219,11 @@ typedef void(^MBApiPostBlock)(MBApiError *error,id array);
         case MBApiPostTypeGetKeyWord:
             url = @"MyBlaire/app/getKeyWord";
             break;
+        case MBApiPostTypeGetNewDiscount:
+            url = @"MyBlaire/app/newDiscount";
+            break;
+        case MBApiPostTypeFindPassword:
+            url = @"MyBlaire/app/findPWD";
         default:
             break;
     }
@@ -216,7 +243,7 @@ typedef void(^MBApiPostBlock)(MBApiError *error,id array);
 {
     MBApiError *error = [MBApiError shareWithDictionary:responseObject];
     if (error.code == MBApiCodeSuccess) {
-        [[NSUserDefaults standardUserDefaults] setObject:[[responseObject dictionaryForKey:@"result"] stringForKey:@"token"] forKey:@"MBTOKEN"];
+        [[NSUserDefaults standardUserDefaults] setObject:[[responseObject dictionaryForKey:@"result"] stringForKey:@"token"] forKey:kMBMODELTOKENKEY];
     }
     return error;
 }

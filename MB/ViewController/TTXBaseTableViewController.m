@@ -31,7 +31,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.view addSubview:self.tableView];
+    [self.mbView addSubview:self.tableView];
       // Do any additional setup after loading the view.
 }
 
@@ -62,6 +62,7 @@
         if ([cell isKindOfClass:[TTXBaseTableViewCell class]]) {
             ((TTXBaseTableViewCell *)cell).model = [self cellModelAtIndexPath:indexPath];
         }
+        ((TTXBaseTableViewCell *)cell).backgroundColor = [UIColor clearColor];
         return cell;
     }
     return nil;
@@ -74,7 +75,7 @@
 
 + (BOOL)automaticallyAdjustsScrollViewInsets
 {
-    return YES;
+    return NO;
 }
 
 - (void)didReceiveMemoryWarning {

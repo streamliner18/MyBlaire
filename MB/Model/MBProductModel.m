@@ -19,11 +19,13 @@
     model.goodName = [dic stringForKey:@"goodName"];
     model.currentPrice = [dic stringForKey:@"currentPrice"];
     model.collectCount = [dic intForKey:@"collectCount"];
-    model.smallPicture = [MBApi serverImageURLWithImageName:[dic stringForKey:@"smallPicture"]];
-    DLog(@"%@",model.smallPicture);
     model.isCollect = [[dic stringForKey:@"isCollect"] boolValue];
-    model.imageWidth = 100;
-    model.imageHeight = 100;
+    model.imageWidth = 90;
+    model.imageHeight = 120;
+    model.smallPicture = [MBApi serverImageURLWithImageName:[dic stringForKey:@"imageThumbnail"]];
+    model.imageSlideshow = [MBApi serverImageURLWithImageName:[dic stringForKey:@"imageSlideshow"]];
+    model.imageHighlight = [MBApi serverImageURLWithImageName:[dic stringForKey:@"imageHighlight"]];
+    model.imageTrending = [MBApi serverImageURLWithImageName:[dic stringForKey:@"imageTrending"]];
     return model;
 }
 
@@ -37,7 +39,19 @@
         self.production = [dic stringForKey:@"production"];
         self.bigPctureUrl = [dic stringForKey:@"bigPctureUrl"];
         self.bigPctureUrl2 = [dic stringForKey:@"bigPctureUrl2"];
-        self.bigPctureUrl3 = [dic stringForKey:@"bigPctureUrl3"];        
+        self.bigPctureUrl3 = [dic stringForKey:@"bigPctureUrl3"];
+        self.buyURL = [dic stringForKey:@"buyUrl"];
+        NSMutableArray *array = @[].mutableCopy;
+        NSArray *images = [dic arrayForKey:@"imageBig"];
+        for (NSDictionary *subDic in images) {
+            if ([subDic isKindOfClass:[NSDictionary class]]) {
+                NSString *imageName = [subDic stringForKey:@"imageUrl"];
+                if (imageName.length > 0) {
+                    [array addObject:[MBApi serverImageURLWithImageName:imageName]];
+                }
+            }
+        }
+        self.bigPictures = [NSArray arrayWithArray:array];
     }
 }
 
@@ -51,6 +65,23 @@
         }
     }
     return [NSArray arrayWithArray:mulArray];
+}
+
+- (NSString *)collecteViewNeedShowImageURL
+{
+    if (self.smallPicture) {
+        return self.smallPicture;
+    }
+    if (self.imageHighlight) {
+        return self.imageHighlight;
+    }
+    if (self.imageSlideshow) {
+        return self.imageSlideshow;
+    }
+    if (self.imageTrending) {
+        return self.imageTrending;
+    }
+    return nil;
 }
 
 @end

@@ -11,6 +11,7 @@
 typedef NS_ENUM(NSUInteger, MBProductCellType) {
     MBProductCellTypeNormal = 0,
     MBProductCellTypeStreet = 1,
+    MBProductCellTypeWithoutLove = 2,
 };
 
 @interface MBProductCell : PSCollectionViewCell
