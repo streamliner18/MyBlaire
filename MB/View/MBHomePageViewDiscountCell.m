@@ -37,6 +37,7 @@
             UIImageView *imageView = [[UIImageView alloc] initWithFrame:weakSelf.scrollView.bounds];
             [imageView sd_setImageWithURL:[NSURL URLWithString:model.imageSlideshow] placeholderImage:nil options:0 progress:nil completed:nil];
             imageView.backgroundColor = [UIColor colorWithHexString:@"#e2e4ec"];
+            //imageView.contentMode = UIViewContentModeCenter;
             
             UIView *whiteView = [[UIView alloc] initWithFrame:CGRectMake(0, 89, imageView.width, 50.5)];
             whiteView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.7];

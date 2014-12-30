@@ -66,6 +66,7 @@
         self.showImageView.frame = CGRectMake(4.5, 4.5, self.width - 9, 151);
         [self.showImageView sd_setImageWithURL:[NSURL URLWithString:starSame.product.imageHighlight] placeholderImage:nil];
         self.showImageView.backgroundColor = [UIColor colorWithHexString:@"#434a54"];
+        //self.showImageView.contentMode = UIViewContentModeScaleAspectFill;
         
         self.whiteView.frame = CGRectMake(self.showImageView.left, self.height - 51, self.showImageView.width, 51);
         

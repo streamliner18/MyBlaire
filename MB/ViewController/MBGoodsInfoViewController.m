@@ -303,7 +303,8 @@
         view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         
         imageView = [[UIImageView alloc] initWithFrame:view.bounds];
-        imageView.backgroundColor = V_COLOR(67, 74, 84, 1.0);
+        imageView.backgroundColor = V_COLOR(255, 255, 255, 1.0);
+        imageView.contentMode = UIViewContentModeScaleAspectFit;
         imageView.tag = 1;
         [view addSubview:imageView];
     } else {
