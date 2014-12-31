@@ -29,7 +29,7 @@
     
     self.whiteView = ({
         UIView *view = [[UIView alloc] initWithFrame:CGRectZero];
-        view.backgroundColor = [UIColor whiteColor];
+        view.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.7];
         view;
     });
     [self addSubview:self.whiteView];
@@ -66,7 +66,8 @@
         self.showImageView.frame = CGRectMake(4.5, 4.5, self.width - 9, 151);
         [self.showImageView sd_setImageWithURL:[NSURL URLWithString:starSame.product.imageHighlight] placeholderImage:nil];
         self.showImageView.backgroundColor = [UIColor colorWithHexString:@"#434a54"];
-        //self.showImageView.contentMode = UIViewContentModeScaleAspectFill;
+        self.showImageView.backgroundColor = [UIColor whiteColor];
+        self.showImageView.contentMode = UIViewContentModeScaleAspectFit;
         
         self.whiteView.frame = CGRectMake(self.showImageView.left, self.height - 51, self.showImageView.width, 51);
         

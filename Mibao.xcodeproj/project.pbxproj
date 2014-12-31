@@ -201,7 +201,7 @@
 		75194D461A1609B0002C7038 /* MBProductCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProductCell.m; sourceTree = "<group>"; };
 		75194D481A16175F002C7038 /* Test_Products.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Test_Products.h; sourceTree = "<group>"; };
 		75194D491A16175F002C7038 /* Test_Products.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Test_Products.m; sourceTree = "<group>"; };
-		7522E5F61A10AE9D007024E6 /* MB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MB.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7522E5F61A10AE9D007024E6 /* Mibao.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mibao.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7522E5FA1A10AE9D007024E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7522E5FB1A10AE9D007024E6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7522E5FD1A10AE9D007024E6 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -211,7 +211,7 @@
 		752D0EA21A466C5900203E23 /* MBFindPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBFindPasswordViewController.m; sourceTree = "<group>"; };
 		752D0EA41A487E8F00203E23 /* MBServerTermsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBServerTermsViewController.h; sourceTree = "<group>"; };
 		752D0EA51A487E8F00203E23 /* MBServerTermsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBServerTermsViewController.m; sourceTree = "<group>"; };
-		75352C341A10D00300110F2D /* MBPrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBPrefixHeader.pch; sourceTree = "<group>"; };
+		75352C341A10D00300110F2D /* MibaoPrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MibaoPrefixHeader.pch; sourceTree = "<group>"; };
 		756AC5DA1A22291800C7CD07 /* MBGoodsDetailInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBGoodsDetailInfoView.h; sourceTree = "<group>"; };
 		756AC5DB1A22291800C7CD07 /* MBGoodsDetailInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBGoodsDetailInfoView.m; sourceTree = "<group>"; };
 		756AC5DD1A2233B400C7CD07 /* TTXActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTXActivity.h; sourceTree = "<group>"; };
@@ -522,7 +522,7 @@
 		7522E5F71A10AE9D007024E6 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7522E5F61A10AE9D007024E6 /* MB.app */,
+				7522E5F61A10AE9D007024E6 /* Mibao.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -566,7 +566,7 @@
 				756AC6691A24C66800C7CD07 /* LaunchDefault(iphone4).png */,
 				756AC66A1A24C66800C7CD07 /* LaunchDefault(iphone6).png */,
 				756AC66B1A24C66800C7CD07 /* LaunchDefault(iphone6+).png */,
-				75352C341A10D00300110F2D /* MBPrefixHeader.pch */,
+				75352C341A10D00300110F2D /* MibaoPrefixHeader.pch */,
 				7522E5FB1A10AE9D007024E6 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -922,9 +922,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		7522E5F51A10AE9D007024E6 /* MB */ = {
+		7522E5F51A10AE9D007024E6 /* Mibao */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7522E6191A10AE9D007024E6 /* Build configuration list for PBXNativeTarget "MB" */;
+			buildConfigurationList = 7522E6191A10AE9D007024E6 /* Build configuration list for PBXNativeTarget "Mibao" */;
 			buildPhases = (
 				27A6053830364D609B38FD55 /* Check Pods Manifest.lock */,
 				7522E5F21A10AE9D007024E6 /* Sources */,
@@ -936,9 +936,9 @@
 			);
 			dependencies = (
 			);
-			name = MB;
+			name = Mibao;
 			productName = MB;
-			productReference = 7522E5F61A10AE9D007024E6 /* MB.app */;
+			productReference = 7522E5F61A10AE9D007024E6 /* Mibao.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -948,11 +948,11 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0610;
-				ORGANIZATIONNAME = "xxx Innovation Co. Ltd";
+				ORGANIZATIONNAME = "MyBlaire Inc.";
 				TargetAttributes = {
 					7522E5F51A10AE9D007024E6 = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = 2E728EA35C;
+						DevelopmentTeam = 6H4HH7GKLG;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 0;
@@ -961,7 +961,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 7522E5F11A10AE9D007024E6 /* Build configuration list for PBXProject "MB" */;
+			buildConfigurationList = 7522E5F11A10AE9D007024E6 /* Build configuration list for PBXProject "Mibao" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -974,7 +974,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				7522E5F51A10AE9D007024E6 /* MB */,
+				7522E5F51A10AE9D007024E6 /* Mibao */,
 			);
 		};
 /* End PBXProject section */
@@ -1270,17 +1270,18 @@
 				ARCHS = armv7;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing iTotem Tech Co., Ltd.";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = MB/MBPrefixHeader.pch;
+				GCC_PREFIX_HEADER = MB/MibaoPrefixHeader.pch;
 				INFOPLIST_FILE = MB/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MB_APP_ID_SUFFIX = dev;
 				MB_App_DISPLAY_NAME = "蜜包Dev";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "D69A7E45-15EA-4CA2-8425-E99FA0CCBEA0";
+				PRODUCT_NAME = Mibao;
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -1291,37 +1292,156 @@
 				ARCHS = armv7;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing iTotem Tech Co., Ltd.";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = MB/MBPrefixHeader.pch;
+				GCC_PREFIX_HEADER = MB/MibaoPrefixHeader.pch;
 				INFOPLIST_FILE = MB/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MB_APP_ID_SUFFIX = "";
 				MB_App_DISPLAY_NAME = "蜜包";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "D69A7E45-15EA-4CA2-8425-E99FA0CCBEA0";
+				PRODUCT_NAME = Mibao;
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
+		};
+		BF66F41D1A53957C00000AD2 /* App Store Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "App Store Release";
+		};
+		BF66F41E1A53957C00000AD2 /* App Store Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 79644A57B5CDA7336727AAE4 /* Pods.release.xcconfig */;
+			buildSettings = {
+				ARCHS = armv7;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = MB/MibaoPrefixHeader.pch;
+				INFOPLIST_FILE = MB/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MB_APP_ID_SUFFIX = "";
+				MB_App_DISPLAY_NAME = "蜜包";
+				PRODUCT_NAME = Mibao;
+				PROVISIONING_PROFILE = "";
+			};
+			name = "App Store Release";
+		};
+		BF66F41F1A53C45C00000AD2 /* Ad-hoc Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Ad-hoc Release";
+		};
+		BF66F4201A53C45C00000AD2 /* Ad-hoc Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 79644A57B5CDA7336727AAE4 /* Pods.release.xcconfig */;
+			buildSettings = {
+				ARCHS = armv7;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Miao He";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Miao He";
+				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = MB/MibaoPrefixHeader.pch;
+				INFOPLIST_FILE = MB/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MB_APP_ID_SUFFIX = "";
+				MB_App_DISPLAY_NAME = "蜜包";
+				PRODUCT_NAME = Mibao;
+				PROVISIONING_PROFILE = "";
+			};
+			name = "Ad-hoc Release";
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		7522E5F11A10AE9D007024E6 /* Build configuration list for PBXProject "MB" */ = {
+		7522E5F11A10AE9D007024E6 /* Build configuration list for PBXProject "Mibao" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7522E6171A10AE9D007024E6 /* Debug */,
 				7522E6181A10AE9D007024E6 /* Release */,
+				BF66F41F1A53C45C00000AD2 /* Ad-hoc Release */,
+				BF66F41D1A53957C00000AD2 /* App Store Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7522E6191A10AE9D007024E6 /* Build configuration list for PBXNativeTarget "MB" */ = {
+		7522E6191A10AE9D007024E6 /* Build configuration list for PBXNativeTarget "Mibao" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7522E61A1A10AE9D007024E6 /* Debug */,
 				7522E61B1A10AE9D007024E6 /* Release */,
+				BF66F4201A53C45C00000AD2 /* Ad-hoc Release */,
+				BF66F41E1A53957C00000AD2 /* App Store Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

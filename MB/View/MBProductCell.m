@@ -59,7 +59,7 @@
         _showImageView = ({
             UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
             imageView.backgroundColor = V_COLOR(255,255,255, 1.0);
-            imageView.contentMode = UIViewContentModeScaleAspectFill;
+            imageView.contentMode = UIViewContentModeScaleAspectFit;
             imageView;
         });
     }

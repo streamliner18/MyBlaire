@@ -51,13 +51,15 @@
         self.model = model;
         self.dataSource = [GoodsDetailInfoRowObject arrayWithModel:model];
         self.listView.frame = self.bounds;
-        self.listView.scrollEnabled = NO;
+        self.listView.scrollEnabled = YES;
         [self addSubview:self.listView];
         UIScrollView *s = (UIScrollView *)self.superview;
-        s.contentSize = CGSizeMake(s.width, s.contentSize.height - self.height);
-        self.height = self.listView.contentSize.height + 40;
-        self.listView.height = self.height;
-        s.contentSize = CGSizeMake(s.width, s.contentSize.height + self.height);
+        CGFloat origion = CGRectGetMinY(self.frame);
+        CGFloat height = [self totalHeight] + 40;
+        self.height = height;
+        DLog("Total Height = %f", [self totalHeight]);
+        self.listView.frame = self.bounds;
+        s.contentSize = CGSizeMake(s.width, origion + self.height);
     }
     return self;
 }
@@ -128,5 +130,20 @@
 //    CGFloat height = 0;
 //    height +
 //}
+- (CGFloat)stringHeight:(NSString *)string
+{
+    CGSize size = BT_TEXTSIZE(string, [UIFont systemFontOfSize:15]);
+    return MAX(size.height,40);
+}
+
+- (CGFloat)totalHeight
+{
+    __block CGFloat height = 0;
+    [self.dataSource enumerateObjectsUsingBlock:^(GoodsDetailInfoRowObject *obj, NSUInteger idx, BOOL *stop) {
+        height += [self stringHeight:[NSString stringWithFormat:@"%@:",obj.title]];
+        height += [self stringHeight:obj.defaultValue];
+    }];
+    return height;
+}
 
 @end
