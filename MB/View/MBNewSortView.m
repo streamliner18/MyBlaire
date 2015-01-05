@@ -52,7 +52,7 @@
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.width, 69)];
     view.backgroundColor = [UIColor clearColor];
     
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(21, 19, 37, 37)];
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(21, 28, 37, 37)];
     imageView.image = [UIImage bt_imageWithBundleName:@"Source" filepath:@"Sort" imageName:@"Refine-Expanded-new_03"];
     [view addSubview:imageView];
     
@@ -61,7 +61,7 @@
     label.font = [UIFont systemFontOfSize:20];
     label.textColor = [UIColor colorWithHexString:@"#525a66"];
     label.tag = 1;
-    label.text = [NSString stringWithFormat:@"Hi,%@",MB_Model.userName];
+    label.text = [NSString stringWithFormat:@"Hi, %@",MB_Model.userName];
     [view addSubview:label];
     
     return view;
@@ -239,6 +239,18 @@
         }
     }
     return 0;
+}
+
+- (BOOL)isAllClose
+{
+    __block BOOL isAllClose = YES;
+    [self.dataSource enumerateObjectsUsingBlock:^(MBSortModel *obj, NSUInteger idx, BOOL *stop) {
+        if ([obj isKindOfClass:[MBSortModel class]] && obj.isOpen) {
+            isAllClose = NO;
+            *stop = YES;
+        }
+    }];
+    return isAllClose;
 }
 
 @end

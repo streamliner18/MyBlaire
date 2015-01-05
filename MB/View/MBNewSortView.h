@@ -10,4 +10,5 @@
 
 @interface MBNewSortView : UIView
 - (void)reloadUserName;
+- (BOOL)isAllClose;
 @end

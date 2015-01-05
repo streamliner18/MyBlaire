@@ -26,6 +26,11 @@
     [self.sortView reloadUserName];
 }
 
+- (BOOL)isAllClose
+{
+    return [self.sortView isAllClose];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

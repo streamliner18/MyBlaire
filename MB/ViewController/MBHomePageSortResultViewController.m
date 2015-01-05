@@ -10,6 +10,8 @@
 #import "MBProductListView.h"
 #import "MBGoodsInfoViewController.h"
 #import "MBProductModel.h"
+#import "MBSortViewController.h"
+#import <MMDrawerController.h>
 
 @interface MBHomePageSortResultViewController ()
 @property (nonatomic, strong) MBProductListView *productListView;
@@ -49,7 +51,12 @@
             }
         }];
     };
-    [MBApi getGoodsWithPriceRange:[MBSorter shared].currentPriceSortModel.type discount:[MBSorter shared].currentDiscountSortModel.type color:[MBSorter shared].currentColor searchContent:@"" completionHandle:^(MBApiError *error, NSArray *array) {
+    
+    MMDrawerController *menu = (MMDrawerController *)[[UIApplication sharedApplication] keyWindow].rootViewController;
+    MBSortViewController *sortViewController = (MBSortViewController *)menu.leftDrawerViewController;
+    BOOL isAllClose = [sortViewController isAllClose];
+    
+    [MBApi getGoodsWithPriceRange:isAllClose ? MBGoodsConditionNoRange : [MBSorter shared].currentPriceSortModel.type discount:isAllClose ? MBGoodsDiscountNoneLimit : [MBSorter shared].currentDiscountSortModel.type color:isAllClose ? nil : [MBSorter shared].currentColor searchContent:@"" completionHandle:^(MBApiError *error, NSArray *array) {
         [self hideProgressHUD];
         if (error.code == MBApiCodeSuccess) {
             if (array.count) {

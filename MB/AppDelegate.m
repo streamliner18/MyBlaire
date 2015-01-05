@@ -14,6 +14,7 @@
 #import "MBSearchViewController.h"
 #import "MBLoveViewController.h"
 #import "MBAboutViewController.h"
+#import <FIR/FIR.h>
 
 #import "MBModel.h"
 
@@ -41,6 +42,7 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [FIR handleCrashWithKey:@"7756b081c3b65e906e4db4a861f30171"]; 
     [UIFont setReplacementDictionary:@{
                                        @"Helvetica" : @"QuicksandBook-Regular",
                                        @"Helvetica-Bold":@"QuicksandBold-Regular",
@@ -92,6 +94,7 @@
                             [[TTXBaseNavigationController alloc] initWithRootViewController:[[MBAboutViewController alloc] init]]
                             ];
     MMDrawerController *menu = [[MMDrawerController alloc] initWithCenterViewController:tab leftDrawerViewController:[[MBSortViewController alloc] init]];
+    menu.closeDrawerGestureModeMask = MMCloseDrawerGestureModeAll;
     menu.maximumLeftDrawerWidth = self.window.width - 50;
     self.window.rootViewController = menu;
     LaunchView *launchView = [[LaunchView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];

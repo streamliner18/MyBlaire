@@ -161,6 +161,8 @@
 		75FD55561A34130300532B91 /* MBSta.m in Sources */ = {isa = PBXBuildFile; fileRef = 75FD55551A34130300532B91 /* MBSta.m */; };
 		75FD55581A34214100532B91 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 75FD55571A34214100532B91 /* iTunesArtwork */; };
 		75FD555A1A34371B00532B91 /* clearColor.png in Resources */ = {isa = PBXBuildFile; fileRef = 75FD55591A34371B00532B91 /* clearColor.png */; };
+		BF5FF4721A5931D100C06FBA /* FIR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF5FF4711A5931D100C06FBA /* FIR.framework */; };
+		BF5FF4741A5931EC00C06FBA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF5FF4731A5931EC00C06FBA /* SystemConfiguration.framework */; };
 		C4310DE9523E470F833AEFE9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E39AD4A044145C6ABB96EA3 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -412,6 +414,8 @@
 		75FD55571A34214100532B91 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
 		75FD55591A34371B00532B91 /* clearColor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clearColor.png; sourceTree = "<group>"; };
 		79644A57B5CDA7336727AAE4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		BF5FF4711A5931D100C06FBA /* FIR.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FIR.framework; sourceTree = "<group>"; };
+		BF5FF4731A5931EC00C06FBA /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -419,6 +423,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF5FF4741A5931EC00C06FBA /* SystemConfiguration.framework in Frameworks */,
+				BF5FF4721A5931D100C06FBA /* FIR.framework in Frameworks */,
 				C4310DE9523E470F833AEFE9 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -512,6 +518,7 @@
 		7522E5ED1A10AE9D007024E6 = {
 			isa = PBXGroup;
 			children = (
+				BF5FF4711A5931D100C06FBA /* FIR.framework */,
 				7522E5F81A10AE9D007024E6 /* MB */,
 				7522E5F71A10AE9D007024E6 /* Products */,
 				FF404DD00E204CB5A8CBF243 /* Frameworks */,
@@ -914,6 +921,7 @@
 		FF404DD00E204CB5A8CBF243 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BF5FF4731A5931EC00C06FBA /* SystemConfiguration.framework */,
 				6E39AD4A044145C6ABB96EA3 /* libPods.a */,
 			);
 			name = Frameworks;
@@ -1221,7 +1229,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1256,7 +1264,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -1272,6 +1280,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = MB/MibaoPrefixHeader.pch;
@@ -1294,6 +1306,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = MB/MibaoPrefixHeader.pch;
@@ -1335,7 +1351,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -1351,6 +1367,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = MB/MibaoPrefixHeader.pch;
@@ -1392,7 +1412,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -1408,6 +1428,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Miao He";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Miao He";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = MB/MibaoPrefixHeader.pch;

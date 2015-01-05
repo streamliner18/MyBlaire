@@ -28,7 +28,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.title = [NSString stringWithFormat:@"Hello,%@",MB_Model.userName];
+    self.navigationItem.title = [NSString stringWithFormat:@"Hello, %@",MB_Model.userName];
     
     CGRect rect = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) - (!kiOS7 ? (44 + 49) : 0));
     self.productListView = [[MBProductListView alloc] initWithFrame:rect type:MBProductListViewTypeStreet];

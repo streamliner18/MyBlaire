@@ -37,7 +37,9 @@
             MBProductModel *model = obj;
             UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake((145+4.5)*idx, 0, 145, 85)];
             imageView.tag = idx + 100;
-            imageView.backgroundColor = [UIColor colorWithHexString:@"#434a54"];
+            //imageView.backgroundColor = [UIColor colorWithHexString:@"#434a54"];
+            imageView.backgroundColor = [UIColor whiteColor];
+            imageView.contentMode = UIViewContentModeScaleAspectFit;
             imageView.userInteractionEnabled = YES;
             [imageView sd_setImageWithURL:[NSURL URLWithString:model.imageTrending] placeholderImage:nil];
             [imageView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didSelectedGoods:)]];

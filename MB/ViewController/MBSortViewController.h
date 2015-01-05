@@ -10,4 +10,5 @@
 
 @interface MBSortViewController : TTXBaseViewController
 - (void)reloadUserName;
+- (BOOL)isAllClose;
 @end

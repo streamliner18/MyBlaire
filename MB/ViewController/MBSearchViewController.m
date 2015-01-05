@@ -231,7 +231,7 @@ typedef void(^MBKeywordsBlock)(NSArray *keys);
 
     [self.searchTempView addSubview:productListView];
     [self showProgressHUD];
-    [MBApi getGoodsWithPriceRange:[MBSorter shared].currentPriceSortModel.type discount:[MBSorter shared].currentDiscountSortModel.type color:[MBSorter shared].currentColor searchContent:searchKey completionHandle:^(MBApiError *error, NSArray *array) {
+    [MBApi getGoodsWithPriceRange:MBGoodsConditionNoRange discount:MBGoodsDiscountNoneLimit color:nil searchContent:searchKey completionHandle:^(MBApiError *error, NSArray *array) {
         [self hideProgressHUD];
         if (error.code == MBApiCodeSuccess) {
             if (array.count) {
