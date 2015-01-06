@@ -156,7 +156,7 @@
 #define kDetailButtonHeight (30)
 
 #define kPageControlBottomMargin (0)
-#define kPageControlWidth (80)
+#define kPageControlWidth (120)
 #define kPageControlHeight (25)
 
 #define kPriceWidth (100)
