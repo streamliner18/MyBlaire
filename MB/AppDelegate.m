@@ -67,7 +67,11 @@
     if (kiOS7) {
         [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
         [[UITabBar appearance] setBarStyle:UIBarStyleDefault];
-        [[UITabBar appearance] setTranslucent:NO];
+        NSString *reqSysVer = @"8.0";
+        NSString *currSysVer = [[UIDevice currentDevice] systemVersion];
+        if ([currSysVer compare:reqSysVer options:NSNumericSearch] != NSOrderedAscending){
+            [[UITabBar appearance] setTranslucent:NO];
+        }
         [[UITabBar appearance] setBackgroundImage:[UIImage imageWithColor:[UIColor whiteColor] size:CGSizeMake(self.window.width, 49)]];
     }
     //设定Tabbar的颜色
