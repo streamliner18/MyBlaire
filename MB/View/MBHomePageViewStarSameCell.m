@@ -69,18 +69,18 @@
         self.showImageView.backgroundColor = [UIColor whiteColor];
         self.showImageView.contentMode = UIViewContentModeScaleAspectFit;
         
-        self.whiteView.frame = CGRectMake(self.showImageView.left, self.height - 51, self.showImageView.width, 51);
+        self.whiteView.frame = CGRectMake(self.showImageView.left, self.height - 51, self.showImageView.width, 51); //白色条
         
         CGSize size = BT_TEXTSIZE(starSame.product.goodName, [UIFont systemFontOfSize:14]);
         self.nameLabel.frame = CGRectMake(12, 16, size.width, size.height);
-        self.nameLabel.text = starSame.product.goodName;
+        self.nameLabel.text = starSame.product.goodName; //名称文字
         
         size = BT_TEXTSIZE(([NSString stringWithFormat:@"￥%@",starSame.product.currentPrice]), [UIFont boldSystemFontOfSize:15]);
         self.priceLabel.frame = CGRectMake(self.nameLabel.right + 10, self.nameLabel.top, size.width, size.height);
-        self.priceLabel.text = [NSString stringWithFormat:@"￥%@",starSame.product.currentPrice];
+        self.priceLabel.text = [NSString stringWithFormat:@"￥%@",starSame.product.currentPrice];//价格文字
         
         self.detailImageView.image = [UIImage bt_imageWithBundleName:@"Source" filepath:@"Home" imageName:@"ProductShowDetail"];
-        self.detailImageView.frame = CGRectMake(self.width - 20 - 19, 15, 19, 19);
+        self.detailImageView.frame = CGRectMake(self.width - 20 - 19, 15, 19, 19); //详情按钮
     }
 }
 
