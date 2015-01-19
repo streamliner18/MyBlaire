@@ -10,9 +10,9 @@
 #import "MBApiWebManager.h"
 
 typedef NS_ENUM(NSUInteger, MBApiPostType) {
-    MBApiPostTypeRegister,//注册
-    MBApiPostTypeLoginNormal,//正常登录
-    MBApiPostTypeLoginThirdParty,//第三方登录
+    MBApiPostTypeRegister,                      //注册
+    MBApiPostTypeLoginNormal,                 //正常登录
+    MBApiPostTypeLoginThirdParty,            //第三方登录
     MBApiPostTypeGetKeyWord,//关键词
     MBApiPostTypeGetNewDiscount,//最新折扣
     MBApiPostTypeGetHotGoods,//热销产品

@@ -10,7 +10,7 @@
 
 NSString* TTX_ShowGuide_AppVersion(void)
 {
-    return @"1.0.0";
+    return @"1.1.6";
 }
 
 NSString *TTX_AppVersion(NSString *version)
