@@ -173,6 +173,11 @@ typedef void(^MBApiPostBlock)(MBApiError *error,id array);
 }
 
 + (NSString *)serverImageURLWithImageName:(NSString *)imageName
+
+/**
+ * 为指定的URL处理图片
+ **/
+
 {
     if (imageName.length > 0) {
         return [MBURLBASE stringByAppendingFormat:@"/MyBlaire/upload/%@",imageName];
